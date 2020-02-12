@@ -11775,7 +11775,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Day-4:-Neurons-and-Networks">Day 4: Neurons and Networks<a class="anchor-link" href="#Day-4:-Neurons-and-Networks">&#182;</a></h2><p>Welcome to Day 4! Today, we learn about realistic modelling of synaptic interactions for networks of Hogkin Huxley Neurons and how to implement synapses in TensorFlow.</p>
+<h2 id="Day-4:-Neurons-and-Networks">Day 4: Neurons and Networks<a class="anchor-link" href="#Day-4:-Neurons-and-Networks">&#182;</a></h2><p>Welcome to Day 4! In this section we simulate a network of neurons interacting via synapses.</p>
 
 </div>
 </div>
@@ -11784,16 +11784,18 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="How-do-we-model-Synapses?">How do we model Synapses?<a class="anchor-link" href="#How-do-we-model-Synapses?">&#182;</a></h3><p>A synapse is defined between two neurons. There can be multiple synapses between two neurons (even of the same type) but here we will consider only single synapses between two neuron. So, there can be atmost $n^2$ synapses of the same type between $n$ different neurons. Each synapse will have their own state variables the dynamics of which can be defined using differential equations.</p>
-<p>For most networks, not all neurons will be connected by all types of synapses. The network of neurons have a certain connectivity that can be represented as an adjacency matrix in the language of graphs. Each type of synapse will have its own connectivity/adjacency matrix.</p>
-<h4 id="Types-of-Synapses">Types of Synapses<a class="anchor-link" href="#Types-of-Synapses">&#182;</a></h4><p>There are two major categories of synapses: Exitatory and Inhibitory Synapses.</p>
-<p>Here we will focus on implementing one of each category of synapses, Excitatory and Inhibitory.</p>
-<h4 id="Modelling-Synapses">Modelling Synapses<a class="anchor-link" href="#Modelling-Synapses">&#182;</a></h4><p>The current that passes through a synaptic channel depends on the difference between its reversal potential ($E_{syn}$) and the actual value of the membrane potential ($u$), and is $I_{syn}(t)=g_{syn}(t)(u(t)−E_{syn})$. We can describe the synaptic conductance $g_{syn}(t)=g_{max}[O](t)$, by its maximal conductance $g_{max}$ and a gating variable $[O]$, where $[O](𝑡)$ is the fraction of open synaptic channels. Channels open when a neurotransmitter binds to the synapse which is a function of the presynaptic activation $[T]$.</p>
-<p>$\frac{d[O]}{dt}=\alpha[T](1−[O])−\beta[O]$</p>
-<p>where $\alpha$ is the binding constant, $\beta$ the unbinding constant and $(1−[O])$ the fraction of closed channels where binding of neurotransmitter can occur. The functional form of T depends on the type and nature of the synapse.</p>
-<h5 id="Acetylcholine-Synapses-(Excitatory)">Acetylcholine Synapses (Excitatory)<a class="anchor-link" href="#Acetylcholine-Synapses-(Excitatory)">&#182;</a></h5><p>$$[T]_{ach} = A\ \Theta(t_{max}+t_{fire}+t_{delay}-t)\ \Theta(t-t_{fire}-t_{delay})$$</p>
-<h5 id="GABAa-Synapses-(Inhibitory)">GABAa Synapses (Inhibitory)<a class="anchor-link" href="#GABAa-Synapses-(Inhibitory)">&#182;</a></h5><p>$$[T]_{gaba} = \frac{1}{1+e^{-\frac{V(t)-V_0}{\sigma}}}$$</p>
-<h4 id="Iterating-over-conditionals-in-TensorFlow">Iterating over conditionals in TensorFlow<a class="anchor-link" href="#Iterating-over-conditionals-in-TensorFlow">&#182;</a></h4><p>How would you solve a problem where you have to choose between two options based on the condition provided in a list/array using TensorFlow. Say, you have a array of 10 random variables (say x) between 0 and 1, and you want the output of your code to be 10, if the random variable is greater than 0.5, but -10 when it is not. To perform choices based on the conditions given in a boolean list/array, we can use the TensorFlow function tf.where(). tf.where(cond,a,b) chooses elements from a/b based on conditional array/list cond. Essentially it performs masking between a and b.|</p>
+<h3 id="How-do-we-model-Synapses?">How do we model Synapses?<a class="anchor-link" href="#How-do-we-model-Synapses?">&#182;</a></h3><p>Each synapse is defined by its own set of state variables and differential equations governing their temporal evolution. There are different kinds of synapses - electrical and chemical synapses. Electrical synapses are modeled as physical conduits that allow the flow of ions across connected neurons. Chemical synapses are more common in the brain and more complex than electrical synapses. When an action potential arrives at the axon terminal, it leads to the opening of voltage-gated calcium channels. The incoming calcium triggers neurotransmitter filled vesciles to fuse with the axon terminal membrane and release their cargo into the synaptic cleft. The neurotransmitters diffuse across the cleft and open (or close) ion channels on the post-synaptic neuron. This can cause a depolarization (increase in potential across the post-synaptic neuron’s membrane) that makes it easier for the neuron to spike or it can inhibit the neuron and have the opposite effect. In some cases these effects are fast and direct —a neurotransmitter binds to a receptor in the post-synaptic site that causes an influx or efflux of ions and leads to a change in the membrane potential. The effect of a synapse can also be indirect such that neurotransmitters invoke a second messenger cascade that eventually leads to the opening or closing of ion channels in the post-synaptic neuron. Here we model fast excitatory and inhibitory chemical synapses.The network of interactions between neurons will be described by connectivity matrices. We used different connectivity matrices to describe the interactions due to different types of synapses.</p>
+<h4 id="Modelling-Synapses">Modelling Synapses<a class="anchor-link" href="#Modelling-Synapses">&#182;</a></h4><p>The synaptic current ($I_{syn}$) depends on the difference between the reversal potential ($E_{syn}$) and the value of the membrane potential ($u$). The synaptic current due to neurotransmitter release into the synaptic cleft following an action potential is given by:</p>
+<p>$$I_{syn}(t) = g_{syn}(t)(u(t) − E_{syn}) $$</p>
+<p>When the transmitter binds to postsynaptic receptors it causes a transient change in the conductance $g_{syn}$. To capture the dynamics of $g_{syn}$, one models the system using a simple kinetic model where the receptors can be either in an open or a closed state. The transition between the states is proportional to the concentration of the neurotransmitter $[T]$ in the cleft.</p>
+<p>This may be rewritten in the form of a differential equation.</p>
+<p>$$\frac{d[O]}{dt}=\alpha[T](1−[O])−\beta[O]$$</p>
+<p>We can now describe the synaptic conductance $g_{syn}(t) = g_{max}[O]$, in terms of the maximal conductance $g_{max}$ and a gating variable $[O]$, where $[O](t)$ is the fraction of open synaptic channels. $\alpha$ is the binding constant, $\beta$ the unbinding constant and $(1 − [O])$ the fraction of closed channels where the neurotransmitter can bind. The functional form of $[T]$ depends on the nature of the synapse. For cholinergic excitatory synapses, $[T]$ is given by,</p>
+<p>$$[T]_{ach} = A\ \Theta(t_{max}+t_{fire}+t_{delay}-t)\ \Theta(t-t_{fire}-t_{delay})$$</p>
+<p>where, $\Theta(x)$ is the Heaviside step function, $t_{fire}$ is the time of the last presynaptic spike, $t_{delay}$ is the time delay from the time of the last spike to its effect on the postsynaptic neuron and $t_{max}$ is the duration after the spike during which the transmitter remains in the synaptic cleft. For Fast GABAergic inhibitory synapses, we used the following equation:</p>
+<p>$$[T]_{gaba} = \frac{1}{1+e^{-\frac{V(t-t_{fire}-t_{delay})-V_0}{\sigma}}}$$</p>
+<p>Note that in order to solve the equation, we need to determine the time when the presynaptic neuron fired ($t_{fire}$). To account for these synaptic interactions between neurons we need to modify the RK4 integrator developed to simulate multiple independent Hodgkin-Huxley neurons.</p>
+<h4 id="Iterating-over-conditionals-in-TensorFlow">Iterating over conditionals in TensorFlow<a class="anchor-link" href="#Iterating-over-conditionals-in-TensorFlow">&#182;</a></h4><p>Say, you have a array x of 10 random numbers between 0 and 1. You want the output of the code to be another array of the same size as x such that the elements of the array are either -10 or 10 depending on whether the corresponding element in x is less or greater than 0.5. The function tf.where(cond,a,b) outputs an array with elements from a if the condition cond is True and from b if cond is False.</p>
 
 </div>
 </div>
@@ -11856,15 +11858,15 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Recalling-and-Redesigning-the-Generalized-TensorFlow-Integrator">Recalling and Redesigning the Generalized TensorFlow Integrator<a class="anchor-link" href="#Recalling-and-Redesigning-the-Generalized-TensorFlow-Integrator">&#182;</a></h4><p>Recall the RK4 based numerical integrator we had created on day 2. You might have noticed that there is an additional dynamical state variable required for the implementation of synapses which cannot be trivially changed by a memoryless differential equation. Here, we use the word memoryless because till now, all our dynamical variables have only depended on the value immediately before. The dynamical state variable in question is the time of last firing, lets call it fire_t.</p>
-<p>One limitation of using TensorFlow in this implentation is that, when we are calculating the change in the dynamical state variable, we only have access to the values for variables immediately before unless we explicity save it as a different variable. Note that if we want to check if a neuron has "fired", we need to know the value of the voltage before and after the updation to check if it crossed the threshold. This means we have to change our implementation of the integrator to be able to update the variable fire_t</p>
-<p>We do this as follows:</p>
+<h4 id="Recalling-and-Redesigning-the-Generalized-TensorFlow-Integrator">Recalling and Redesigning the Generalized TensorFlow Integrator<a class="anchor-link" href="#Recalling-and-Redesigning-the-Generalized-TensorFlow-Integrator">&#182;</a></h4><p>Recall the RK4 based numerical integrator we had created on day 2.Recall the RK4 based numerical integrator we had created on day 2.In this section we modify the integrator that we coded on Day 2 to account for interactions between neurons. This will require an additional variable that stores the time elapsed from the last presynaptic spike to calculate the equations for $[T]$. In the modified code we will use the TensorFlow function tf.where() to efficiently assign the indices of neurons that have spiked and those that have not spiked at each time point.</p>
+<p>In order to determine whether a particular neuron fired, we introduce a new variable $fire_t$ that stores the time of the last spike for each neuron. We modify the code as follows:</p>
 <ol>
-<li>The Integrator needs to know two more properties, the number of neurons ($n$) and firing threshold ($threshold$) for each of these neurons. We provide this information as inputs to the Integrator Class itself as arguments.</li>
-<li>Our state vector will now have an additional $n$ many variables representing the firing time that will not undergo the standard differential updation but be updated by a single bit memory method. </li>
-<li>Inside our Integrator, we have access to the initial values of the state variable and the change in the state variable. We use this to check if the voltages have crossed the firing threshold. For this, we need to define a convection for the state vector, we will store the voltage of the neurons in the first $n$ elements and the fire times fire_t in the last $n$ elements</li>
-<li>The differential update function ie. step_func will take all variables but not update the last n values ie. $\frac{d\ fire\_t}{dt}=0$, the updation will be performed by the scan function itself after the $\Delta y$ has been calculated. It will check for every neuron if the firing threshold of that neuron lies between $V$ and $V + \Delta V$ and update the variable fire_t of the appropriate neurons with the current time. </li>
+<li>The Integrator class that we defined earlier now requires two more properties as input, namely, the number of neurons ($n$) and firing threshold ($F_b$) of each of these neurons. We provide these inputs as arguments to the Integrator class.</li>
+<li>The state vector will now have an additional set of $n$ variables representing the firing times. These will not be updated by the step function ($_step_func$). </li>
+<li>Inside the Integrator class, we have access to the values of the state variable and the change in the state variable since the last iteration. We use this to check if the voltages have crossed the firing threshold. The convention followed in this code is, the first $n$ elements of the state vector are the membrane voltages while the last $n$ elements are the time from the last spike for each of the neurons.</li>
+<li>The differential update function ie. $_step_func$ takes except the last $n$ values of the state variable and updates according to the differential equations specified in $func$. The last n variables are updated separately in $scan_func$. It checks if any neuron has crossed its firing threshold and updates the variable $fire_t$ of the appropriate neurons with the current time.</li>
 </ol>
+<p>The modifications to the RK4 code implemented earlier is shown below,</p>
 
 </div>
 </div>
@@ -11877,6 +11879,10 @@ div#notebook {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="c1">## OR ##</span>
+<span class="c1"># import tensorflow.compat.v1 as tf</span>
+<span class="c1"># tf.disable_v2_behavior()</span>
+
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
 
@@ -11976,9 +11982,7 @@ div#notebook {
 <p>$$[T]_{gaba} = \frac{1}{1+e^{-\frac{V(t)-V_0}{\sigma}}}$$</p>
 <p>where the values of $\tau_m$, $\tau_h$, $\tau_n$, $m_0$, $h_0$, $n_0$ are given from the equations mentioned earlier.</p>
 <h4 id="Synaptic-Memory-Management">Synaptic Memory Management<a class="anchor-link" href="#Synaptic-Memory-Management">&#182;</a></h4><p>As discussed earlier, there are atmost $n^2$ synapses of each type but at a time, unless the network is fully connected/very dense, mostly we need a very small subset of these synapses. We could, in principle, calculate the dynamics of all $n^2$ but it would be pointless. So have to devise a matrix based sparse-dense coding system for evaluating the dynamics of these variables and also using their values. This will reduce memory usage and minimize number of calculations at the cost of time for encoding and decoding into dense data from sparse data and vice versa. This is why we use a matrix approach, so that tensorflow can speed up the process.</p>
-<h4 id="Defining-the-Connectivity">Defining the Connectivity<a class="anchor-link" href="#Defining-the-Connectivity">&#182;</a></h4><p>Lets take a very simple 3 neuron network to test how the two types of synapses work. Let $X_1$ be an Excitatory Neuron and it forms Acetylcholine Synapses, $X_2$ be a Inhibitory Neuron and it forms GABAa Synapses and $X_3$ be an output neuron that doesn't synapse onto any neurons. Take the network of the form: $X_1\rightarrow X_2\rightarrow X_3$.</p>
-<p>We create the connectivity matrices for both types of synapses. We need to define a convention for the ordering of connectivity. We set the presynaptic neurons as the column number, and the postsynaptic neurons as the row number.</p>
-<p>Let $X_1$,$X_2$,$X_3$ be indexed by 0, 1 and 2 respectively. The Acetylcholine connectivity matrix takes the form of:</p>
+<h4 id="Defining-the-Connectivity">Defining the Connectivity<a class="anchor-link" href="#Defining-the-Connectivity">&#182;</a></h4><p>In a network with n neurons, there are at most $n^2$ synapses of each type. The actual number may be much smaller. To illustrate the details of the implementation, consider the following three neuron network. Let $X_1$ be an excitatory neuron that forms a cholinergic synapse, $X_2$ an inhibitory neuron that extends a GABAergic synapse onto $X_3$. The network has the form: $X_1 \rightarrow X_2 \rightarrow X_3$. In defining the connectivity matrix for each synapse type, we set a convention where the presynaptic neurons are indexed by the column number, and the postsynaptic neurons by the row number. Let $X_1$, $X_2$, $X_3$ be indexed as 0, 1 and 2 respectively. The excitatory connectivity matrix takes the form</p>
 <p>$$Ach_{n\times n}=
 \begin{bmatrix}
 0&amp;0&amp;0\\
@@ -11986,7 +11990,7 @@ div#notebook {
 0&amp;0&amp;0\\
 \end{bmatrix}
 $$</p>
-<p>Similarly, the GABAa connectivity matrix becomes:</p>
+<p>Similarly, the inhibitory connectivity matrix becomes:</p>
 <p>$$GABA_{n\times n}=
 \begin{bmatrix}
 0&amp;0&amp;0\\
@@ -11994,6 +11998,7 @@ $$</p>
 0&amp;1&amp;0\\
 \end{bmatrix}
 $$</p>
+<p>In the following code we specify the parameters of the synapse. The number of synapses of each type are determined by adding up all the elements of the connectivity matrix. Other parameters are specified as vectors with values for each of the synapses.</p>
 
 </div>
 </div>
@@ -12095,10 +12100,9 @@ $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Working-with-Sparse&lt;-&gt;Dense-Dynamics">Working with Sparse&lt;-&gt;Dense Dynamics<a class="anchor-link" href="#Working-with-Sparse&lt;-&gt;Dense-Dynamics">&#182;</a></h4><p>For performing the dynamical updates for the synapses, we need only as many variables as the number of synapse x number of equations required for each synapse. Here our synapse models require only one dynamical variable ie. open fraction [O] which we will store as an k-vector where k is the number of synapses.</p>
-<p>We will need to work with this [O] vector on two seperate instances and each time we will have to go to a dense form to speed up computation.</p>
-<h5 id="A.-Calculation-of-Synaptic-Currents">A. Calculation of Synaptic Currents<a class="anchor-link" href="#A.-Calculation-of-Synaptic-Currents">&#182;</a></h5><p>The formula for $I_{syn}$ is given by $$I_{syn} = \sum_{presynaptic} g_{syn}[O](V-E_{syn})$$
-The best way to represent this calculation is to use the connectivity matrix $\mathbf{C}$ for the synapses and the open fraction vector $\vec{[O]}$ to create an open fraction matrix $\mathbf{O}$ and perform the following computations.</p>
+<h4 id="Defining-the-connectivity-matrix-and-calculating-currents">Defining the connectivity matrix and calculating currents<a class="anchor-link" href="#Defining-the-connectivity-matrix-and-calculating-currents">&#182;</a></h4><p>For updating the dynamics of synapses, we need only as many variables as the number of synapses $\times$ number of equations required for each synapse. Here our synapse models require only one dynamical variable, the fraction of open channels $[O]$, that we store as an $k$—dimensional vector, where $k$ is the number of synapses. There are two instances where the $[O]$ vector is used. First, to solve the equation for $[o]$ and second, to calculate the synaptic current given by,</p>
+<p>$$I_{syn} = \sum_{presynaptic} g_{syn}[O](V-E_{syn})$$</p>
+<p>The best way to represent this calculation is to use the connectivity matrix $\mathbf{C}$ for the synapses and the open fraction vector $\vec{[O]}$ to create an open fraction matrix $\mathbf{O}$ and perform the following computations.</p>
 <p>$$\mathbf{C}=
 \begin{bmatrix}
 0&amp;1&amp;...&amp;0\\
@@ -12150,6 +12154,10 @@ $$</p>
     <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">o_</span><span class="p">,(</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">o_</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">E_gaba</span><span class="p">))</span><span class="o">*</span><span class="n">g_gaba</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
 
+<span class="c1"># For TensorFlow v2.x, use tf.tensor_scatter_nd_update instead of </span>
+<span class="c1"># tf.scatter_update and make o_ a tf.constant istead of a tf.variable</span>
+<span class="c1"># Also ind must be reshaped to be a column matrix.</span>
+
 <span class="c1">## Other Currents ##</span>
 
 <span class="k">def</span> <span class="nf">I_K</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -12171,13 +12179,13 @@ $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="B.-Updation-of-Synaptic-Variables">B. Updation of Synaptic Variables<a class="anchor-link" href="#B.-Updation-of-Synaptic-Variables">&#182;</a></h5><p>For the updation, the first we need to calculate the values of the presynaptic activation [T] for both types of synapses. We will essentially calculate this for each neuron and then redirect the values to the correct post synaptic neuron. Recall:</p>
+<h4 id="Updation-of-Synaptic-Variables">Updation of Synaptic Variables<a class="anchor-link" href="#Updation-of-Synaptic-Variables">&#182;</a></h4><p>To update the synapses we first calculate the values of the presynaptic activation function $[T]$ for both types of synapses. This function determines whether a neuron fired or not and is calculated for each neuron. The values of $[T]$ are then sent to the correct synapses in the form of a $k \times 1$ vector. Recall:</p>
 <p>$$[T]_{ach} = A\ \Theta(t_{max}+t_{fire}+t_{delay}-t)\ \Theta(t-t_{fire}-t_{delay})$$</p>
 <p>$$[T]_{gaba} = \frac{1}{1+e^{-\frac{V(t)-V_0}{\sigma}}}$$</p>
-<p>Thus $[T]_{ach}$ is function of the last firing time, and $[T]_{gaba}$ depends on the presynaptic voltage. Once we calculate the values of [T]-vector for both types of synapse, we need to redirect them to the correct synapses in a sparse $k\times1$ vector form.</p>
-<h5 id="Algorithm-for-Dynamics">Algorithm for Dynamics<a class="anchor-link" href="#Algorithm-for-Dynamics">&#182;</a></h5><ol>
-<li>For $[T]_{ach}$, use a boolean logical_and function to check is the current timepoint t is greater than the last fire time (fire_t) + delay (t_delay) and less than last fire time (fire_t) + delay (t_delay) + activation length (t_max) for each neuron as a vector. Use the result of these boolean operations to choose between zero or an constant A. This serves as the heaviside step function. For $[T]_{gaba}$, simply use the V vector to determine T.</li>
-<li>For making the sparse vector, we follow as two step process. First we multiply each row of the connectivity matrices $\mathbf{C}$ with the respective $[T]$ vector to get a activation matrix $\mathbf{T}$, and then we just flatten $\mathbf{T}$ and $\mathbf{C}$ and, using tf.boolean_mask, remove all the zeros from $\mathbf{T}$ to get a $k\times1$ vector which now stores the presynaptic activation for each of the synapses where $k=n_{gaba}$ or $n_{ach}$</li>
+<p>Once we calculate the values of $[T]$-vector for both types of synapse, we need to redirect them to the correct synapses in a sparse $k \times 1$ vector form.</p>
+<h5 id="Steps-to-calculate-[T]">Steps to calculate [T]<a class="anchor-link" href="#Steps-to-calculate-[T]">&#182;</a></h5><ol>
+<li>To calculate $[T]_{ach}$, use a boolean logical_and function to check is the current timepoint t is greater than the last fire time (fire_t) + delay (t_delay) and less than last fire time (fire_t) + delay (t_delay) + activation length (t_max) for each neuron as a vector. Use the result of these boolean operations to choose between zero or an constant A. This serves as the heaviside step function. For $[T]_{gaba}$, simply use the V vector to determine T.</li>
+<li>To determine the [T] vector, we follow as two step process. First we multiply each row of the connectivity matrices $\mathbf{C}$ with the respective $[T]$ vector to get a activation matrix $\mathbf{T}$, and then we just flatten $\mathbf{T}$ and $\mathbf{C}$ and, using tf.boolean_mask, remove all the zeros from $\mathbf{T}$ to get a $k\times1$ vector which now stores the presynaptic activation for each of the synapses where $k=n_{gaba}$ or $n_{ach}$</li>
 <li>Calculate the differential change in the open fractions using the $k\times1$ vector.</li>
 </ol>
 
@@ -12246,8 +12254,8 @@ $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Defining-the-Gating-Variable-Updation-Function-and-the-Initial-Conditions">Defining the Gating Variable Updation Function and the Initial Conditions<a class="anchor-link" href="#Defining-the-Gating-Variable-Updation-Function-and-the-Initial-Conditions">&#182;</a></h4><p>Like earlier, we again define the function that returns us the values of $\tau_m$, $\tau_h$, $\tau_n$, $m_0$, $h_0$, $n_0$ and we prepare the parameters and initial conditions.</p>
-<p>Note: If we initialize the last firing time as 0, then the second neuron $X_2$ will get an EPSP immediately after the start of the simulation. To avoid this the last firing time should be initialized to a large negative number &gt;= the length of the simulation.</p>
+<h4 id="Defining-the-Gating-Variable-Updation-Function-and-the-Initial-Conditions">Defining the Gating Variable Updation Function and the Initial Conditions<a class="anchor-link" href="#Defining-the-Gating-Variable-Updation-Function-and-the-Initial-Conditions">&#182;</a></h4><p>As before, we again define functions that return the values of $\tau_m$, $\tau_h$, $\tau_n$, $m_0$, $h_0$, $n_0$, set parameters and initial conditions.</p>
+<p>Note: The last firing times are stored in the $n$ elements of the state vector. If we initialize the last firing time as 0, then the second neuron $X_2$ will get an EPSP immediately after the start of the simulation. To avoid this the last firing time should be initialized to a large negative number greater than the duration of the simulation.</p>
 
 </div>
 </div>
