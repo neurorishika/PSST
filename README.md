@@ -40,4 +40,5 @@ Our tutorial is a simple exposition of numerical methods to solve ordinary diffe
 
 Happy Coding!
 
-- Rishika Mohanta and Collins Assisi
+Cheers,
+Rishika Mohanta and Collins Assisi
