@@ -336,34 +336,34 @@
 <h2>What is the Hodgkin Huxley Neuron Model?<a class="headerlink" href="#what-is-the-hodgkin-huxley-neuron-model" title="Permalink to this headline">¶</a></h2>
 <p>The cell membrane, a 5nm thick lipid bilayer, separates the inside from the outside of the neuron. The membrane is largely impermeable to charged ions present on either side. The concentration of <span class="math notranslate nohighlight">\(\text{Na}^{+}\)</span> ions outside the cell is greater than its concentration inside, while <span class="math notranslate nohighlight">\(\text{K}^{+}\)</span> ions are relatively abundant inside compared to the outside. In addition to these there are chloride (<span class="math notranslate nohighlight">\(\text{Cl}^{-}\)</span>), calcium (<span class="math notranslate nohighlight">\(\text{Ca}^{2+}\)</span>) and magnesium ions (<span class="math notranslate nohighlight">\(\text{Mg}^{+}\)</span>) that populate the cellular milieu. The differences in ionic abundances across the membrane cause a net accumulation of positive ions on one side of the membrane and negative ions on the other, and thus a potential difference across the membrane. Embedded on the membrane are ion channels that are highly selective to the ion species it lets across. In the squid axon, Hodgkin and Huxley found that there were only two types of ion channels (<span class="math notranslate nohighlight">\(\text{Na}^{+}\)</span> and <span class="math notranslate nohighlight">\(\text{K}^{+}\)</span>), in addition to a non-specific leak channel. The Hodgkin-Huxley model of neurons can be understood with the help of an equivalent electrical circuit given below. The cell membrane acts as a capacitor. The total injected current (<span class="math notranslate nohighlight">\(I\)</span>) can be written as the sum of the capacitive current <span class="math notranslate nohighlight">\(I_{C}\)</span>, ionic currents <span class="math notranslate nohighlight">\(I_{Na}\)</span> and <span class="math notranslate nohighlight">\(I_{K}\)</span> and the leak current <span class="math notranslate nohighlight">\(I_L\)</span>.</p>
 <a class="reference internal image-reference" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/circuit.svg"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/circuit.svg" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/circuit.svg" width="800" /></a>
-<div class="amsmath math notranslate nohighlight" id="equation-ea2ec2fa-72a3-4c87-8c76-3f956d37f6fb">
-<span class="eqno">(12)<a class="headerlink" href="#equation-ea2ec2fa-72a3-4c87-8c76-3f956d37f6fb" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-af4dce79-5c63-4d87-853a-6e4edf82682e">
+<span class="eqno">(12)<a class="headerlink" href="#equation-af4dce79-5c63-4d87-853a-6e4edf82682e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 I = I_{C}(t) + I_{Na}(t) + I_{K}(t)
 \end{equation}\]</div>
 <p>where,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c07a6665-27e4-43c4-92ff-a33090919175">
-<span class="eqno">(13)<a class="headerlink" href="#equation-c07a6665-27e4-43c4-92ff-a33090919175" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-7d40dc26-a1d5-40e0-a9d2-3cace03734b2">
+<span class="eqno">(13)<a class="headerlink" href="#equation-7d40dc26-a1d5-40e0-a9d2-3cace03734b2" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
 C_m = 1 \mu F/cm^2 \\
 I_{Na} = g_{Na}(u-E_{Na})\\
 I_{K} = g_{k}(u-E_K)\\
 I_{L} = g_{L}(u-E_L)
 \end{eqnarray}\]</div>
 <p>The equation describing the membrane potential can thus be written as follows,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a6ed299b-8dd5-48d7-bd33-e25e627d14e7">
-<span class="eqno">(14)<a class="headerlink" href="#equation-a6ed299b-8dd5-48d7-bd33-e25e627d14e7" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-7852a4c8-ede9-48e9-849c-e70bdc58c60c">
+<span class="eqno">(14)<a class="headerlink" href="#equation-7852a4c8-ede9-48e9-849c-e70bdc58c60c" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
 C_m\frac{dV}{dt}=−I_{Na}(t)−I_{K}(t)−I_{L}(t)+I(t)
 \end{eqnarray}\]</div>
 <p>Hodgkin and Huxley discovered that the <span class="math notranslate nohighlight">\(Na\)</span> and the <span class="math notranslate nohighlight">\(K\)</span> channels do not act as Ohmic conductances, but are modulated by the potential across the membrane.
 Changes in potential had a nonlinear effect on flow of ionic currents. Based in their experimental results they obtained a system of differential equations that described the temporal evolution of the membrane potential in terms of changes in ionic currents (chiefly <span class="math notranslate nohighlight">\(\text{Na}^{+}\)</span> and <span class="math notranslate nohighlight">\(\text{K}^{+}\)</span>).</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7e28f397-2c5e-4ad7-8b68-b16adee32f81">
-<span class="eqno">(15)<a class="headerlink" href="#equation-7e28f397-2c5e-4ad7-8b68-b16adee32f81" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-fa416eae-8b48-4fb2-81c7-e8664110fc23">
+<span class="eqno">(15)<a class="headerlink" href="#equation-fa416eae-8b48-4fb2-81c7-e8664110fc23" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
 I = g_{Na}m^3h(u−E_{Na}) \\
 I_K = g_Kn^4(u−E_K)\\
 I_L = g_L(u−E_L)
 \end{eqnarray}\]</div>
 <p>where <span class="math notranslate nohighlight">\(E_{Na}=50\ mV\)</span>, <span class="math notranslate nohighlight">\(E_K = -95\ mV\)</span> and <span class="math notranslate nohighlight">\(E_L=-55\ mV\)</span> are the reversal potentials; <span class="math notranslate nohighlight">\(g_{Na} = 100\ \mu S/cm^2\)</span>, <span class="math notranslate nohighlight">\(g_K = 10\ \mu S/cm^2\)</span> and <span class="math notranslate nohighlight">\(g_L = 0.15\ \mu S/cm^2\)</span> are the channel conductances; and m,h, and n are gating variables that follow the dynamics given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6c64dab8-19ad-4a8c-a375-b2d69f56c20d">
-<span class="eqno">(16)<a class="headerlink" href="#equation-6c64dab8-19ad-4a8c-a375-b2d69f56c20d" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-9ecec93f-76b4-4363-99cd-4dfbef3eb347">
+<span class="eqno">(16)<a class="headerlink" href="#equation-9ecec93f-76b4-4363-99cd-4dfbef3eb347" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
 \frac{dm}{dt} = - \frac{1}{\tau_m}(m-m_0)\\
 \frac{dh}{dt} = - \frac{1}{\tau_h}(h-h_0)\\
 \frac{dn}{dt} = - \frac{1}{\tau_n}(n-n_0)
@@ -580,18 +580,18 @@ I_L = g_L(u−E_L)
 <li><p><strong>Functional Evaluations:</strong> The form of the equations that describe the neuronal dynamics,  are common across neurons. Only the parameters for differ across neurons. This can be used to `vectorize’ the equations.</p></li>
 </ol>
 <p>Say <span class="math notranslate nohighlight">\(\vec{X}=[V,m,n,h]\)</span> is the state vector of a single neuron and its dynamics are defined using parameters <span class="math notranslate nohighlight">\(C_m,g_K,...E_L\)</span> equations of the form:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-581bf19b-4a09-440f-bfc2-8213933e4a0a">
-<span class="eqno">(17)<a class="headerlink" href="#equation-581bf19b-4a09-440f-bfc2-8213933e4a0a" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\vec{X}}{dt} = [f_1(\vec{X},C_m,g_K,...E_L),f_2(\vec{X},C_m,g_K,...E_L)...f_m(\vec{X},C_m,g_K,...E_L)]\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-77f7a77f-1ede-4b50-baa1-17f925ab05fc">
+<span class="eqno">(17)<a class="headerlink" href="#equation-77f7a77f-1ede-4b50-baa1-17f925ab05fc" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\vec{X}}{dt} = [f_1(\vec{X},C_m,g_K,...E_L),f_2(\vec{X},C_m,g_K,...E_L)...f_m(\vec{X},C_m,g_K,...E_L)]\end{eqnarray}\]</div>
 <p>We can convert these equations to a form in which all evaluations are done as vector calculations and NOT scalar calculations. Despite the parameters being different, the functional forms of the equations are similar for the same state variable of different neurons. Thus, the trick is to reorganize <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> as <span class="math notranslate nohighlight">\(\mathbf{X'}=[(V_1,V_2,...V_n),(m_1,m_2,...m_n),(h_1,h_2,...h_n),(n_1,n_2,...n_n)]=[\vec{V},\vec{m},\vec{h},\vec{n}]\)</span>. And the parameters as <span class="math notranslate nohighlight">\([\vec{C_m},\vec{g_K}] = [C_{m_{1}}\dots C_{m_{n}},g_{K_{1}}\dots g_{K_{n}}]\)</span> and so on.</p>
 <p>The advantage of this re-ordering is that the differential equation of the form,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dfe76f65-c801-4017-b2ea-ff683615009f">
-<span class="eqno">(18)<a class="headerlink" href="#equation-dfe76f65-c801-4017-b2ea-ff683615009f" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{dV_i}{dt}=f(V_i,m_i,h_i,n_i,C_{m_i},g_{K_i}...)\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-3017f958-106d-4689-ac7a-c9ab231ef4ae">
+<span class="eqno">(18)<a class="headerlink" href="#equation-3017f958-106d-4689-ac7a-c9ab231ef4ae" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{dV_i}{dt}=f(V_i,m_i,h_i,n_i,C_{m_i},g_{K_i}...)\end{eqnarray}\]</div>
 <p>is now easily parallelizable using a vector computation of the form,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ce094ce6-aab0-43d0-b9a3-5633ddd4010a">
-<span class="eqno">(19)<a class="headerlink" href="#equation-ce094ce6-aab0-43d0-b9a3-5633ddd4010a" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\vec{V}}{dt}=f(\vec{V},\vec{m},\vec{h},\vec{n},\vec{C_m},\vec{g_K}...)\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-e88a2c89-984f-4bcd-99f8-6fa4884cc3b1">
+<span class="eqno">(19)<a class="headerlink" href="#equation-e88a2c89-984f-4bcd-99f8-6fa4884cc3b1" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\vec{V}}{dt}=f(\vec{V},\vec{m},\vec{h},\vec{n},\vec{C_m},\vec{g_K}...)\end{eqnarray}\]</div>
 <p>The equations can now be written in the form,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-52efcd37-4f47-4729-a625-1b58f69fcf06">
-<span class="eqno">(20)<a class="headerlink" href="#equation-52efcd37-4f47-4729-a625-1b58f69fcf06" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\mathbf{X'}}{dt}= \Big[\frac{d\vec{V}}{dt},\frac{d\vec{m}}{dt},\frac{d\vec{h}}{dt},\frac{d\vec{n}}{dt}\Big]\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-b189870a-1a5d-4693-a0d1-62fe750ab3d1">
+<span class="eqno">(20)<a class="headerlink" href="#equation-b189870a-1a5d-4693-a0d1-62fe750ab3d1" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\mathbf{X'}}{dt}= \Big[\frac{d\vec{V}}{dt},\frac{d\vec{m}}{dt},\frac{d\vec{h}}{dt},\frac{d\vec{n}}{dt}\Big]\end{eqnarray}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_n</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># number of simultaneous neurons to simulate</span>
