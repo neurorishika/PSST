@@ -7,3 +7,4 @@ CALL cd PSST
 CALL ghp-import -n -p -f _build/html
 CALL del _config.yml
 CALL del _toc.yml
+CALL rmdir /s _build
