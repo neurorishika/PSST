@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 ## OR ##
 import tensorflow.compat.v1 as tf
-tf.disable_eager_execution()
+tf.disable_v2_behavior()
 
 def tf_check_type(t, y0): # Ensure Input is Correct
     if not (y0.dtype.is_floating and t.dtype.is_floating):

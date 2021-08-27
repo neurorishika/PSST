@@ -1,7 +1,7 @@
 import tensorflow as tf
 ## OR ##
 import tensorflow.compat.v1 as tf
-tf.disable_eager_execution()
+tf.disable_v2_behavior()
 
 import numpy as np
 import tf_integrator as tf_int
