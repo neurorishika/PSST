@@ -14,7 +14,7 @@ sim_res = 0.01                     # Time Resolution of the Simulation
 sim_time = 700                     # Length of the Simulation
 
 # t = np.arange(0,sim_time,sim_res)
-t = np.load("time.npy")[int(sys.argv[1])] # get first argument to run.py
+t = np.load("time.npy",allow_pickle=True)[int(sys.argv[1])] # get first argument to run.py
 
 # Acetylcholine
 
