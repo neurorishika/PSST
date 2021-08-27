@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 7: (Optional) Distributed Computing with TensorFlow &#8212; PSST: Parallelised Scalable Simulations in TensorFlow</title>
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../../../_static/PSST-favicon-32x32.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="Day 6: (Example Implementation) Into the Mind of a Locust" href="../../Example%20Implementation%20Locust%20AL/Example.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../index.html">
+      
+      <img src="../../../_static/PSST.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">PSST: Parallelised Scalable Simulations in TensorFlow</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../README.html">
+   PSST … It’s well Documented!
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../README.html">
+   Day 0 : Introduction to the Tutorials
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.html">
+   Day 1: Of Numerical Integration and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html">
+   Day 2: Let the Tensors Flow!
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Day%203%20Cells%20in%20Silicon/Day%203.html">
+   Day 3: Cells in Silicon
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Day%204%20Neurons%20and%20Networks/Day%204.html">
+   Day 4: Neurons and Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Day%205%20Optimal%20Mind%20Control/Day%205.html">
+   Day 5: Optimal Mind Control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../Example%20Implementation%20Locust%20AL/Example.html">
+   Day 6: (Example Implementation) Into the Mind of a Locust
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Day 7: (Optional) Distributed Computing with TensorFlow
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../_sources/Tutorial/Optional Material/Distributed TensorFlow/Distributed TensorFlow.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/neurorishika/PSST"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/neurorishika/PSST/issues/new?title=Issue%20on%20page%20%2FTutorial/Optional Material/Distributed TensorFlow/Distributed TensorFlow.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distributed-tensorflow">
+   Distributed TensorFlow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example">
+   Example
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><a href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.ipynb" target="_parent"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>   <a href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.ipynb" target="_parent"><img alt="Open in Kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p>
+<div class="section" id="day-7-optional-distributed-computing-with-tensorflow">
+<h1>Day 7: (Optional) Distributed Computing with TensorFlow<a class="headerlink" href="#day-7-optional-distributed-computing-with-tensorflow" title="Permalink to this headline">¶</a></h1>
+<p>TensorFlow supports distributed computing, allowing portions of the graph to be computed on different processes, which may be on completely different servers! In addition, this can be used to distribute computation to servers with powerful GPUs, and have other computations done on servers with more memory, and so on. Unfortunately, the official documentation on Distributed TensorFlow rather jumps in at the deep end. For a slightly more gentle introduction we will run through some really basic examples with Jupyter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="c1">## OR ##</span>
+<span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /usr/local/lib/python3.7/dist-packages/tensorflow/python/compat/v2_compat.py:101: disable_resource_variables (from tensorflow.python.ops.variable_scope) is deprecated and will be removed in a future version.
+Instructions for updating:
+non-resource variables are not supported in the long term
+</pre></div>
+</div>
+</div>
+</div>
+<p>Most times when we write a distributed code, we want each server to have access to a common set of variables. Say we want to share the variable var between two sessions (called sess1 and sess2) created on two different processes on different clusters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">initial_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+<span class="c1"># Imagine this was run on server 1</span>
+<span class="n">sess1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">sess1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">())</span>
+
+<span class="c1"># Imagine this was run on server 1</span>
+<span class="n">sess2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">sess2</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Whenever a call to tf.Session() is made, it creates a completely seperate “execution engine”. It is then connected to the session handle and the execution engine that stores variable values and runs operations. Lets try making changes on the variable var.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of var (Session 1):&quot;</span><span class="p">,</span> <span class="n">sess1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of var (Session 2):&quot;</span><span class="p">,</span> <span class="n">sess2</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+
+<span class="n">sess1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">assign_add</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Increment var in Session 1&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of var (Session 1):&quot;</span><span class="p">,</span> <span class="n">sess1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of var (Session 2):&quot;</span><span class="p">,</span> <span class="n">sess2</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value of var (Session 1): 0.0
+Value of var (Session 2): 0.0
+Increment var in Session 1
+Value of var (Session 1): 1.0
+Value of var (Session 2): 0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thus, we can see, sessions in different processes are unlinked. Changing var in one session (on one execution engine) won’t affect var in the other session. In order to share variables between processes, we need to link the different execution engines together. This is where we introduce Distributed TensorFlow.</p>
+<div class="section" id="distributed-tensorflow">
+<h2>Distributed TensorFlow<a class="headerlink" href="#distributed-tensorflow" title="Permalink to this headline">¶</a></h2>
+<p>TensorFlow works a bit like a server-client model. The idea is that the users creates a whole bunch of worker nodes that will perform the heavy lifting. A session is then created on one of those worker nodes, and it will compute the graph, possibly distributing parts of it to other worker nodes on the cluster.</p>
+<p>In order to do this, the main worker, needs to know about the other workers. This is done via the creation of a “ClusterSpec”, which you need to pass to all workers. A ClusterSpec is built using a dictionary, where the key is a “job name”, and each job contains many workers.</p>
+<p>The first step is to define what the cluster looks like. We start off with the simplest possible cluster: two worker nodes/servers, both on the same machine; one that will listen on port 2020, one on port 2021. And we create a job called “local” using these servers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the Worker Nodes (called Tasks)</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;localhost:2020&quot;</span><span class="p">,</span> <span class="s2">&quot;localhost:2021&quot;</span><span class="p">]</span>
+<span class="c1"># Define the Cluster Jobs which is a dictionary of connect tasks</span>
+<span class="n">jobs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;local&quot;</span><span class="p">:</span><span class="n">tasks</span><span class="p">}</span>
+<span class="c1"># Initialize the Cluster using ClusterSpec</span>
+<span class="n">cluster</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">ClusterSpec</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now launch the servers associated with the cluster jobs using the Server function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This server corresponds to the the first worker associated with the &#39;local&#39; job.</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Server</span><span class="p">(</span><span class="n">cluster</span><span class="p">,</span> <span class="n">job_name</span><span class="o">=</span><span class="s2">&quot;local&quot;</span><span class="p">,</span> <span class="n">task_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># This server corresponds to the the second worker associated with the &#39;local&#39; job.</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Server</span><span class="p">(</span><span class="n">cluster</span><span class="p">,</span> <span class="n">job_name</span><span class="o">=</span><span class="s2">&quot;local&quot;</span><span class="p">,</span> <span class="n">task_index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With the servers linked together in the same cluster, variables in any one of the server will be shared between all servers. By default, variables and operations get stored and executed on the first worker in the cluster. but to fix a variable or an operation to a specific worker, we can use tf.device().</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Place variable &#39;var&#39; in the first server</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;/job:local/task:0&quot;</span><span class="p">):</span> 
+  <span class="n">var</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">initial_value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;var&#39;</span><span class="p">)</span>
+<span class="n">sess1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+<span class="n">sess2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now try the same thing we did earlier to change the value of var.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the variables</span>
+<span class="n">sess1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">())</span>
+<span class="n">sess2</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of var (Session 1):&quot;</span><span class="p">,</span> <span class="n">sess1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of var (Session 2):&quot;</span><span class="p">,</span> <span class="n">sess2</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+
+<span class="n">sess1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">assign_add</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Increment var in Session 1&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of var (Session 1):&quot;</span><span class="p">,</span> <span class="n">sess1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of var (Session 2):&quot;</span><span class="p">,</span> <span class="n">sess2</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value of var (Session 1): 0.0
+Value of var (Session 2): 0.0
+Increment var in Session 1
+Value of var (Session 1): 1.0
+Value of var (Session 2): 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Voila! Now the value of var is changed for both sessions. An interesting thing to note would be that the second tf.global_variables_initializer() is redundant as there is only a single shared variable that gets initialized by the first call.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;/job:local/task:0&quot;</span><span class="p">):</span>
+    <span class="n">var1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;var1&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;/job:local/task:1&quot;</span><span class="p">):</span>
+    <span class="n">var2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;var2&#39;</span><span class="p">)</span>
+    
+<span class="c1"># (This will initialize both variables)</span>
+<span class="n">sess1</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, whenever we use var1 it will always be run on the first task/worker node (localhost:2020) and for var2 it will always be run on the second task/worker node (localhost:2021).</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Lets try to take a simple Tensorflow Computation graph and split it across multiple processes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@markdown Restart runtime</span>
+<span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="c1">## OR ##</span>
+<span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">300</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">66</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">y2</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /usr/local/lib/python3.7/dist-packages/tensorflow/python/compat/v2_compat.py:101: disable_resource_variables (from tensorflow.python.ops.variable_scope) is deprecated and will be removed in a future version.
+Instructions for updating:
+non-resource variables are not supported in the long term
+238
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we will use Process() from the multiprocessing package to create workers on different processes and run the code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@markdown Restart runtime</span>
+<span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
+
+<span class="c1"># Make a function that creates workers on &quot;localhost:2020&quot; </span>
+<span class="c1"># and &quot;localhost:2021&quot; given the worker number and joins</span>
+
+<span class="k">def</span> <span class="nf">create_server</span><span class="p">(</span><span class="n">worker_number</span><span class="p">):</span>
+    
+    <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+    <span class="c1">## OR ##</span>
+    <span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="nn">tf</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
+    <span class="n">cluster</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">ClusterSpec</span><span class="p">({</span><span class="s2">&quot;local&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;localhost:2020&quot;</span><span class="p">,</span> <span class="s2">&quot;localhost:2021&quot;</span><span class="p">]})</span>
+    <span class="n">worker</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Server</span><span class="p">(</span><span class="n">cluster</span><span class="p">,</span> <span class="n">job_name</span><span class="o">=</span><span class="s2">&quot;local&quot;</span><span class="p">,</span> <span class="n">task_index</span><span class="o">=</span><span class="n">worker_number</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting server #</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">worker_number</span><span class="p">))</span>
+    <span class="n">worker</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">worker</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then create and start the two processes using the function create_server and giving the worker number as the argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create Process</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">create_server</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,))</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">create_server</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+
+<span class="c1"># Start Process</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">p2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally we actually run the session.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="c1">## OR ##</span>
+<span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
+
+<span class="c1"># Initialize the Cluster we are using</span>
+<span class="n">cluster</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">ClusterSpec</span><span class="p">({</span><span class="s2">&quot;local&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;localhost:2020&quot;</span><span class="p">,</span> <span class="s2">&quot;localhost:2021&quot;</span><span class="p">]})</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># define the device to use. FORMAT: /job:JOB_NAME/task:TASK_NUMBER</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;/job:local/task:0&quot;</span><span class="p">):</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">66</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;/job:local/task:1&quot;</span><span class="p">):</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">300</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">y2</span>
+
+<span class="c1"># Run session on one of the workers</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="s2">&quot;grpc://localhost:2020&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /usr/local/lib/python3.7/dist-packages/tensorflow/python/compat/v2_compat.py:101: disable_resource_variables (from tensorflow.python.ops.variable_scope) is deprecated and will be removed in a future version.
+Instructions for updating:
+non-resource variables are not supported in the long term
+238
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thus we are now capable of running distributed code over TensorFlow. In an actual distributed scenario, we will be running the code defined in create_server() on different nodes of a cluster and run the last cell in the main worker node to actually perform the computation.</p>
+<p>From this example it is really easy to now break the integrator into different sections and run them on different nodes to optimize performance by distributing some intensive computation to servers with powerful GPUs, and have other memory heavy computations done on servers with more memory, and so on. A device can be specified on a remote computer by modifying the device string. As an example “/job:local/task:0/gpu:0” will target the GPU on the local job.</p>
+<p>Sources:
+https://databricks.com/tensorflow/distributed-computing-with-tensorflow
+http://amid.fish/distributed-tensorflow-a-gentle-introduction</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Tutorial\Optional Material\Distributed TensorFlow"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../../Example%20Implementation%20Locust%20AL/Example.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Day 6: (Example Implementation) Into the Mind of a Locust</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Rishika Mohanta and Collins Assisi<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

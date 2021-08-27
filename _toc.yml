@@ -1,0 +1,11 @@
+format: jb-book
+root: README
+chapters:
+- file: Tutorial/README
+- file: Tutorial/Day 1 Of Numerical Integration and Python/Day 1
+- file: Tutorial/Day 2 Let the Tensors Flow/Day 2
+- file: Tutorial/Day 3 Cells in Silicon/Day 3
+- file: Tutorial/Day 4 Neurons and Networks/Day 4
+- file: Tutorial/Day 5 Optimal Mind Control/Day 5
+- file: Tutorial/Example Implementation Locust AL/Example
+- file: Tutorial/Optional Material/Distributed TensorFlow/Distributed TensorFlow
