@@ -1,0 +1,1000 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example Implementation: Into the Mind of a Locust &#8212; PSST: Parallelised Scalable Simulations in TensorFlow</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../../_static/PSST-favicon-32x32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Distributed Computing with TensorFlow" href="../Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.html" />
+    <link rel="prev" title="Day 5: Optimal Mind Control" href="../Day%205%20Optimal%20Mind%20Control/Day%205.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/PSST.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">PSST: Parallelised Scalable Simulations in TensorFlow</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../README.html">
+   PSST … It’s well Documented!
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Day 0 : Introduction to the Tutorials
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.html">
+   Day 1: Of Numerical Integration and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html">
+   Day 2: Let the Tensors Flow!
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%203%20Cells%20in%20Silicon/Day%203.html">
+   Day 3: Cells in Silicon
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%204%20Neurons%20and%20Networks/Day%204.html">
+   Day 4: Neurons and Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%205%20Optimal%20Mind%20Control/Day%205.html">
+   Day 5: Optimal Mind Control
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Example Implementation: Into the Mind of a Locust
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.html">
+   Distributed Computing with TensorFlow
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Tutorial/Example Implementation Locust AL/Example.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/neurorishika/PSST"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/neurorishika/PSST/issues/new?title=Issue%20on%20page%20%2FTutorial/Example Implementation Locust AL/Example.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-locust-antennal-lobe">
+   A Locust Antennal Lobe
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-model-of-the-locust-al">
+     A Model of the Locust AL
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#projection-neurons">
+       Projection Neurons
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#local-interneurons">
+       Local Interneurons
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#synaptic-dynamics">
+       Synaptic Dynamics
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#importing-nerveflow">
+     Importing Nerveflow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defining-simulation-parameters">
+     Defining Simulation Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualizing-the-connectivity">
+     Visualizing the Connectivity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defining-the-functions-to-evaluate-dynamics-in-gating-variables">
+     Defining the functions to evaluate dynamics in gating variables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defining-channel-currents-synaptic-potentials-and-input-currents-injection-current">
+     Defining Channel Currents, Synaptic Potentials, and Input Currents (Injection Current)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#putting-together-the-dynamics">
+     Putting Together the Dynamics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-the-current-input-and-run-the-simulation">
+     Creating the Current Input and Run the Simulation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-the-initial-state-vector-and-add-some-jitter-to-break-symmetry">
+     Create the initial state vector and add some jitter to break symmetry
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-the-simulation-and-interpreting-the-output">
+     Running the simulation and Interpreting the Output
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><a href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Example%20Implementation%20Locust%20AL/Example.ipynb" target="_parent"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>   <a href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/Example.ipynb" target="_parent"><img alt="Open in Kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p>
+<div class="section" id="example-implementation-into-the-mind-of-a-locust">
+<h1>Example Implementation: Into the Mind of a Locust<a class="headerlink" href="#example-implementation-into-the-mind-of-a-locust" title="Permalink to this headline">¶</a></h1>
+<p>Once we have figured out how to implement neurons and networks, we can try to simulate a model of a small part of a Locust’s nervous system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#@markdown Import required files and code from previous tutorials
+
+!wget --no-check-certificate \
+  &quot;https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/tf_integrator.py&quot; \
+  -O &quot;tf_integrator.py&quot;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2021-08-27 13:48:57--  https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/tf_integrator.py
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.109.133, 185.199.111.133, 185.199.108.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.109.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2649 (2.6K) [text/plain]
+Saving to: ‘tf_integrator.py’
+
+tf_integrator.py    100%[===================&gt;]   2.59K  --.-KB/s    in 0s      
+
+2021-08-27 13:48:57 (26.0 MB/s) - ‘tf_integrator.py’ saved [2649/2649]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="a-locust-antennal-lobe">
+<h2>A Locust Antennal Lobe<a class="headerlink" href="#a-locust-antennal-lobe" title="Permalink to this headline">¶</a></h2>
+<p>To an insect, the sense of smell is its source of essential information about their surroundings. Whether it is getting attracted to a potential mate or finding a source of nutrition, odorants are known to trigger various behaviors in insects. Because of their simpler nervous systems and amazing ability to detect and track odors, insects are used to study olfaction to a great extent. Their most surprising ability is to track odors even in the very noisy natural environments. To study this neurobiology look a the dynamics of the networks involved in the processing of chemosensory information to the insect.</p>
+<p>Odorants are detected by receptors in olfactory receptor neurons (ORNs) which undergo a depolarization as a result. The antennal lobe (AL) in the insects’ brain is considered to be the primary structure that receives input from ORNs within the antennae. It is the consensus that, since different sets of ORNs are activated by different odors, the coding of the odor identity is combinatorial in nature. Inside the Antennal Lobe, the input from the the ORNs is converted into complex long-lived dynamic transients and complex interacting signals which output to the mushroom body in the insect brain. Moreover, the network in the Locust Antennal Lobe seems to be a random network rather than a genetically encoded network with a particular fixed topology.</p>
+<p>The Locust AL has two types of neurons:</p>
+<ol class="simple">
+<li><p><strong>Inhibitory Local Interneurons (LN):</strong> They produce GABAergic Synapses ie. GABAa (Fast) and Metabotropic GABA (Slow). They synapse onto other Local Interneurons and to Projection Neurons. A subset of them receive inputs from the ORNs.</p></li>
+<li><p><strong>Projection Neurons (PN):</strong> They produce Cholinergic Synapses ie. Acetylcholine. They synapse onto local interneurons and also project to the mushroom body outside the AL and act as the output for the AL. A subset of them also receive inputs from the ORNs.</p></li>
+</ol>
+<div class="section" id="a-model-of-the-locust-al">
+<h3>A Model of the Locust AL<a class="headerlink" href="#a-model-of-the-locust-al" title="Permalink to this headline">¶</a></h3>
+<p>The model described here is based on Bazhenov 2001b.</p>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/model.png"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/model.png" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/model.png" style="width: 400px;" /></a>
+<p><strong>Total Number of Neurons</strong> = 120<br />
+<strong>Number of PNs</strong> = 90<br />
+<strong>Number of LNs</strong> = 30</p>
+<p>The connectivity is random with different connection probabilities as described below:</p>
+<p><strong>Probability(PN to PN)</strong> = 0.0<br />
+<strong>Probability(PN to LN)</strong> = 0.5<br />
+<strong>Probability(LN to LN)</strong> = 0.5<br />
+<strong>Probability(LN to PN)</strong> = 0.5</p>
+<p>33% of all neurons receive input from ORNs.</p>
+<div class="section" id="projection-neurons">
+<h4>Projection Neurons<a class="headerlink" href="#projection-neurons" title="Permalink to this headline">¶</a></h4>
+<p>The projection neurons have an hodgkin huxley dynamics as described below:</p>
+<div class="math notranslate nohighlight">
+\[C_m \frac{dV_{PN}}{dt} = I_{stim} - I_{L} - I_{Na} - I_{K} - I_{A} - I_{KL} - I_{GABA_a} -I_{Ach}\]</div>
+<p>It expresses voltage-gated Na<span class="math notranslate nohighlight">\(^+\)</span> channels, voltage-gated K<span class="math notranslate nohighlight">\(^+\)</span> channels, transient K<span class="math notranslate nohighlight">\(^+\)</span> channels, K<span class="math notranslate nohighlight">\(^+\)</span> leak channels and general leak channel. The Acetylcholine current is always zero in this model as PNs do not project to PNs.</p>
+<p>The PN currents and differential equation for dynamics are described below:
+<a class="reference internal" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/PNeq.png"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/PNeq.png" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/PNeq.png" style="width: 1000px;" /></a></p>
+</div>
+<div class="section" id="local-interneurons">
+<h4>Local Interneurons<a class="headerlink" href="#local-interneurons" title="Permalink to this headline">¶</a></h4>
+<p>The Local Interneurons have an dynamics somewhat similar to hodgkin huxley as described below:</p>
+<div class="math notranslate nohighlight">
+\[C_m \frac{dV_{LN}}{dt} = I_{stim} - I_{L} - I_{Ca} - I_{K} - I_{K(Ca)} - I_{KL} - I_{GABA_a} -I_{Ach}\]</div>
+<p>Unlike the Projection neuron, the local interneurons do not have the normal sodium potassium channel action potentials. They expresse voltage-gated Ca<span class="math notranslate nohighlight">\(^{2+}\)</span> channels, voltage-gated K<span class="math notranslate nohighlight">\(^+\)</span> channels, Calcium dependent K<span class="math notranslate nohighlight">\(^+\)</span> channels, K<span class="math notranslate nohighlight">\(^+\)</span> leak channels and general leak channel. Here, opposite interactions between K and Ca channels cause longer extended action potentials. The dynamics in intracellular Ca<span class="math notranslate nohighlight">\(^{2+}\)</span> causes changes in K(Ca) channel dynamics allowing for adaptive behavior in the neurons.</p>
+<p>The LN currents and differential equation for dynamics are described below:
+<a class="reference internal" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/LNeq.png"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/LNeq.png" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/LNeq.png" style="width: 1000px;" /></a></p>
+</div>
+<div class="section" id="synaptic-dynamics">
+<h4>Synaptic Dynamics<a class="headerlink" href="#synaptic-dynamics" title="Permalink to this headline">¶</a></h4>
+<p>Finally, the equation of the dynamics of the two types of synapses are given below.</p>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/syneq.png"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/syneq.png" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/syneq.png" style="width: 1000px;" /></a>
+</div>
+</div>
+<div class="section" id="importing-nerveflow">
+<h3>Importing Nerveflow<a class="headerlink" href="#importing-nerveflow" title="Permalink to this headline">¶</a></h3>
+<p>Once the Integrator is saved in tf_integrator.py in the same directory as the Notebook, we can start importing the essentials including the integrator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="c1">## OR ##</span>
+<span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">tf_integrator</span> <span class="k">as</span> <span class="nn">tf_int</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From /usr/local/lib/python3.7/dist-packages/tensorflow/python/compat/v2_compat.py:101: disable_resource_variables (from tensorflow.python.ops.variable_scope) is deprecated and will be removed in a future version.
+Instructions for updating:
+non-resource variables are not supported in the long term
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="defining-simulation-parameters">
+<h3>Defining Simulation Parameters<a class="headerlink" href="#defining-simulation-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Now we can start defining the parameters of the model. First, we define the length of the simulation and the time resolution and create the time array t.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim_time</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># simulation time (in ms)</span>
+<span class="n">sim_res</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># simulation resolution (in ms)</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sim_time</span><span class="p">,</span> <span class="n">sim_res</span><span class="p">)</span> <span class="c1"># time array</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we start implementing the details of the network. Since there are two different cell types they may have different properties/parameters. As you might remember, our parallelization paradigm allows us to have different values of parameters for different neurons/synapses by having parameter vectors. To make it easy for us to manipulate the information it is best for us to have a convection for splitting parameters into cell types.</p>
+<p>Here, we follow the convention that the first 90 values of each common parameter will be for PN cell type and the rest 30 will be for LN cell type. Unique parameters are defined whenever necessary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining Neuron Counts</span>
+
+<span class="n">n_n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>                 <span class="c1"># number of neurons</span>
+
+<span class="n">p_n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>                  <span class="c1"># number of PNs</span>
+<span class="n">l_n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>                  <span class="c1"># number of LNs</span>
+
+<span class="n">C_m</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                     <span class="c1"># Capacitance</span>
+
+<span class="c1"># Defining Common Current Parameters #</span>
+
+<span class="n">g_K</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                    <span class="c1"># K conductance</span>
+<span class="n">g_L</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                    <span class="c1"># Leak conductance</span>
+<span class="n">g_KL</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">]</span><span class="o">*</span><span class="n">p_n</span> <span class="o">+</span> <span class="p">[</span><span class="mf">0.02</span><span class="p">]</span><span class="o">*</span><span class="n">l_n</span>      <span class="c1"># K leak conductance (first 90 for PNs and next 30 for LNs)</span>
+
+<span class="n">E_K</span>  <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">95.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                   <span class="c1"># K Potential</span>
+<span class="n">E_L</span>  <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">55.0</span><span class="p">]</span><span class="o">*</span><span class="n">p_n</span> <span class="o">+</span> <span class="p">[</span><span class="o">-</span><span class="mf">50.0</span><span class="p">]</span><span class="o">*</span><span class="n">l_n</span>     <span class="c1"># Leak Potential (first 90 for PNs and next 30 for LNs)</span>
+<span class="n">E_KL</span>  <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">95.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                  <span class="c1"># K Leak Potential</span>
+
+<span class="c1"># Defining Cell Type Specific Current Parameters #</span>
+
+<span class="c1">## PNs</span>
+
+<span class="n">g_Na</span> <span class="o">=</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">]</span><span class="o">*</span><span class="n">p_n</span>                   <span class="c1"># Na conductance</span>
+<span class="n">g_A</span>  <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">]</span><span class="o">*</span><span class="n">p_n</span>                    <span class="c1"># Transient K conductance</span>
+
+<span class="n">E_Na</span> <span class="o">=</span> <span class="p">[</span><span class="mf">50.0</span><span class="p">]</span><span class="o">*</span><span class="n">p_n</span>                    <span class="c1"># Na Potential</span>
+<span class="n">E_A</span>  <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">95.0</span><span class="p">]</span><span class="o">*</span><span class="n">p_n</span>                   <span class="c1"># Transient K Potential</span>
+
+<span class="c1">## LNs</span>
+
+<span class="n">g_Ca</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">]</span><span class="o">*</span><span class="n">l_n</span>                     <span class="c1"># Ca conductance</span>
+<span class="n">g_KCa</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">]</span><span class="o">*</span><span class="n">l_n</span>                    <span class="c1"># Ca dependent K conductance</span>
+
+<span class="n">E_Ca</span> <span class="o">=</span> <span class="p">[</span><span class="mf">140.0</span><span class="p">]</span><span class="o">*</span><span class="n">l_n</span>                   <span class="c1"># Ca Potential</span>
+<span class="n">E_KCa</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">90</span><span class="p">]</span><span class="o">*</span><span class="n">l_n</span>                    <span class="c1"># Ca dependent K Potential</span>
+
+<span class="n">A_Ca</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">))]</span><span class="o">*</span><span class="n">l_n</span>            <span class="c1"># Ca outflow rate</span>
+<span class="n">Ca0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.4</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">))]</span><span class="o">*</span><span class="n">l_n</span>           <span class="c1"># Equilibrium Calcium Concentration</span>
+<span class="n">t_Ca</span> <span class="o">=</span> <span class="p">[</span><span class="mi">150</span><span class="p">]</span><span class="o">*</span><span class="n">l_n</span>                     <span class="c1"># Ca recovery time constant</span>
+
+<span class="c1">## Defining Firing Thresholds ##</span>
+
+<span class="n">F_b</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                      <span class="c1"># Fire threshold</span>
+
+<span class="c1">## Defining Acetylcholine Synapse Connectivity ##</span>
+
+<span class="n">ach_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">))</span>                                 <span class="c1"># Ach Synapse Connectivity Matrix</span>
+<span class="n">ach_mat</span><span class="p">[</span><span class="n">p_n</span><span class="p">:,:</span><span class="n">p_n</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">l_n</span><span class="p">,</span><span class="n">p_n</span><span class="p">))</span> <span class="c1"># 50% probability of PN -&gt; LN</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">ach_mat</span><span class="p">,</span><span class="mf">0.</span><span class="p">)</span>                                  <span class="c1"># Remove all self connection</span>
+
+<span class="c1">## Defining Acetylcholine Synapse Parameters ##</span>
+
+<span class="n">n_syn_ach</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ach_mat</span><span class="p">))</span>     <span class="c1"># Number of Acetylcholine (Ach) Synapses </span>
+<span class="n">alp_ach</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_syn_ach</span>           <span class="c1"># Alpha for Ach Synapse</span>
+<span class="n">bet_ach</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">]</span><span class="o">*</span><span class="n">n_syn_ach</span>            <span class="c1"># Beta for Ach Synapse</span>
+<span class="n">t_max</span> <span class="o">=</span> <span class="mf">0.3</span>                          <span class="c1"># Maximum Time for Synapse</span>
+<span class="n">t_delay</span> <span class="o">=</span> <span class="mi">0</span>                          <span class="c1"># Axonal Transmission Delay</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                        <span class="c1"># Synaptic Response Strength</span>
+<span class="n">g_ach</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.35</span><span class="p">]</span><span class="o">*</span><span class="n">p_n</span><span class="o">+</span><span class="p">[</span><span class="mf">0.3</span><span class="p">]</span><span class="o">*</span><span class="n">l_n</span>         <span class="c1"># Ach Conductance</span>
+<span class="n">E_ach</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                    <span class="c1"># Ach Potential</span>
+
+<span class="c1">## Defining GABAa Synapse Connectivity ##</span>
+
+<span class="n">fgaba_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">))</span>                              <span class="c1"># GABAa Synapse Connectivity Matrix</span>
+<span class="n">fgaba_mat</span><span class="p">[:,</span><span class="n">p_n</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_n</span><span class="p">,</span><span class="n">l_n</span><span class="p">))</span> <span class="c1"># 50% probability of LN -&gt; LN/PN</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">fgaba_mat</span><span class="p">,</span><span class="mf">0.</span><span class="p">)</span>                               <span class="c1"># No self connection</span>
+
+<span class="c1">## Defining GABAa Synapse Parameters ##</span>
+    
+<span class="n">n_syn_fgaba</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">fgaba_mat</span><span class="p">))</span> <span class="c1"># Number of GABAa (fGABA) Synapses</span>
+<span class="n">alp_fgaba</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_syn_fgaba</span>       <span class="c1"># Alpha for fGABA Synapse</span>
+<span class="n">bet_fgaba</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.16</span><span class="p">]</span><span class="o">*</span><span class="n">n_syn_fgaba</span>       <span class="c1"># Beta for fGABA Synapse</span>
+<span class="n">V0</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">20.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                     <span class="c1"># Decay Potential</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                    <span class="c1"># Decay Time Constant</span>
+<span class="n">g_fgaba</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">]</span><span class="o">*</span><span class="n">p_n</span><span class="o">+</span><span class="p">[</span><span class="mf">0.8</span><span class="p">]</span><span class="o">*</span><span class="n">l_n</span>        <span class="c1"># fGABA Conductance</span>
+<span class="n">E_fgaba</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">70.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                <span class="c1"># fGABA Potential</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="visualizing-the-connectivity">
+<h3>Visualizing the Connectivity<a class="headerlink" href="#visualizing-the-connectivity" title="Permalink to this headline">¶</a></h3>
+<p>Now that we have a connectivity matrix, we can visualize the connectivity as a heatmap. For this, we combine the two synapse connectivity matrix to get a single matrix that has +1 for excitatory connection and -1 for inhibitory connections. Then we use seaborn library to get a clean heatmap.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">ach_mat</span><span class="o">-</span><span class="n">fgaba_mat</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Presynaptic Neuron Number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Postsynaptic Neuron Number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Network Connectivity&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Example_10_0.png" src="../../_images/Example_10_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="defining-the-functions-to-evaluate-dynamics-in-gating-variables">
+<h3>Defining the functions to evaluate dynamics in gating variables<a class="headerlink" href="#defining-the-functions-to-evaluate-dynamics-in-gating-variables" title="Permalink to this headline">¶</a></h3>
+<p>Now, we define all the functions that will evaluate the equilibium value and time constants of gating variable for different channels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">K_prop</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">22</span>
+    
+    <span class="n">phi</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">**</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mf">36.0</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="n">V_</span> <span class="o">=</span> <span class="n">V</span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">)</span>
+    
+    <span class="n">alpha_n</span> <span class="o">=</span> <span class="mf">0.02</span><span class="o">*</span><span class="p">(</span><span class="mf">15.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">15.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">beta_n</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">10.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">40.0</span><span class="p">)</span>
+    
+    <span class="n">t_n</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_n</span><span class="o">+</span><span class="n">beta_n</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">n_0</span> <span class="o">=</span> <span class="n">alpha_n</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_n</span><span class="o">+</span><span class="n">beta_n</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">n_0</span><span class="p">,</span> <span class="n">t_n</span>
+
+
+<span class="k">def</span> <span class="nf">Na_prop</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">22</span>
+    
+    <span class="n">phi</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">**</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mi">36</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="n">V_</span> <span class="o">=</span> <span class="n">V</span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">)</span>
+    
+    <span class="n">alpha_m</span> <span class="o">=</span> <span class="mf">0.32</span><span class="o">*</span><span class="p">(</span><span class="mf">13.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">13.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">4.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">beta_m</span> <span class="o">=</span> <span class="mf">0.28</span><span class="o">*</span><span class="p">(</span><span class="n">V_</span> <span class="o">-</span> <span class="mf">40.0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">V_</span> <span class="o">-</span> <span class="mf">40.0</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    
+    <span class="n">alpha_h</span> <span class="o">=</span> <span class="mf">0.128</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">17.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">18.0</span><span class="p">)</span>
+    <span class="n">beta_h</span> <span class="o">=</span> <span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">40.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span>
+    
+    <span class="n">t_m</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_m</span><span class="o">+</span><span class="n">beta_m</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">t_h</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_h</span><span class="o">+</span><span class="n">beta_h</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    
+    <span class="n">m_0</span> <span class="o">=</span> <span class="n">alpha_m</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_m</span><span class="o">+</span><span class="n">beta_m</span><span class="p">)</span>
+    <span class="n">h_0</span> <span class="o">=</span> <span class="n">alpha_h</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_h</span><span class="o">+</span><span class="n">beta_h</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">m_0</span><span class="p">,</span> <span class="n">t_m</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">t_h</span>
+
+
+<span class="k">def</span> <span class="nf">A_prop</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">36</span>
+    
+    <span class="n">phi</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">**</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mf">23.5</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="n">m_0</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">V</span><span class="o">+</span><span class="mf">60.0</span><span class="p">)</span><span class="o">/</span><span class="mf">8.5</span><span class="p">))</span>
+    <span class="n">h_0</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">V</span><span class="o">+</span><span class="mf">78.0</span><span class="p">)</span><span class="o">/</span><span class="mf">6.0</span><span class="p">))</span>
+    
+    <span class="n">tau_m</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">V</span><span class="o">+</span><span class="mf">35.82</span><span class="p">)</span><span class="o">/</span><span class="mf">19.69</span><span class="p">)</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">V</span><span class="o">+</span><span class="mf">79.69</span><span class="p">)</span><span class="o">/</span><span class="mf">12.7</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.37</span><span class="p">)</span> <span class="o">/</span> <span class="n">phi</span>
+    
+    <span class="n">t1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">V</span><span class="o">+</span><span class="mf">46.05</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">V</span><span class="o">+</span><span class="mf">238.4</span><span class="p">)</span><span class="o">/</span><span class="mf">37.45</span><span class="p">))</span> <span class="o">/</span> <span class="n">phi</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="p">(</span><span class="mf">19.0</span><span class="o">/</span><span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">V</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">V</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    <span class="n">tau_h</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">less</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="o">-</span><span class="mf">63.0</span><span class="p">),</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">m_0</span><span class="p">,</span> <span class="n">tau_m</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">tau_h</span>
+
+
+<span class="k">def</span> <span class="nf">Ca_prop</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    
+    <span class="n">m_0</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">V</span><span class="o">+</span><span class="mf">20.0</span><span class="p">)</span><span class="o">/</span><span class="mf">6.5</span><span class="p">))</span>
+    <span class="n">h_0</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">V</span><span class="o">+</span><span class="mf">25.0</span><span class="p">)</span><span class="o">/</span><span class="mi">12</span><span class="p">))</span>
+    
+    <span class="n">tau_m</span> <span class="o">=</span> <span class="mf">1.5</span>
+    <span class="n">tau_h</span> <span class="o">=</span> <span class="mf">0.3</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">V</span><span class="o">-</span><span class="mf">40.0</span><span class="p">)</span><span class="o">/</span><span class="mf">13.0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.002</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">60.0</span><span class="o">-</span><span class="n">V</span><span class="p">)</span><span class="o">/</span><span class="mi">29</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">m_0</span><span class="p">,</span> <span class="n">tau_m</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">tau_h</span>
+
+<span class="k">def</span> <span class="nf">KCa_prop</span><span class="p">(</span><span class="n">Ca</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">26</span>
+    
+    <span class="n">phi</span> <span class="o">=</span> <span class="mf">2.3</span><span class="o">**</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mf">23.0</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.01</span><span class="o">*</span><span class="n">Ca</span>
+    <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.02</span>
+    
+    <span class="n">tau</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">((</span><span class="n">alpha</span><span class="o">+</span><span class="n">beta</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">alpha</span><span class="o">*</span><span class="n">tau</span><span class="o">*</span><span class="n">phi</span><span class="p">,</span> <span class="n">tau</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="defining-channel-currents-synaptic-potentials-and-input-currents-injection-current">
+<h3>Defining Channel Currents, Synaptic Potentials, and Input Currents (Injection Current)<a class="headerlink" href="#defining-channel-currents-synaptic-potentials-and-input-currents-injection-current" title="Permalink to this headline">¶</a></h3>
+<p>Just like the normal hodgkin-huxley network, we define the different functions that evaluate the different neuronal currents.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NEURONAL CURRENTS</span>
+
+<span class="c1"># Common Currents #</span>
+
+<span class="k">def</span> <span class="nf">I_K</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_K</span>  <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_K</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_L</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_L</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_L</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_KL</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_KL</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_KL</span><span class="p">)</span>
+
+<span class="c1"># PN Currents #</span>
+
+<span class="k">def</span> <span class="nf">I_Na</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_Na</span> <span class="o">*</span> <span class="n">m</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_Na</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_A</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_A</span> <span class="o">*</span> <span class="n">m</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_A</span><span class="p">)</span>
+
+<span class="c1"># LN Currents #</span>
+
+<span class="k">def</span> <span class="nf">I_Ca</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_Ca</span> <span class="o">*</span> <span class="n">m</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_Ca</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_KCa</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">26</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="mf">2.3</span><span class="o">**</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mf">23.0</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">g_KCa</span> <span class="o">*</span> <span class="n">m</span> <span class="o">*</span> <span class="n">phi</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_KCa</span><span class="p">)</span>
+
+<span class="c1"># SYNAPTIC CURRENTS</span>
+
+<span class="k">def</span> <span class="nf">I_ach</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span><span class="n">ach_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">scatter_update</span><span class="p">(</span><span class="n">o_</span><span class="p">,</span><span class="n">ind</span><span class="p">,</span><span class="n">o</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">o_</span><span class="p">,(</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">o_</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">E_ach</span><span class="p">))</span><span class="o">*</span><span class="n">g_ach</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_fgaba</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span><span class="n">fgaba_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">scatter_update</span><span class="p">(</span><span class="n">o_</span><span class="p">,</span><span class="n">ind</span><span class="p">,</span><span class="n">o</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">o_</span><span class="p">,(</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">o_</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">E_fgaba</span><span class="p">))</span><span class="o">*</span><span class="n">g_fgaba</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># OR for TensorFlow v2.x and above</span>
+
+<span class="k">def</span> <span class="nf">I_ach</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span><span class="n">ach_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">),[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">tensor_scatter_nd_update</span><span class="p">(</span><span class="n">o_</span><span class="p">,</span><span class="n">ind</span><span class="p">,</span><span class="n">o</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">o_</span><span class="p">,(</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">o_</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">E_ach</span><span class="p">))</span><span class="o">*</span><span class="n">g_ach</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_gaba</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span><span class="n">gaba_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">),[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">tensor_scatter_nd_update</span><span class="p">(</span><span class="n">o_</span><span class="p">,</span><span class="n">ind</span><span class="p">,</span><span class="n">o</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">o_</span><span class="p">,(</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">o_</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">E_gaba</span><span class="p">))</span><span class="o">*</span><span class="n">g_gaba</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># INPUT CURRENTS</span>
+
+<span class="k">def</span> <span class="nf">I_inj_t</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">current_input</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)[</span><span class="n">tf</span><span class="o">.</span><span class="n">to_int32</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="mi">100</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="putting-together-the-dynamics">
+<h3>Putting Together the Dynamics<a class="headerlink" href="#putting-together-the-dynamics" title="Permalink to this headline">¶</a></h3>
+<p>The construction of the function that evaluates the dynamical equations is similar to the normal HH Model but we have a small difference. That is, not all neurons share the same dynamical equations, they have some common terms and some terms that are unique. The procedure we deal with this is briefly explained below.</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\vec{X_A}}{dt} = f(\vec{X_{A_\alpha}},\vec{X_{A_\beta}}...)+g_A(\vec{X_{A_\gamma}}...)\ \ \ \ \ \ \frac{d\vec{X_B}}{dt} = f(\vec{X_{B_\alpha}},\vec{X_{B_\beta}}...)+g_B(\vec{X_{B_\gamma}}...)\]</div>
+<div class="math notranslate nohighlight">
+\[To\ evaluate\ \frac{d\vec{X}}{dt}\ where\ \vec{X}=[\vec{X_A},\vec{X_B}], Find:\]</div>
+<div class="math notranslate nohighlight">
+\[\Big(\frac{dX_A}{dt}\Big)_{unique}=g_A(\vec{X_{A_\gamma}}..)\ \ \ \ \ \ \ \ \ \ \ \ \ \Big(\frac{dX_B}{dt}\Big)_{unique}=g_B(\vec{X_{B_\gamma}}..)\]</div>
+<div class="math notranslate nohighlight">
+\[\Big(\frac{dX}{dt}\Big)_{unique}=\Big[\Big(\frac{dX_A}{dt}\Big)_{unique},\Big(\frac{dX_B}{dt}\Big)_{unique}\Big]\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{dX}{dt}=\Big(\frac{dX}{dt}\Big)_{unique}+f(\vec{X_{\alpha}},\vec{X_{\beta}}...)\]</div>
+<p>This way, we can minimize the number of computations required for the simulation and all the computations are highly parallelizeable by TensorFlow. As for the vector we follow the convention given below:</p>
+<ul class="simple">
+<li><p>Voltage(PN)[90]</p></li>
+<li><p>Voltage(LN)[30]</p></li>
+<li><p>K-gating(ALL)[120]</p></li>
+<li><p>Na-activation-gating(PN)[90]</p></li>
+<li><p>Na-inactivation-gating(PN)[90]</p></li>
+<li><p>Transient-K-activation-gating(PN)[90]</p></li>
+<li><p>Transient-K-inactivation-gating(PN)[90]</p></li>
+<li><p>Ca-activation-gating(LN)[30]</p></li>
+<li><p>Ca-inactivation-gating(LN)[30]</p></li>
+<li><p>K(Ca)-gating(LN)[30]</p></li>
+<li><p>Ca-concentration(LN)[30]</p></li>
+<li><p>Acetylcholine Open Fraction[n_syn_ach]</p></li>
+<li><p>GABAa Open Fraction[n_syn_fgaba]</p></li>
+<li><p>Fire-times[120]</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dXdt</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span> <span class="c1"># X is the state vector</span>
+    
+    <span class="n">V_p</span>   <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span>   <span class="p">:</span> <span class="n">p_n</span><span class="p">]</span> <span class="c1"># Voltage(PN)</span>
+    <span class="n">V_l</span>   <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">p_n</span> <span class="p">:</span> <span class="n">n_n</span><span class="p">]</span> <span class="c1"># Voltage(LN)</span>
+    
+    <span class="n">n_K</span>   <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">n_n</span> <span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">n_n</span><span class="p">]</span> <span class="c1"># K-gating(ALL)</span>
+    
+    <span class="n">m_Na</span>  <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="n">p_n</span><span class="p">]</span> <span class="c1"># Na-activation-gating(PN)</span>
+    <span class="n">h_Na</span>  <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="n">p_n</span> <span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_n</span><span class="p">]</span> <span class="c1"># Na-inactivation-gating(PN)</span>
+
+    <span class="n">m_A</span>   <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_n</span> <span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">p_n</span><span class="p">]</span> <span class="c1"># Transient-K-activation-gating(PN)</span>
+    <span class="n">h_A</span>   <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">p_n</span> <span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">p_n</span><span class="p">]</span> <span class="c1"># Transient-K-inactivation-gating(PN)</span>
+    
+    <span class="n">m_Ca</span>  <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">p_n</span> <span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">p_n</span> <span class="o">+</span> <span class="n">l_n</span><span class="p">]</span> <span class="c1"># Ca-activation-gating(LN)</span>
+    <span class="n">h_Ca</span>  <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">p_n</span> <span class="o">+</span> <span class="n">l_n</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">p_n</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">l_n</span><span class="p">]</span> <span class="c1"># Ca-inactivation-gating(LN)</span>
+    
+    <span class="n">m_KCa</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">p_n</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">l_n</span> <span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">p_n</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">l_n</span><span class="p">]</span> <span class="c1"># K(Ca)-gating(LN)</span>
+    <span class="n">Ca</span>    <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">p_n</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">l_n</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">p_n</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">l_n</span><span class="p">]</span> <span class="c1"># Ca-concentration(LN)</span>
+
+    <span class="n">o_ach</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">6</span><span class="o">*</span><span class="n">n_n</span> <span class="p">:</span> <span class="mi">6</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="n">n_syn_ach</span><span class="p">]</span> <span class="c1"># Acetylcholine Open Fraction</span>
+    <span class="n">o_fgaba</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">6</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="n">n_syn_ach</span> <span class="p">:</span> <span class="mi">6</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="n">n_syn_ach</span> <span class="o">+</span> <span class="n">n_syn_fgaba</span><span class="p">]</span> <span class="c1"># GABAa Open Fraction</span>
+    
+    <span class="n">fire_t</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="n">n_n</span><span class="p">:]</span> <span class="c1"># Fire-times</span>
+    
+    <span class="n">V</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">n_n</span><span class="p">]</span> <span class="c1"># Overall Voltage (PN + LN)</span>
+    
+    
+    <span class="c1"># Evaluate Differentials for Gating variables and Ca concentration</span>
+    
+    <span class="n">n0</span><span class="p">,</span><span class="n">tn</span> <span class="o">=</span> <span class="n">K_prop</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    
+    <span class="n">dn_k</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">tn</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">n_K</span><span class="o">-</span><span class="n">n0</span><span class="p">)</span>
+    
+    <span class="n">m0</span><span class="p">,</span><span class="n">tm</span><span class="p">,</span><span class="n">h0</span><span class="p">,</span><span class="n">th</span> <span class="o">=</span> <span class="n">Na_prop</span><span class="p">(</span><span class="n">V_p</span><span class="p">)</span>
+    
+    <span class="n">dm_Na</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">tm</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">m_Na</span><span class="o">-</span><span class="n">m0</span><span class="p">)</span>
+    <span class="n">dh_Na</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">th</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">h_Na</span><span class="o">-</span><span class="n">h0</span><span class="p">)</span>
+    
+    <span class="n">m0</span><span class="p">,</span><span class="n">tm</span><span class="p">,</span><span class="n">h0</span><span class="p">,</span><span class="n">th</span> <span class="o">=</span> <span class="n">A_prop</span><span class="p">(</span><span class="n">V_p</span><span class="p">)</span>
+    
+    <span class="n">dm_A</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">tm</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">m_A</span><span class="o">-</span><span class="n">m0</span><span class="p">)</span>
+    <span class="n">dh_A</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">th</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">h_A</span><span class="o">-</span><span class="n">h0</span><span class="p">)</span>
+    
+    <span class="n">m0</span><span class="p">,</span><span class="n">tm</span><span class="p">,</span><span class="n">h0</span><span class="p">,</span><span class="n">th</span> <span class="o">=</span> <span class="n">Ca_prop</span><span class="p">(</span><span class="n">V_l</span><span class="p">)</span>
+    
+    <span class="n">dm_Ca</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">tm</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">m_Ca</span><span class="o">-</span><span class="n">m0</span><span class="p">)</span>
+    <span class="n">dh_Ca</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">th</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">h_Ca</span><span class="o">-</span><span class="n">h0</span><span class="p">)</span>
+    
+    <span class="n">m0</span><span class="p">,</span><span class="n">tm</span> <span class="o">=</span> <span class="n">KCa_prop</span><span class="p">(</span><span class="n">Ca</span><span class="p">)</span>
+    
+    <span class="n">dm_KCa</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">tm</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">m_KCa</span><span class="o">-</span><span class="n">m0</span><span class="p">)</span>
+    
+    <span class="n">dCa</span> <span class="o">=</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A_Ca</span><span class="p">)</span><span class="o">*</span><span class="n">I_Ca</span><span class="p">(</span><span class="n">V_l</span><span class="p">,</span><span class="n">m_Ca</span><span class="p">,</span><span class="n">h_Ca</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">Ca</span> <span class="o">-</span> <span class="n">Ca0</span><span class="p">)</span><span class="o">/</span><span class="n">t_Ca</span>
+    
+    <span class="c1"># Evaluate differential for Voltage</span>
+    
+    <span class="c1"># The dynamical equation for voltage has both unique and common parts.</span>
+    <span class="c1"># Thus, as discussed above, we first evaluate the unique parts of Cm*dV/dT for LNs and PNs.</span>
+    
+    <span class="n">CmdV_p</span> <span class="o">=</span> <span class="o">-</span> <span class="n">I_Na</span><span class="p">(</span><span class="n">V_p</span><span class="p">,</span> <span class="n">m_Na</span><span class="p">,</span> <span class="n">h_Na</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_A</span><span class="p">(</span><span class="n">V_p</span><span class="p">,</span> <span class="n">m_A</span><span class="p">,</span> <span class="n">h_A</span><span class="p">)</span>
+    <span class="n">CmdV_l</span> <span class="o">=</span> <span class="o">-</span> <span class="n">I_Ca</span><span class="p">(</span><span class="n">V_l</span><span class="p">,</span> <span class="n">m_Ca</span><span class="p">,</span> <span class="n">h_Ca</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_KCa</span><span class="p">(</span><span class="n">V_l</span><span class="p">,</span> <span class="n">m_KCa</span><span class="p">)</span>
+    
+    <span class="c1"># Once we have that, we merge the two into a single 120-vector.</span>
+    
+    <span class="n">CmdV</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">CmdV_p</span><span class="p">,</span><span class="n">CmdV_l</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1"># Finally we add the common currents and divide by Cm to get dV/dt.</span>
+    
+    <span class="n">dV</span> <span class="o">=</span> <span class="p">(</span><span class="n">I_inj_t</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">CmdV</span> <span class="o">-</span> <span class="n">I_K</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">n_K</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_L</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_KL</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_ach</span><span class="p">(</span><span class="n">o_ach</span><span class="p">,</span><span class="n">V</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_fgaba</span><span class="p">(</span><span class="n">o_fgaba</span><span class="p">,</span><span class="n">V</span><span class="p">))</span> <span class="o">/</span> <span class="n">C_m</span>
+    
+    <span class="c1"># Evaluate dynamics in synapses</span>
+    
+    <span class="n">A_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">T_ach</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">greater</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">fire_t</span><span class="o">+</span><span class="n">t_delay</span><span class="p">),</span><span class="n">tf</span><span class="o">.</span><span class="n">less</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">fire_t</span><span class="o">+</span><span class="n">t_max</span><span class="o">+</span><span class="n">t_delay</span><span class="p">)),</span><span class="n">A_</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">A_</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">A_</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
+    <span class="n">T_ach</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">ach_mat</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span><span class="n">T_ach</span><span class="p">)</span>
+    <span class="n">T_ach</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">T_ach</span><span class="p">,(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)),</span><span class="n">ach_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">do_achdt</span> <span class="o">=</span> <span class="n">alp_ach</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">o_ach</span><span class="p">)</span><span class="o">*</span><span class="n">T_ach</span> <span class="o">-</span> <span class="n">bet_ach</span><span class="o">*</span><span class="n">o_ach</span>
+    
+    <span class="n">T_fgaba</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">V0</span><span class="p">)</span><span class="o">/</span><span class="n">sigma</span><span class="p">))</span>
+    <span class="n">T_fgaba</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">fgaba_mat</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span><span class="n">T_fgaba</span><span class="p">)</span>
+    <span class="n">T_fgaba</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">T_fgaba</span><span class="p">,(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)),</span><span class="n">fgaba_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">do_fgabadt</span> <span class="o">=</span> <span class="n">alp_fgaba</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">o_fgaba</span><span class="p">)</span><span class="o">*</span><span class="n">T_fgaba</span> <span class="o">-</span> <span class="n">bet_fgaba</span><span class="o">*</span><span class="n">o_fgaba</span>
+    
+    <span class="c1"># Set change in fire-times as zero</span>
+    
+    <span class="n">dfdt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">fire_t</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">fire_t</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+    <span class="c1"># Combine to a single vector</span>
+    
+    <span class="n">out</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">dV</span><span class="p">,</span>         <span class="n">dn_k</span><span class="p">,</span>
+                     <span class="n">dm_Na</span><span class="p">,</span>      <span class="n">dh_Na</span><span class="p">,</span>
+                     <span class="n">dm_A</span><span class="p">,</span>       <span class="n">dh_A</span><span class="p">,</span>
+                     <span class="n">dm_Ca</span><span class="p">,</span>      <span class="n">dh_Ca</span><span class="p">,</span>
+                     <span class="n">dm_KCa</span><span class="p">,</span>     
+                     <span class="n">dCa</span><span class="p">,</span>        <span class="n">do_achdt</span><span class="p">,</span>
+                     <span class="n">do_fgabadt</span><span class="p">,</span> <span class="n">dfdt</span>   <span class="p">],</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-the-current-input-and-run-the-simulation">
+<h3>Creating the Current Input and Run the Simulation<a class="headerlink" href="#creating-the-current-input-and-run-the-simulation" title="Permalink to this headline">¶</a></h3>
+<p>We will run an 1000 ms simulation where we will give input to randomly chosen 33% of the neurons. The input will be an saturating increase to 10 from 100 ms to 600 ms and an exponetial decrease to 0 after 600 ms.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">current_input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_n</span><span class="p">,</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="c1"># Create the input shape</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">t</span><span class="o">&lt;</span><span class="mi">600</span><span class="p">,(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">100</span><span class="p">)</span><span class="o">/</span><span class="mi">75</span><span class="p">)),</span><span class="mf">0.9996</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">600</span><span class="p">)</span><span class="o">/</span><span class="mi">150</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">t</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Randomly choose 33% indices from 120</span>
+
+<span class="n">p_input</span> <span class="o">=</span> <span class="mf">0.33</span>
+<span class="n">input_neurons</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_n</span><span class="p">)),</span><span class="nb">int</span><span class="p">(</span><span class="n">p_input</span><span class="o">*</span><span class="n">n_n</span><span class="p">),</span><span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Assign input shape to chosen indices</span>
+
+<span class="n">current_input</span><span class="p">[</span><span class="n">input_neurons</span><span class="p">,:]</span><span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="create-the-initial-state-vector-and-add-some-jitter-to-break-symmetry">
+<h3>Create the initial state vector and add some jitter to break symmetry<a class="headerlink" href="#create-the-initial-state-vector-and-add-some-jitter-to-break-symmetry" title="Permalink to this headline">¶</a></h3>
+<p>We create the initial state vector, initializing voltage to <span class="math notranslate nohighlight">\(-70\ mV\)</span>, gating variables and open fractions to <span class="math notranslate nohighlight">\(0.0\)</span>, and calcium concentration to <span class="math notranslate nohighlight">\(2.4\times10^{-4}\)</span> and add 1% gaussian noise to the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state_vector</span> <span class="o">=</span>  <span class="p">[</span><span class="o">-</span><span class="mi">70</span><span class="p">]</span><span class="o">*</span> <span class="n">n_n</span> <span class="o">+</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span> <span class="p">(</span><span class="n">n_n</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">p_n</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">l_n</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="mf">2.4</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">))]</span><span class="o">*</span><span class="n">l_n</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n_syn_ach</span><span class="o">+</span><span class="n">n_syn_fgaba</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">sim_time</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span><span class="o">*</span><span class="n">n_n</span>
+<span class="n">state_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state_vector</span><span class="p">)</span>
+<span class="n">state_vector</span> <span class="o">=</span> <span class="n">state_vector</span> <span class="o">+</span> <span class="mf">0.01</span><span class="o">*</span><span class="n">state_vector</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">state_vector</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">init_state</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">state_vector</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="running-the-simulation-and-interpreting-the-output">
+<h3>Running the simulation and Interpreting the Output<a class="headerlink" href="#running-the-simulation-and-interpreting-the-output" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">tf_int</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">dXdt</span><span class="p">,</span> <span class="n">init_state</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">n_n</span><span class="p">,</span> <span class="n">F_b</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">sess</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:From &lt;ipython-input-7-168af555c8c1&gt;:66: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+</pre></div>
+</div>
+</div>
+</div>
+<p>To visualize the data, we plot the voltage traces of the PNs (Neurons 0 to 89) and LNs (Neurons 90 to 119) as a Voltage vs Time heatmap, peaks in the data are the action potentials.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">state</span><span class="p">[::</span><span class="mi">100</span><span class="p">,:</span><span class="mi">90</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">xticklabels</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">yticklabels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (in ms)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Projection Neuron Number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Voltage vs Time Heatmap for Projection Neurons (PNs)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Example_24_0.png" src="../../_images/Example_24_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">state</span><span class="p">[::</span><span class="mi">100</span><span class="p">,</span><span class="mi">90</span><span class="p">:</span><span class="mi">120</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">xticklabels</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">yticklabels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (in ms)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Local Interneuron Number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Voltage vs Time Heatmap for Local Interneurons (LNs)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Example_25_0.png" src="../../_images/Example_25_0.png" />
+</div>
+</div>
+<p>Thus, We are capable of making models of complex realistic networks of neurons in the brains of living organisms. As an <strong>Exercise</strong> implement the batch and caller-runner system for this example as taught in day 5. Use this to implement a simulation of successive box input to 1/3rd of the neurons for a period of 2 seconds. Also try introducing variability to the parameters of the neurons.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Tutorial\Example Implementation Locust AL"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../Day%205%20Optimal%20Mind%20Control/Day%205.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Day 5: Optimal Mind Control</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Distributed Computing with TensorFlow</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Rishika Mohanta and Collins Assisi<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

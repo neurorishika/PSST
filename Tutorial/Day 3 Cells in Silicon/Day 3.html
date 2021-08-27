@@ -1,0 +1,810 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 3: Cells in Silicon &#8212; PSST: Parallelised Scalable Simulations in TensorFlow</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../../_static/PSST-favicon-32x32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Day 4: Neurons and Networks" href="../Day%204%20Neurons%20and%20Networks/Day%204.html" />
+    <link rel="prev" title="Day 2: Let the Tensors Flow!" href="../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/PSST.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">PSST: Parallelised Scalable Simulations in TensorFlow</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../README.html">
+   PSST … It’s well Documented!
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Day 0 : Introduction to the Tutorials
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.html">
+   Day 1: Of Numerical Integration and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html">
+   Day 2: Let the Tensors Flow!
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Day 3: Cells in Silicon
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%204%20Neurons%20and%20Networks/Day%204.html">
+   Day 4: Neurons and Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%205%20Optimal%20Mind%20Control/Day%205.html">
+   Day 5: Optimal Mind Control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Example%20Implementation%20Locust%20AL/Example.html">
+   Example Implementation: Into the Mind of a Locust
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.html">
+   Distributed Computing with TensorFlow
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Tutorial/Day 3 Cells in Silicon/Day 3.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/neurorishika/PSST"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/neurorishika/PSST/issues/new?title=Issue%20on%20page%20%2FTutorial/Day 3 Cells in Silicon/Day 3.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Day 3: Cells in Silicon
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-the-hodgkin-huxley-neuron-model">
+     What is the Hodgkin Huxley Neuron Model?
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#implementing-the-hodgkin-huxley-neuron-model">
+       Implementing the Hodgkin-Huxley neuron model
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-1-defining-parameters-of-the-neuron">
+         Step 1: Defining Parameters of the Neuron
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-2-defining-functions-that-calculate-tau-m-tau-h-tau-n-m-0-h-0-n-0">
+         Step 2: Defining functions that calculate
+         <span class="math notranslate nohighlight">
+          \(\tau_m\)
+         </span>
+         ,
+         <span class="math notranslate nohighlight">
+          \(\tau_h\)
+         </span>
+         ,
+         <span class="math notranslate nohighlight">
+          \(\tau_n\)
+         </span>
+         ,
+         <span class="math notranslate nohighlight">
+          \(m_0\)
+         </span>
+         ,
+         <span class="math notranslate nohighlight">
+          \(h_0\)
+         </span>
+         ,
+         <span class="math notranslate nohighlight">
+          \(n_0\)
+         </span>
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-3-defining-function-that-calculate-neuronal-currents">
+         Step 3: Defining function that calculate Neuronal currents
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-4-define-the-function-dx-dt-where-x-is-the-state-vector">
+         Step 4: Define the function dX/dt where X is the State Vector
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-5-define-initial-condition-and-integrate">
+         Step 5: Define Initial Condition and Integrate
+        </a>
+       </li>
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-6-plot-output">
+         Step 6: Plot Output
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#simulating-multiple-independent-hh-neurons-at-the-same-time">
+       Simulating Multiple Independent HH Neurons at the Same Time
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h4 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#methods-of-parallelization">
+         Methods of Parallelization
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#quantifying-the-firing-rates-against-input-current">
+       Quantifying the Firing Rates against Input Current
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><a href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Day%203%20Cells%20in%20Silicon/Day%203.ipynb" target="_parent"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>   <a href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/Day%203.ipynb" target="_parent"><img alt="Open in Kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p>
+<div class="section" id="day-3-cells-in-silicon">
+<h1>Day 3: Cells in Silicon<a class="headerlink" href="#day-3-cells-in-silicon" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to Day 3! Today, we start with our discussion of Hodgkin Huxley Neurons and how we can simulate them in Python using Tensorflow and Numerical Integration.</p>
+<p>The electric potential measured across the membranes of excitable cells, such as neurons or heart cells, can undergo transient changes when perturbed by external inputs. When the inputs to a neuron are sufficiently large these transient changes can regeneratively build up into a large deviation from the resting state known as an action potential. Action potentials propagate undiminished along the axon and perturb post-synaptic neurons. The Hodgkin-Huxley model is a system of differential equations that describe the generation an action potential and its propagation along the axon. We provide only a brief overview of the Hodgkin-Huxley model. A number of classic references (Dayan 2005, Johnston 1995) and the original papers by Hodgkin and Huxley (Huxley 1952) chronicle the history and the details of the model. An excellent set of MOOCS and the accompanying textbooks (Gerstner 2014, Dayan 2005) give an accessible introduction to the topic</p>
+<div class="section" id="what-is-the-hodgkin-huxley-neuron-model">
+<h2>What is the Hodgkin Huxley Neuron Model?<a class="headerlink" href="#what-is-the-hodgkin-huxley-neuron-model" title="Permalink to this headline">¶</a></h2>
+<p>The cell membrane, a 5nm thick lipid bilayer, separates the inside from the outside of the neuron. The membrane is largely impermeable to charged ions present on either side. The concentration of <span class="math notranslate nohighlight">\(\text{Na}^{+}\)</span> ions outside the cell is greater than its concentration inside, while <span class="math notranslate nohighlight">\(\text{K}^{+}\)</span> ions are relatively abundant inside compared to the outside. In addition to these there are chloride (<span class="math notranslate nohighlight">\(\text{Cl}^{-}\)</span>), calcium (<span class="math notranslate nohighlight">\(\text{Ca}^{2+}\)</span>) and magnesium ions (<span class="math notranslate nohighlight">\(\text{Mg}^{+}\)</span>) that populate the cellular milieu. The differences in ionic abundances across the membrane cause a net accumulation of positive ions on one side of the membrane and negative ions on the other, and thus a potential difference across the membrane. Embedded on the membrane are ion channels that are highly selective to the ion species it lets across. In the squid axon, Hodgkin and Huxley found that there were only two types of ion channels (<span class="math notranslate nohighlight">\(\text{Na}^{+}\)</span> and <span class="math notranslate nohighlight">\(\text{K}^{+}\)</span>), in addition to a non-specific leak channel. The Hodgkin-Huxley model of neurons can be understood with the help of an equivalent electrical circuit given below. The cell membrane acts as a capacitor. The total injected current (<span class="math notranslate nohighlight">\(I\)</span>) can be written as the sum of the capacitive current <span class="math notranslate nohighlight">\(I_{C}\)</span>, ionic currents <span class="math notranslate nohighlight">\(I_{Na}\)</span> and <span class="math notranslate nohighlight">\(I_{K}\)</span> and the leak current <span class="math notranslate nohighlight">\(I_L\)</span>.</p>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/circuit.svg"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/circuit.svg" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/circuit.svg" width="800" /></a>
+<div class="amsmath math notranslate nohighlight" id="equation-4e65a414-b916-4401-9bc7-f54711088cd2">
+<span class="eqno">(9)<a class="headerlink" href="#equation-4e65a414-b916-4401-9bc7-f54711088cd2" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+I = I_{C}(t) + I_{Na}(t) + I_{K}(t)
+\end{equation}\]</div>
+<p>where,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1ceb3f34-7105-4c13-b1a2-239114d953f7">
+<span class="eqno">(10)<a class="headerlink" href="#equation-1ceb3f34-7105-4c13-b1a2-239114d953f7" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
+C_m = 1 \mu F/cm^2 \\
+I_{Na} = g_{Na}(u-E_{Na})\\
+I_{K} = g_{k}(u-E_K)\\
+I_{L} = g_{L}(u-E_L)
+\end{eqnarray}\]</div>
+<p>The equation describing the membrane potential can thus be written as follows,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-99c315bd-5b35-4e89-91b7-bec3feb190e3">
+<span class="eqno">(11)<a class="headerlink" href="#equation-99c315bd-5b35-4e89-91b7-bec3feb190e3" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
+C_m\frac{dV}{dt}=−I_{Na}(t)−I_{K}(t)−I_{L}(t)+I(t)
+\end{eqnarray}\]</div>
+<p>Hodgkin and Huxley discovered that the <span class="math notranslate nohighlight">\(Na\)</span> and the <span class="math notranslate nohighlight">\(K\)</span> channels do not act as Ohmic conductances, but are modulated by the potential across the membrane.
+Changes in potential had a nonlinear effect on flow of ionic currents. Based in their experimental results they obtained a system of differential equations that described the temporal evolution of the membrane potential in terms of changes in ionic currents (chiefly <span class="math notranslate nohighlight">\(\text{Na}^{+}\)</span> and <span class="math notranslate nohighlight">\(\text{K}^{+}\)</span>).</p>
+<div class="amsmath math notranslate nohighlight" id="equation-417ed705-619d-4fb6-ae03-70c99a94dc14">
+<span class="eqno">(12)<a class="headerlink" href="#equation-417ed705-619d-4fb6-ae03-70c99a94dc14" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
+I = g_{Na}m^3h(u−E_{Na}) \\
+I_K = g_Kn^4(u−E_K)\\
+I_L = g_L(u−E_L)
+\end{eqnarray}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_{Na}=50\ mV\)</span>, <span class="math notranslate nohighlight">\(E_K = -95\ mV\)</span> and <span class="math notranslate nohighlight">\(E_L=-55\ mV\)</span> are the reversal potentials; <span class="math notranslate nohighlight">\(g_{Na} = 100\ \mu S/cm^2\)</span>, <span class="math notranslate nohighlight">\(g_K = 10\ \mu S/cm^2\)</span> and <span class="math notranslate nohighlight">\(g_L = 0.15\ \mu S/cm^2\)</span> are the channel conductances; and m,h, and n are gating variables that follow the dynamics given by:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8f2e296a-0241-4ea3-9256-5b23b0c64dda">
+<span class="eqno">(13)<a class="headerlink" href="#equation-8f2e296a-0241-4ea3-9256-5b23b0c64dda" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
+\frac{dm}{dt} = - \frac{1}{\tau_m}(m-m_0)\\
+\frac{dh}{dt} = - \frac{1}{\tau_h}(h-h_0)\\
+\frac{dn}{dt} = - \frac{1}{\tau_n}(n-n_0)
+\end{eqnarray}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tau_m\)</span>, <span class="math notranslate nohighlight">\(\tau_h\)</span> and <span class="math notranslate nohighlight">\(\tau_n\)</span> are empirically determined voltage dependent time constants and <span class="math notranslate nohighlight">\(m_0\)</span>, <span class="math notranslate nohighlight">\(h_0\)</span> and <span class="math notranslate nohighlight">\(n_0\)</span> are voltage dependent asymptotic gating values.</p>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/mhn.svg"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/mhn.svg" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/mhn.svg" width="800" /></a>
+<p>On day 2, we had created a RK4 based numerical integrator. Recall this implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="c1">## OR for Tensorflow 2.0 and above ##</span>
+<span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+
+<span class="k">def</span> <span class="nf">tf_check_type</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y0</span><span class="p">):</span> <span class="c1"># Ensure Input is Correct</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">y0</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">is_floating</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">is_floating</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Error in Datatype&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">_Tf_Integrator</span><span class="p">():</span>
+    
+    <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span> 
+        <span class="n">time_delta_grid</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="k">def</span> <span class="nf">scan_func</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t_dt</span><span class="p">):</span> 
+            <span class="n">t</span><span class="p">,</span> <span class="n">dt</span> <span class="o">=</span> <span class="n">t_dt</span>
+            <span class="n">dy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_step_func</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">dt</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="c1"># Make code more modular.</span>
+            <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span>
+        
+        <span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="n">scan_func</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">time_delta_grid</span><span class="p">),</span><span class="n">y0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([[</span><span class="n">y0</span><span class="p">],</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    
+    <span class="k">def</span> <span class="nf">_step_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">k1</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">half_step</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">dt_cast</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="c1"># Failsafe</span>
+
+        <span class="n">k2</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">dt_cast</span> <span class="o">*</span> <span class="n">k1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">half_step</span><span class="p">)</span>
+        <span class="n">k3</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">dt_cast</span> <span class="o">*</span> <span class="n">k2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">half_step</span><span class="p">)</span>
+        <span class="n">k4</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">dt_cast</span> <span class="o">*</span> <span class="n">k3</span><span class="p">,</span> <span class="n">t</span> <span class="o">+</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">add_n</span><span class="p">([</span><span class="n">k1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">k2</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">k3</span><span class="p">,</span> <span class="n">k4</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">dt_cast</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span>
+    
+
+<span class="k">def</span> <span class="nf">odeint</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;y0&#39;</span><span class="p">)</span>
+    <span class="n">tf_check_type</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_Tf_Integrator</span><span class="p">()</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="implementing-the-hodgkin-huxley-neuron-model">
+<h3>Implementing the Hodgkin-Huxley neuron model<a class="headerlink" href="#implementing-the-hodgkin-huxley-neuron-model" title="Permalink to this headline">¶</a></h3>
+<p>The variables of the Hodgkin Huxley neuron model that are updated at each integration time step are, the membrane potential, <span class="math notranslate nohighlight">\(V\)</span>, the sodium activation gating variable, <span class="math notranslate nohighlight">\(m\)</span>, the sodium inactivation gating variable, <span class="math notranslate nohighlight">\(h\)</span>, and the potassium channel gating variable, <span class="math notranslate nohighlight">\(n\)</span>. The dynamics are given by Equations above. In the following code, we define the parameters associated with the conductances, including the formulae for <span class="math notranslate nohighlight">\(\tau_{m}\)</span>, <span class="math notranslate nohighlight">\(\tau_{h}\)</span>, <span class="math notranslate nohighlight">\(\tau_{n}\)</span> and the voltage dependent steady state values of the gating variables.</p>
+<div class="section" id="step-1-defining-parameters-of-the-neuron">
+<h4>Step 1: Defining Parameters of the Neuron<a class="headerlink" href="#step-1-defining-parameters-of-the-neuron" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C_m</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1"># Membrane Capacitance</span>
+
+<span class="n">g_K</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">E_K</span> <span class="o">=</span> <span class="o">-</span><span class="mi">95</span>
+
+<span class="n">g_Na</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">E_Na</span> <span class="o">=</span> <span class="mi">50</span> 
+
+<span class="n">g_L</span> <span class="o">=</span> <span class="mf">0.15</span>
+<span class="n">E_L</span> <span class="o">=</span> <span class="o">-</span><span class="mi">55</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-2-defining-functions-that-calculate-tau-m-tau-h-tau-n-m-0-h-0-n-0">
+<h4>Step 2: Defining functions that calculate <span class="math notranslate nohighlight">\(\tau_m\)</span>, <span class="math notranslate nohighlight">\(\tau_h\)</span>, <span class="math notranslate nohighlight">\(\tau_n\)</span>, <span class="math notranslate nohighlight">\(m_0\)</span>, <span class="math notranslate nohighlight">\(h_0\)</span>, <span class="math notranslate nohighlight">\(n_0\)</span><a class="headerlink" href="#step-2-defining-functions-that-calculate-tau-m-tau-h-tau-n-m-0-h-0-n-0" title="Permalink to this headline">¶</a></h4>
+<p>Note: Always use Tensorflow functions for all mathematical operations.</p>
+<p>For our Hodgkin Huxley Model, we will determine the values of <span class="math notranslate nohighlight">\(\tau_m\)</span>, <span class="math notranslate nohighlight">\(\tau_h\)</span>, <span class="math notranslate nohighlight">\(\tau_n\)</span>, <span class="math notranslate nohighlight">\(m_0\)</span>, <span class="math notranslate nohighlight">\(h_0\)</span>, <span class="math notranslate nohighlight">\(n_0\)</span>  by the following equations:</p>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/eqn1.svg"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/eqn1.svg" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/eqn1.svg" width="800" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">K_prop</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">**</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mf">36.0</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">V_</span> <span class="o">=</span> <span class="n">V</span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">)</span>
+    
+    <span class="n">alpha_n</span> <span class="o">=</span> <span class="mf">0.02</span><span class="o">*</span><span class="p">(</span><span class="mf">15.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">15.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">beta_n</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">10.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">40.0</span><span class="p">)</span>
+    
+    <span class="n">t_n</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_n</span><span class="o">+</span><span class="n">beta_n</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">n_0</span> <span class="o">=</span> <span class="n">alpha_n</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_n</span><span class="o">+</span><span class="n">beta_n</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">n_0</span><span class="p">,</span> <span class="n">t_n</span>
+
+
+<span class="k">def</span> <span class="nf">Na_prop</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">**</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mi">36</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">V_</span> <span class="o">=</span> <span class="n">V</span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">)</span>
+    
+    <span class="n">alpha_m</span> <span class="o">=</span> <span class="mf">0.32</span><span class="o">*</span><span class="p">(</span><span class="mf">13.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">13.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">4.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">beta_m</span> <span class="o">=</span> <span class="mf">0.28</span><span class="o">*</span><span class="p">(</span><span class="n">V_</span> <span class="o">-</span> <span class="mf">40.0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">V_</span> <span class="o">-</span> <span class="mf">40.0</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    
+    <span class="n">alpha_h</span> <span class="o">=</span> <span class="mf">0.128</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">17.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">18.0</span><span class="p">)</span>
+    <span class="n">beta_h</span> <span class="o">=</span> <span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">40.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span>
+    
+    <span class="n">t_m</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_m</span><span class="o">+</span><span class="n">beta_m</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">t_h</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_h</span><span class="o">+</span><span class="n">beta_h</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    
+    <span class="n">m_0</span> <span class="o">=</span> <span class="n">alpha_m</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_m</span><span class="o">+</span><span class="n">beta_m</span><span class="p">)</span>
+    <span class="n">h_0</span> <span class="o">=</span> <span class="n">alpha_h</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_h</span><span class="o">+</span><span class="n">beta_h</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">m_0</span><span class="p">,</span> <span class="n">t_m</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">t_h</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-3-defining-function-that-calculate-neuronal-currents">
+<h4>Step 3: Defining function that calculate Neuronal currents<a class="headerlink" href="#step-3-defining-function-that-calculate-neuronal-currents" title="Permalink to this headline">¶</a></h4>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/eqn2.svg"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/eqn2.svg" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/eqn2.svg" width="800" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">I_K</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_K</span>  <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_K</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_Na</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_Na</span> <span class="o">*</span> <span class="n">m</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_Na</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_L</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_L</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_L</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-4-define-the-function-dx-dt-where-x-is-the-state-vector">
+<h4>Step 4: Define the function dX/dt where X is the State Vector<a class="headerlink" href="#step-4-define-the-function-dx-dt-where-x-is-the-state-vector" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dXdt</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+    
+    <span class="n">dVdt</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span> <span class="o">-</span> <span class="n">I_Na</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_K</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_L</span><span class="p">(</span><span class="n">V</span><span class="p">))</span> <span class="o">/</span> <span class="n">C_m</span> 
+    <span class="c1"># Here the current injection I_injected = 5 uA</span>
+    
+    <span class="n">m0</span><span class="p">,</span><span class="n">tm</span><span class="p">,</span><span class="n">h0</span><span class="p">,</span><span class="n">th</span> <span class="o">=</span> <span class="n">Na_prop</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">n0</span><span class="p">,</span><span class="n">tn</span> <span class="o">=</span> <span class="n">K_prop</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+
+    <span class="n">dmdt</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">tm</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">m0</span><span class="p">)</span>
+    <span class="n">dhdt</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">th</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="n">h0</span><span class="p">)</span>
+    <span class="n">dndt</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">tn</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">n0</span><span class="p">)</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">dVdt</span><span class="p">,</span><span class="n">dmdt</span><span class="p">,</span><span class="n">dhdt</span><span class="p">,</span><span class="n">dndt</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-5-define-initial-condition-and-integrate">
+<h4>Step 5: Define Initial Condition and Integrate<a class="headerlink" href="#step-5-define-initial-condition-and-integrate" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="o">-</span><span class="mi">71</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="n">epsilon</span><span class="p">)</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">dXdt</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-6-plot-output">
+<h4>Step 6: Plot Output<a class="headerlink" href="#step-6-plot-output" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">state</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (in ms)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Voltage (in mV)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Day 3_15_0.png" src="../../_images/Day 3_15_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="simulating-multiple-independent-hh-neurons-at-the-same-time">
+<h3>Simulating Multiple Independent HH Neurons at the Same Time<a class="headerlink" href="#simulating-multiple-independent-hh-neurons-at-the-same-time" title="Permalink to this headline">¶</a></h3>
+<p>Here we illustrate some simple steps that can be used to simulate populations of neurons efficiently. Key to setting up the equations is to order it in a manner that utilizes TensorFlow’s algorithms that distribute vector, matrix and tensor computations over multiple cores. Consider a system of 20 independent HH neurons with different input currents that characterise the firing rates.</p>
+<div class="section" id="methods-of-parallelization">
+<h4>Methods of Parallelization<a class="headerlink" href="#methods-of-parallelization" title="Permalink to this headline">¶</a></h4>
+<p>TensorFlow has built-in functions that speed up Tensor computations using available multi-cores, and GPU/TPU setups. There are two major parts of the code where such a speed-up can be effected</p>
+<ol class="simple">
+<li><p><strong>RK4 iterations</strong> Our implementation of the integrator utilizes Tensors as inputs.</p></li>
+<li><p><strong>Functional Evaluations:</strong> The form of the equations that describe the neuronal dynamics,  are common across neurons. Only the parameters for differ across neurons. This can be used to `vectorize’ the equations.</p></li>
+</ol>
+<p>Say <span class="math notranslate nohighlight">\(\vec{X}=[V,m,n,h]\)</span> is the state vector of a single neuron and its dynamics are defined using parameters <span class="math notranslate nohighlight">\(C_m,g_K,...E_L\)</span> equations of the form:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-72258e0d-0cd1-45dc-a3fb-62ae295cf050">
+<span class="eqno">(14)<a class="headerlink" href="#equation-72258e0d-0cd1-45dc-a3fb-62ae295cf050" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\vec{X}}{dt} = [f_1(\vec{X},C_m,g_K,...E_L),f_2(\vec{X},C_m,g_K,...E_L)...f_m(\vec{X},C_m,g_K,...E_L)]\end{eqnarray}\]</div>
+<p>We can convert these equations to a form in which all evaluations are done as vector calculations and NOT scalar calculations. Despite the parameters being different, the functional forms of the equations are similar for the same state variable of different neurons. Thus, the trick is to reorganize <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> as <span class="math notranslate nohighlight">\(\mathbf{X'}=[(V_1,V_2,...V_n),(m_1,m_2,...m_n),(h_1,h_2,...h_n),(n_1,n_2,...n_n)]=[\vec{V},\vec{m},\vec{h},\vec{n}]\)</span>. And the parameters as <span class="math notranslate nohighlight">\([\vec{C_m},\vec{g_K}] = [C_{m_{1}}\dots C_{m_{n}},g_{K_{1}}\dots g_{K_{n}}]\)</span> and so on.</p>
+<p>The advantage of this re-ordering is that the differential equation of the form,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-bc6062f5-023a-466c-bde1-d8328dac9007">
+<span class="eqno">(15)<a class="headerlink" href="#equation-bc6062f5-023a-466c-bde1-d8328dac9007" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{dV_i}{dt}=f(V_i,m_i,h_i,n_i,C_{m_i},g_{K_i}...)\end{eqnarray}\]</div>
+<p>is now easily parallelizable using a vector computation of the form,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-63bf47b3-9f88-48cf-a03e-94c1aa9ca6ad">
+<span class="eqno">(16)<a class="headerlink" href="#equation-63bf47b3-9f88-48cf-a03e-94c1aa9ca6ad" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\vec{V}}{dt}=f(\vec{V},\vec{m},\vec{h},\vec{n},\vec{C_m},\vec{g_K}...)\end{eqnarray}\]</div>
+<p>The equations can now be written in the form,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3cc18c2f-095d-4562-9f55-ab2077d88523">
+<span class="eqno">(17)<a class="headerlink" href="#equation-3cc18c2f-095d-4562-9f55-ab2077d88523" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\mathbf{X'}}{dt}= \Big[\frac{d\vec{V}}{dt},\frac{d\vec{m}}{dt},\frac{d\vec{h}}{dt},\frac{d\vec{n}}{dt}\Big]\end{eqnarray}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_n</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># number of simultaneous neurons to simulate</span>
+
+<span class="c1"># parameters will now become n_n-vectors</span>
+
+<span class="n">C_m</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+<span class="n">g_K</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+<span class="n">E_K</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">95.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+
+<span class="n">g_Na</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+<span class="n">E_Na</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span> 
+
+<span class="n">g_L</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+<span class="n">E_L</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">55.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+
+
+<span class="k">def</span> <span class="nf">K_prop</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">**</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mf">36.0</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">V_</span> <span class="o">=</span> <span class="n">V</span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">)</span>
+    
+    <span class="n">alpha_n</span> <span class="o">=</span> <span class="mf">0.02</span><span class="o">*</span><span class="p">(</span><span class="mf">15.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">15.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">beta_n</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">10.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">40.0</span><span class="p">)</span>
+    
+    <span class="n">t_n</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_n</span><span class="o">+</span><span class="n">beta_n</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">n_0</span> <span class="o">=</span> <span class="n">alpha_n</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_n</span><span class="o">+</span><span class="n">beta_n</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">n_0</span><span class="p">,</span> <span class="n">t_n</span>
+
+
+<span class="k">def</span> <span class="nf">Na_prop</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">**</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mi">36</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">V_</span> <span class="o">=</span> <span class="n">V</span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">)</span>
+    
+    <span class="n">alpha_m</span> <span class="o">=</span> <span class="mf">0.32</span><span class="o">*</span><span class="p">(</span><span class="mf">13.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">13.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">4.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">beta_m</span> <span class="o">=</span> <span class="mf">0.28</span><span class="o">*</span><span class="p">(</span><span class="n">V_</span> <span class="o">-</span> <span class="mf">40.0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">V_</span> <span class="o">-</span> <span class="mf">40.0</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    
+    <span class="n">alpha_h</span> <span class="o">=</span> <span class="mf">0.128</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">17.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">18.0</span><span class="p">)</span>
+    <span class="n">beta_h</span> <span class="o">=</span> <span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">40.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span>
+    
+    <span class="n">t_m</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_m</span><span class="o">+</span><span class="n">beta_m</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">t_h</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_h</span><span class="o">+</span><span class="n">beta_h</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    
+    <span class="n">m_0</span> <span class="o">=</span> <span class="n">alpha_m</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_m</span><span class="o">+</span><span class="n">beta_m</span><span class="p">)</span>
+    <span class="n">h_0</span> <span class="o">=</span> <span class="n">alpha_h</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_h</span><span class="o">+</span><span class="n">beta_h</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">m_0</span><span class="p">,</span> <span class="n">t_m</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">t_h</span>
+
+<span class="k">def</span> <span class="nf">I_K</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_K</span>  <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_K</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_Na</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_Na</span> <span class="o">*</span> <span class="n">m</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_Na</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_L</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_L</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_L</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dXdt</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">1</span><span class="o">*</span><span class="n">n_n</span><span class="p">]</span>       <span class="c1"># First n_n values are Membrane Voltage</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="o">*</span><span class="n">n_n</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span><span class="p">]</span>  <span class="c1"># Next n_n values are Sodium Activation Gating Variables</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span><span class="p">:</span><span class="mi">3</span><span class="o">*</span><span class="n">n_n</span><span class="p">]</span>  <span class="c1"># Next n_n values are Sodium Inactivation Gating Variables</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">n_n</span><span class="p">:]</span>       <span class="c1"># Last n_n values are Potassium Gating Variables</span>
+    
+    <span class="n">dVdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">n_n</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_Na</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_K</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span><span class="n">I_L</span><span class="p">(</span><span class="n">V</span><span class="p">))</span> <span class="o">/</span> <span class="n">C_m</span> 
+    <span class="c1"># Input current is linearly varied between 0 and 10</span>
+    
+    <span class="n">m0</span><span class="p">,</span><span class="n">tm</span><span class="p">,</span><span class="n">h0</span><span class="p">,</span><span class="n">th</span> <span class="o">=</span> <span class="n">Na_prop</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">n0</span><span class="p">,</span><span class="n">tn</span> <span class="o">=</span> <span class="n">K_prop</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+
+    <span class="n">dmdt</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">tm</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">m0</span><span class="p">)</span>
+    <span class="n">dhdt</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">th</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="n">h0</span><span class="p">)</span>
+    <span class="n">dndt</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">tn</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">n0</span><span class="p">)</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">dVdt</span><span class="p">,</span><span class="n">dmdt</span><span class="p">,</span><span class="n">dhdt</span><span class="p">,</span><span class="n">dndt</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+
+<span class="n">y0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="o">-</span><span class="mi">71</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span><span class="o">+</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="n">epsilon</span><span class="p">)</span>
+
+<span class="n">state</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">dXdt</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">17</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">state</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Injected Current = </span><span class="si">{:0.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">60</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (in ms)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Voltage (in mV)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Day 3_18_0.png" src="../../_images/Day 3_18_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="quantifying-the-firing-rates-against-input-current">
+<h3>Quantifying the Firing Rates against Input Current<a class="headerlink" href="#quantifying-the-firing-rates-against-input-current" title="Permalink to this headline">¶</a></h3>
+<p>The firing frequency as a function of the input is shown in the figure below. The code to generate the firing rate is below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">state</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,:</span><span class="mi">20</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span><span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:</span><span class="mi">20</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="mf">0.2</span><span class="p">,</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Injected Current(mA)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Firing Rate (Hz)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Day 3_20_0.png" src="../../_images/Day 3_20_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<p>(<a id="cit-Dayan2005" href="#call-Dayan2005">Dayan and Abbott, 2005</a>) Peter Dayan and Larry F. Abbott, <code class="docutils literal notranslate"><span class="pre">Theoretical</span> <span class="pre">Neuroscience</span> <span class="pre">-</span> <span class="pre">Computational</span> <span class="pre">and</span> <span class="pre">Mathematical</span> <span class="pre">Modeling</span> <span class="pre">of</span> <span class="pre">Neural</span> <span class="pre">Systems</span></code>,  2005.</p>
+<p>(<a id="cit-Johnston1995" href="#call-Johnston1995">Johnston and Wu, 1995</a>) D. Johnston and S. M.S. Wu, <code class="docutils literal notranslate"><span class="pre">Foundations</span> <span class="pre">of</span> <span class="pre">cellular</span> <span class="pre">neurophysiology</span></code>,  1995.</p>
+<p>(<a id="cit-Huxley1952" href="#call-Huxley1952">Huxley and Hodgkin, 1952</a>) Huxley A. L. and Hodgkin A. F., <code class="docutils literal notranslate"><span class="pre">Quantitative</span> <span class="pre">description</span> <span class="pre">of</span> <span class="pre">nerve</span> <span class="pre">current</span></code>, Journal of Physiology, vol. , number , pp. ,  1952.</p>
+<p>(<a id="cit-gerstnerMOOC" href="#call-gerstnerMOOC">MOOC</a>) , <code class="docutils literal notranslate"><span class="pre">Neuronal</span> <span class="pre">dynamics</span></code>,  .  <a class="reference external" href="https://www.edx.org/course/neuronal-dynamics">online</a></p>
+<p>(<a id="cit-compneuroMOOC" href="#call-compneuroMOOC">MOOC</a>) , <code class="docutils literal notranslate"><span class="pre">Computational</span> <span class="pre">Neuroscience</span></code>,  .  <a class="reference external" href="https://www.coursera.org/learn/computational-neuroscience">online</a></p>
+<p>(<a id="cit-Gerstner2014" href="#call-Gerstner2014">Gerstner, Kistler <em>et al.</em>, 2014</a>) Wulfram Gerstner, Werner M. Kistler, Richard Naud <em>et al.</em>, <code class="docutils literal notranslate"><span class="pre">Neuronal</span> <span class="pre">dynamics:</span> <span class="pre">From</span> <span class="pre">single</span> <span class="pre">neurons</span> <span class="pre">to</span> <span class="pre">networks</span> <span class="pre">and</span> <span class="pre">models</span> <span class="pre">of</span> <span class="pre">cognition</span></code>,  2014.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Tutorial\Day 3 Cells in Silicon"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Day 2: Let the Tensors Flow!</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../Day%204%20Neurons%20and%20Networks/Day%204.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Day 4: Neurons and Networks</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Rishika Mohanta and Collins Assisi<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

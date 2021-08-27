@@ -1,0 +1,959 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 5: Optimal Mind Control &#8212; PSST: Parallelised Scalable Simulations in TensorFlow</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../../_static/PSST-favicon-32x32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Example Implementation: Into the Mind of a Locust" href="../Example%20Implementation%20Locust%20AL/Example.html" />
+    <link rel="prev" title="Day 4: Neurons and Networks" href="../Day%204%20Neurons%20and%20Networks/Day%204.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/PSST.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">PSST: Parallelised Scalable Simulations in TensorFlow</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../README.html">
+   PSST … It’s well Documented!
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Day 0 : Introduction to the Tutorials
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.html">
+   Day 1: Of Numerical Integration and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html">
+   Day 2: Let the Tensors Flow!
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%203%20Cells%20in%20Silicon/Day%203.html">
+   Day 3: Cells in Silicon
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%204%20Neurons%20and%20Networks/Day%204.html">
+   Day 4: Neurons and Networks
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Day 5: Optimal Mind Control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Example%20Implementation%20Locust%20AL/Example.html">
+   Example Implementation: Into the Mind of a Locust
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.html">
+   Distributed Computing with TensorFlow
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Tutorial/Day 5 Optimal Mind Control/Day 5.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/neurorishika/PSST"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/neurorishika/PSST/issues/new?title=Issue%20on%20page%20%2FTutorial/Day 5 Optimal Mind Control/Day 5.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#memory-management">
+   Memory Management
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-the-model">
+   Implementing the Model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#importing-tf-integrator-and-other-requirements">
+     Importing tf_integrator and other requirements
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recall-the-model">
+   Recall the Model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-1-initialize-parameters-and-dynamical-equations-define-input">
+     Step 1: Initialize Parameters and Dynamical Equations; Define Input
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-2-define-the-initial-condition-of-the-network-and-add-some-noise-to-the-initial-conditions">
+     Step 2: Define the Initial Condition of the Network and Add some Noise to the initial conditions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#step-3-splitting-time-series-into-independent-batches-and-run-each-batch-sequentially">
+     Step 3: Splitting Time Series into independent batches and Run Each Batch Sequentially
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#putting-the-output-together">
+     Putting the Output Together
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualizing-the-overall-data">
+     Visualizing the Overall Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-a-runner-and-a-caller">
+   Implementing a Runner and a Caller
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-the-runner-code">
+     Implementing the Runner code
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementing-the-caller-code">
+     Implementing the Caller code
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-call-py">
+     Using call.py
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#combining-all-data">
+     Combining all Data
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><a href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Day%205%20Optimal%20Mind%20Control/Day%205.ipynb" target="_parent"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>   <a href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%205%20Optimal%20Mind%20Control/Day%205.ipynb" target="_parent"><img alt="Open in Kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p>
+<div class="section" id="day-5-optimal-mind-control">
+<h1>Day 5: Optimal Mind Control<a class="headerlink" href="#day-5-optimal-mind-control" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to Day 5! Now that we can simulate a model network of conductance-based neurons, we discuss the limitations of our approach and attempts to work around these issues.</p>
+<div class="section" id="memory-management">
+<h2>Memory Management<a class="headerlink" href="#memory-management" title="Permalink to this headline">¶</a></h2>
+<p>Using Python and TensorFlow allowed us to write code that is readable, parallizable and scalable across a variety of computational devices. However, our implementation is very memory intensive. The iterators in TensorFlow do not follow the normal process of memory allocation and garbage collection. Since, TensorFlow is designed to work on diverse hardware like GPUs, TPUs and distributed platforms, memory allocation is done adaptively during the TensorFlow session and not cleared until the Python kernel has stopped execution. The memory used increases linearly with time as the state matrix is computed recursively by the tf.scan function. The maximum memory used by the computational graph is 2 times the total state matrix size at the point when the computation finishes and copies the final data into the memory. The larger the network and longer the simulation, the larger the solution matrix. Each run is limited by the total available memory. For a system with a limited memory of K bytes, The length of a given simulation (L timesteps) of a given network (N differential equations) with 64-bit floating-point precision will follow:</p>
+<div class="math notranslate nohighlight">
+\[2\times64\times L\times N=K\]</div>
+<p>That is, for any given network, our maximum simulation length is limited. One way to improve our maximum length is to divide the simulation into smaller batches. There will be a small queuing time between batches, which will slow down our code by a small amount but we will be able to simulate longer times. Thus, if we split the simulation into K sequential batches, the maximum memory for the simulation becomes <span class="math notranslate nohighlight">\((1+\frac{1}{K})\)</span> times the total matrix size. Thus the memory relation becomes:</p>
+<div class="math notranslate nohighlight">
+\[\Big(1+\frac{1}{K}\Big)\times64\times L\times N=K\]</div>
+<p>This way, we can maximize the length of out simulation that we can run in a single python kernel.</p>
+<p>Let us implement this batch system for our 3 neuron feed-forward model.</p>
+</div>
+<div class="section" id="implementing-the-model">
+<h2>Implementing the Model<a class="headerlink" href="#implementing-the-model" title="Permalink to this headline">¶</a></h2>
+<p>To improve the readability of our code we separate the integrator into a independent import module. The integrator code was placed in a file called tf integrator.py. The file must be present in the same directory as the implementation of the model.</p>
+<p>Note: If you are using Jupyter Notebook, remember to remove the %matplotlib inline command as it is specific to jupyter.</p>
+<div class="section" id="importing-tf-integrator-and-other-requirements">
+<h3>Importing tf_integrator and other requirements<a class="headerlink" href="#importing-tf-integrator-and-other-requirements" title="Permalink to this headline">¶</a></h3>
+<p>Once the Integrator is saved in tf_integrator.py in the same directory as the Notebook, we can start importing the essentials including the integrator.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#@markdown Import required files and code from previous tutorials
+
+!wget --no-check-certificate \
+  &quot;https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%205%20Optimal%20Mind%20Control/tf_integrator.py&quot; \
+  -O &quot;tf_integrator.py&quot;
+!wget --no-check-certificate \
+  &quot;https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%205%20Optimal%20Mind%20Control/call.py&quot; \
+  -O &quot;call.py&quot;
+!wget --no-check-certificate \
+  &quot;https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%205%20Optimal%20Mind%20Control/run.py&quot; \
+  -O &quot;run.py&quot;
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2021-08-27 12:53:17--  https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%205%20Optimal%20Mind%20Control/tf_integrator.py
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2578 (2.5K) [text/plain]
+Saving to: ‘tf_integrator.py’
+
+
+tf_integrator.py      0%[                    ]       0  --.-KB/s               
+tf_integrator.py    100%[===================&gt;]   2.52K  --.-KB/s    in 0s      
+
+2021-08-27 12:53:17 (30.8 MB/s) - ‘tf_integrator.py’ saved [2578/2578]
+
+--2021-08-27 12:53:17--  https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%205%20Optimal%20Mind%20Control/call.py
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 478 [text/plain]
+Saving to: ‘call.py’
+
+call.py             100%[===================&gt;]     478  --.-KB/s    in 0s      
+
+2021-08-27 12:53:17 (18.2 MB/s) - ‘call.py’ saved [478/478]
+
+--2021-08-27 12:53:17--  https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%205%20Optimal%20Mind%20Control/run.py
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.109.133, 185.199.110.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 8629 (8.4K) [text/plain]
+Saving to: ‘run.py’
+
+run.py              100%[===================&gt;]   8.43K  --.-KB/s    in 0s      
+
+2021-08-27 12:53:18 (55.3 MB/s) - ‘run.py’ saved [8629/8629]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">tf_integrator</span> <span class="k">as</span> <span class="nn">tf_int</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="c1">## OR ##</span>
+<span class="kn">import</span> <span class="nn">tensorflow.compat.v1</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">disable_v2_behavior</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="recall-the-model">
+<h2>Recall the Model<a class="headerlink" href="#recall-the-model" title="Permalink to this headline">¶</a></h2>
+<p>For implementing a Batch system, we do not need to change how we construct our model only how we execute it.</p>
+<div class="section" id="step-1-initialize-parameters-and-dynamical-equations-define-input">
+<h3>Step 1: Initialize Parameters and Dynamical Equations; Define Input<a class="headerlink" href="#step-1-initialize-parameters-and-dynamical-equations-define-input" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_n</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># number of simultaneous neurons to simulate</span>
+
+<span class="n">sim_res</span> <span class="o">=</span> <span class="mf">0.01</span>                     <span class="c1"># Time Resolution of the Simulation</span>
+<span class="n">sim_time</span> <span class="o">=</span> <span class="mi">700</span>                     <span class="c1"># Length of the Simulation</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">sim_time</span><span class="p">,</span><span class="n">sim_res</span><span class="p">)</span> 
+
+<span class="c1"># Acetylcholine</span>
+
+<span class="n">ach_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">))</span>        <span class="c1"># Ach Synapse Connectivity Matrix</span>
+<span class="n">ach_mat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="c1">## PARAMETERS FOR ACETYLCHLOLINE SYNAPSES ##</span>
+
+<span class="n">n_ach</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ach_mat</span><span class="p">))</span>     <span class="c1"># Number of Acetylcholine (Ach) Synapses </span>
+<span class="n">alp_ach</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_ach</span>           <span class="c1"># Alpha for Ach Synapse</span>
+<span class="n">bet_ach</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">]</span><span class="o">*</span><span class="n">n_ach</span>            <span class="c1"># Beta for Ach Synapse</span>
+<span class="n">t_max</span> <span class="o">=</span> <span class="mf">0.3</span>                          <span class="c1"># Maximum Time for Synapse</span>
+<span class="n">t_delay</span> <span class="o">=</span> <span class="mi">0</span>                          <span class="c1"># Axonal Transmission Delay</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                        <span class="c1"># Synaptic Response Strength</span>
+<span class="n">g_ach</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.35</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                   <span class="c1"># Ach Conductance</span>
+<span class="n">E_ach</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                    <span class="c1"># Ach Potential</span>
+
+<span class="c1"># GABAa</span>
+
+<span class="n">gaba_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">))</span>       <span class="c1"># GABAa Synapse Connectivity Matrix</span>
+<span class="n">gaba_mat</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">## PARAMETERS FOR GABAa SYNAPSES ##</span>
+
+<span class="n">n_gaba</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">gaba_mat</span><span class="p">))</span> <span class="c1"># Number of GABAa Synapses</span>
+<span class="n">alp_gaba</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_gaba</span>       <span class="c1"># Alpha for GABAa Synapse</span>
+<span class="n">bet_gaba</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.16</span><span class="p">]</span><span class="o">*</span><span class="n">n_gaba</span>       <span class="c1"># Beta for GABAa Synapse</span>
+<span class="n">V0</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">20.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                     <span class="c1"># Decay Potential</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                    <span class="c1"># Decay Time Constant</span>
+<span class="n">g_gaba</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                  <span class="c1"># fGABA Conductance</span>
+<span class="n">E_gaba</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">70.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                <span class="c1"># fGABA Potential</span>
+
+<span class="c1">## Storing Firing Thresholds ##</span>
+
+<span class="n">F_b</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>                      <span class="c1"># Fire threshold</span>
+
+<span class="k">def</span> <span class="nf">I_inj_t</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">current_input</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)[</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="n">sim_res</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)]</span> <span class="c1"># Turn indices to integer and extract from matrix</span>
+
+<span class="c1">## Acetylcholine Synaptic Current ##</span>
+
+<span class="k">def</span> <span class="nf">I_ach</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span><span class="n">ach_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">scatter_update</span><span class="p">(</span><span class="n">o_</span><span class="p">,</span><span class="n">ind</span><span class="p">,</span><span class="n">o</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">o_</span><span class="p">,(</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">o_</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">E_ach</span><span class="p">))</span><span class="o">*</span><span class="n">g_ach</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">## GABAa Synaptic Current ##</span>
+
+<span class="k">def</span> <span class="nf">I_gaba</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span><span class="n">gaba_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">scatter_update</span><span class="p">(</span><span class="n">o_</span><span class="p">,</span><span class="n">ind</span><span class="p">,</span><span class="n">o</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">o_</span><span class="p">,(</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">o_</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">E_gaba</span><span class="p">))</span><span class="o">*</span><span class="n">g_gaba</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># OR for TensorFlow v2.x and above</span>
+
+<span class="k">def</span> <span class="nf">I_ach</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span><span class="n">ach_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">),[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">tensor_scatter_nd_update</span><span class="p">(</span><span class="n">o_</span><span class="p">,</span><span class="n">ind</span><span class="p">,</span><span class="n">o</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">o_</span><span class="p">,(</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">o_</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">E_ach</span><span class="p">))</span><span class="o">*</span><span class="n">g_ach</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_gaba</span><span class="p">(</span><span class="n">o</span><span class="p">,</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">n_n</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span><span class="n">gaba_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">),[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">tensor_scatter_nd_update</span><span class="p">(</span><span class="n">o_</span><span class="p">,</span><span class="n">ind</span><span class="p">,</span><span class="n">o</span><span class="p">)</span>
+    <span class="n">o_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">o_</span><span class="p">,(</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="n">o_</span><span class="o">*</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">E_gaba</span><span class="p">))</span><span class="o">*</span><span class="n">g_gaba</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">## Other Currents ##</span>
+
+<span class="k">def</span> <span class="nf">I_K</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_K</span>  <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_K</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_Na</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_Na</span> <span class="o">*</span> <span class="n">m</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">h</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_Na</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">I_L</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">g_L</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">E_L</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dXdt</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="mi">1</span><span class="o">*</span><span class="n">n_n</span><span class="p">]</span>       <span class="c1"># First n_n values are Membrane Voltage</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="o">*</span><span class="n">n_n</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span><span class="p">]</span>  <span class="c1"># Next n_n values are Sodium Activation Gating Variables</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">n_n</span><span class="p">:</span><span class="mi">3</span><span class="o">*</span><span class="n">n_n</span><span class="p">]</span>  <span class="c1"># Next n_n values are Sodium Inactivation Gating Variables</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">3</span><span class="o">*</span><span class="n">n_n</span><span class="p">:</span><span class="mi">4</span><span class="o">*</span><span class="n">n_n</span><span class="p">]</span>  <span class="c1"># Next n_n values are Potassium Gating Variables</span>
+    <span class="n">o_ach</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">4</span><span class="o">*</span><span class="n">n_n</span> <span class="p">:</span> <span class="mi">4</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="n">n_ach</span><span class="p">]</span> <span class="c1"># Next n_ach values are Acetylcholine Synapse Open Fractions</span>
+    <span class="n">o_gaba</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">4</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="n">n_ach</span> <span class="p">:</span> <span class="mi">4</span><span class="o">*</span><span class="n">n_n</span> <span class="o">+</span> <span class="n">n_ach</span> <span class="o">+</span> <span class="n">n_gaba</span><span class="p">]</span> <span class="c1"># Next n_ach values are GABAa Synapse Open Fractions</span>
+    <span class="n">fire_t</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="n">n_n</span><span class="p">:]</span>   <span class="c1"># Last n_n values are the last fire times as updated by the modified integrator</span>
+    
+    <span class="n">dVdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">I_inj_t</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_Na</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_K</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_L</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_ach</span><span class="p">(</span><span class="n">o_ach</span><span class="p">,</span><span class="n">V</span><span class="p">)</span> <span class="o">-</span> <span class="n">I_gaba</span><span class="p">(</span><span class="n">o_gaba</span><span class="p">,</span><span class="n">V</span><span class="p">))</span> <span class="o">/</span> <span class="n">C_m</span> 
+    
+    <span class="c1">## Updation for gating variables ##</span>
+    
+    <span class="n">m0</span><span class="p">,</span><span class="n">tm</span><span class="p">,</span><span class="n">h0</span><span class="p">,</span><span class="n">th</span> <span class="o">=</span> <span class="n">Na_prop</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">n0</span><span class="p">,</span><span class="n">tn</span> <span class="o">=</span> <span class="n">K_prop</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+
+    <span class="n">dmdt</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">tm</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="n">m0</span><span class="p">)</span>
+    <span class="n">dhdt</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">th</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="n">h0</span><span class="p">)</span>
+    <span class="n">dndt</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">tn</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">n0</span><span class="p">)</span>
+    
+    <span class="c1">## Updation for o_ach ##</span>
+    
+    <span class="n">A_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">Z_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">A_</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    
+    <span class="n">T_ach</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">greater</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">fire_t</span><span class="o">+</span><span class="n">t_delay</span><span class="p">),</span><span class="n">tf</span><span class="o">.</span><span class="n">less</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">fire_t</span><span class="o">+</span><span class="n">t_max</span><span class="o">+</span><span class="n">t_delay</span><span class="p">)),</span><span class="n">A_</span><span class="p">,</span><span class="n">Z_</span><span class="p">)</span> 
+    <span class="n">T_ach</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">ach_mat</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span><span class="n">T_ach</span><span class="p">)</span>
+    <span class="n">T_ach</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">T_ach</span><span class="p">,(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)),</span><span class="n">ach_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">do_achdt</span> <span class="o">=</span> <span class="n">alp_ach</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">o_ach</span><span class="p">)</span><span class="o">*</span><span class="n">T_ach</span> <span class="o">-</span> <span class="n">bet_ach</span><span class="o">*</span><span class="n">o_ach</span>
+    
+    <span class="c1">## Updation for o_gaba ##</span>
+        
+    <span class="n">T_gaba</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">V</span><span class="o">-</span><span class="n">V0</span><span class="p">)</span><span class="o">/</span><span class="n">sigma</span><span class="p">))</span>
+    <span class="n">T_gaba</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">gaba_mat</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span><span class="n">T_gaba</span><span class="p">)</span>
+    <span class="n">T_gaba</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">boolean_mask</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">T_gaba</span><span class="p">,(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)),</span><span class="n">gaba_mat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">do_gabadt</span> <span class="o">=</span> <span class="n">alp_gaba</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">o_gaba</span><span class="p">)</span><span class="o">*</span><span class="n">T_gaba</span> <span class="o">-</span> <span class="n">bet_gaba</span><span class="o">*</span><span class="n">o_gaba</span>
+    
+    <span class="c1">## Updation for fire times ##</span>
+    
+    <span class="n">dfdt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">fire_t</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">fire_t</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span> <span class="c1"># zero change in fire_t</span>
+    
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">dVdt</span><span class="p">,</span><span class="n">dmdt</span><span class="p">,</span><span class="n">dhdt</span><span class="p">,</span><span class="n">dndt</span><span class="p">,</span><span class="n">do_achdt</span><span class="p">,</span><span class="n">do_gabadt</span><span class="p">,</span><span class="n">dfdt</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span> <span class="nf">K_prop</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">**</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mf">36.0</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">V_</span> <span class="o">=</span> <span class="n">V</span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">)</span>
+    
+    <span class="n">alpha_n</span> <span class="o">=</span> <span class="mf">0.02</span><span class="o">*</span><span class="p">(</span><span class="mf">15.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">15.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">beta_n</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">10.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">40.0</span><span class="p">)</span>
+    
+    <span class="n">t_n</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_n</span><span class="o">+</span><span class="n">beta_n</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">n_0</span> <span class="o">=</span> <span class="n">alpha_n</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_n</span><span class="o">+</span><span class="n">beta_n</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">n_0</span><span class="p">,</span> <span class="n">t_n</span>
+
+
+<span class="k">def</span> <span class="nf">Na_prop</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">22</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="mf">3.0</span><span class="o">**</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mi">36</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">V_</span> <span class="o">=</span> <span class="n">V</span><span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">)</span>
+    
+    <span class="n">alpha_m</span> <span class="o">=</span> <span class="mf">0.32</span><span class="o">*</span><span class="p">(</span><span class="mf">13.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">13.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">4.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">beta_m</span> <span class="o">=</span> <span class="mf">0.28</span><span class="o">*</span><span class="p">(</span><span class="n">V_</span> <span class="o">-</span> <span class="mf">40.0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">V_</span> <span class="o">-</span> <span class="mf">40.0</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    
+    <span class="n">alpha_h</span> <span class="o">=</span> <span class="mf">0.128</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">17.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">18.0</span><span class="p">)</span>
+    <span class="n">beta_h</span> <span class="o">=</span> <span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="mf">40.0</span> <span class="o">-</span> <span class="n">V_</span><span class="p">)</span><span class="o">/</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span>
+    
+    <span class="n">t_m</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_m</span><span class="o">+</span><span class="n">beta_m</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    <span class="n">t_h</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="n">alpha_h</span><span class="o">+</span><span class="n">beta_h</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">)</span>
+    
+    <span class="n">m_0</span> <span class="o">=</span> <span class="n">alpha_m</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_m</span><span class="o">+</span><span class="n">beta_m</span><span class="p">)</span>
+    <span class="n">h_0</span> <span class="o">=</span> <span class="n">alpha_h</span><span class="o">/</span><span class="p">(</span><span class="n">alpha_h</span><span class="o">+</span><span class="n">beta_h</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">m_0</span><span class="p">,</span> <span class="n">t_m</span><span class="p">,</span> <span class="n">h_0</span><span class="p">,</span> <span class="n">t_h</span>
+
+
+<span class="c1"># Initializing the Parameters</span>
+
+<span class="n">C_m</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+<span class="n">g_K</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+<span class="n">E_K</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">95.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+
+<span class="n">g_Na</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+<span class="n">E_Na</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span> 
+
+<span class="n">g_L</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+<span class="n">E_L</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">55.0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+
+<span class="c1"># Creating the Current Input</span>
+<span class="n">current_input</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_n</span><span class="p">,</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">current_input</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="mi">100</span><span class="o">/</span><span class="n">sim_res</span><span class="p">):</span><span class="nb">int</span><span class="p">(</span><span class="mi">200</span><span class="o">/</span><span class="n">sim_res</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">current_input</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="mi">300</span><span class="o">/</span><span class="n">sim_res</span><span class="p">):</span><span class="nb">int</span><span class="p">(</span><span class="mi">400</span><span class="o">/</span><span class="n">sim_res</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="n">current_input</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="mi">500</span><span class="o">/</span><span class="n">sim_res</span><span class="p">):</span><span class="nb">int</span><span class="p">(</span><span class="mi">600</span><span class="o">/</span><span class="n">sim_res</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">7.5</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-2-define-the-initial-condition-of-the-network-and-add-some-noise-to-the-initial-conditions">
+<h3>Step 2: Define the Initial Condition of the Network and Add some Noise to the initial conditions<a class="headerlink" href="#step-2-define-the-initial-condition-of-the-network-and-add-some-noise-to-the-initial-conditions" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initializing the State Vector and adding 1% noise</span>
+<span class="n">state_vector</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">71</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span><span class="o">+</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span><span class="o">+</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n_ach</span><span class="o">+</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n_gaba</span><span class="o">+</span><span class="p">[</span><span class="o">-</span><span class="mi">9999999</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+<span class="n">state_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state_vector</span><span class="p">)</span>
+<span class="n">state_vector</span> <span class="o">=</span> <span class="n">state_vector</span> <span class="o">+</span> <span class="mf">0.01</span><span class="o">*</span><span class="n">state_vector</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">state_vector</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-3-splitting-time-series-into-independent-batches-and-run-each-batch-sequentially">
+<h3>Step 3: Splitting Time Series into independent batches and Run Each Batch Sequentially<a class="headerlink" href="#step-3-splitting-time-series-into-independent-batches-and-run-each-batch-sequentially" title="Permalink to this headline">¶</a></h3>
+<p>Since we will be dividing the computation into batches, we have to split the time array such that for each new call, the final state vector of the last batch will be the initial condition for the current batch. The function <span class="math notranslate nohighlight">\(np.array\_split()\)</span> splits the array into non-overlapping vectors. Therefore, we append the last time of the previous batch to the beginning of the current time array batch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the Number of Batches</span>
+<span class="n">n_batch</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Split t array into batches using numpy</span>
+<span class="n">t_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">n_batch</span><span class="p">)</span>
+
+<span class="c1"># Iterate over the batches of time array</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t_batch</span><span class="p">):</span>
+    
+    <span class="c1"># Inform start of Batch Computation</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Batch&quot;</span><span class="p">,(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="s2">&quot;Running...&quot;</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># In np.array_split(), the split edges are present in only one array and since </span>
+    <span class="c1"># our initial vector to successive calls is corresposnding to the last output</span>
+    <span class="c1"># our first element in the later time array should be the last element of the </span>
+    <span class="c1"># previous output series, Thus, we append the last time to the beginning of </span>
+    <span class="c1"># the current time array batch.</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">sim_res</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+    
+    <span class="c1"># Set state_vector as the initial condition</span>
+    <span class="n">init_state</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">state_vector</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="c1"># Create the Integrator computation graph over the current batch of t array</span>
+    <span class="n">tensor_state</span> <span class="o">=</span> <span class="n">tf_int</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">dXdt</span><span class="p">,</span> <span class="n">init_state</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n_n</span><span class="p">,</span> <span class="n">F_b</span><span class="p">)</span>
+    
+    <span class="c1"># Initialize variables and run session</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tensor_state</span><span class="p">)</span>
+        <span class="n">sess</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+    <span class="c1"># Reset state_vector as the last element of output</span>
+    <span class="n">state_vector</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span>
+    
+    <span class="c1"># Save the output of the simulation to a binary file</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;part_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="c1"># Clear output</span>
+    <span class="n">state</span><span class="o">=</span><span class="kc">None</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Batch 1 Running...Finished
+Batch 2 Running...Finished
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="putting-the-output-together">
+<h3>Putting the Output Together<a class="headerlink" href="#putting-the-output-together" title="Permalink to this headline">¶</a></h3>
+<p>The output from our batch implementation is a set of binary files that store parts of our total simulation. To get the overall output we have to stitch them back together.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">overall_state</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iterate over the generated output files</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s2">&quot;part_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;.npy&quot;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_batch</span><span class="p">)]):</span>
+    
+    <span class="c1"># Since the first element in the series was the last output, we remove them</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">overall_state</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">1</span><span class="p">:,:])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">overall_state</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+<span class="c1"># Concatenate all the matrix to get a single state matrix</span>
+<span class="n">overall_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">overall_state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="visualizing-the-overall-data">
+<h3>Visualizing the Overall Data<a class="headerlink" href="#visualizing-the-overall-data" title="Permalink to this headline">¶</a></h3>
+<p>Finally, we plot the voltage traces of the 3 neurons as a Voltage vs Time heatmap.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">overall_state</span><span class="p">[::</span><span class="mi">100</span><span class="p">,:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">xticklabels</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">yticklabels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (in ms)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Neuron Number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Voltage vs Time Heatmap for Projection Neurons (PNs)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Day 5_14_0.png" src="../../_images/Day 5_14_0.png" />
+</div>
+</div>
+<p>By this method, we have maximized the usage of our available memory but we can go further and develop a method to allow indefinitely long simulation. The issue behind this entire algorithm is that the memory is not cleared until the python kernel finishes. One way to overcome this is to save the parameters of the model (such as connectivity matrix) and the state vector in a file, and start a new python kernel from a python script to compute successive batches. This way after each large batch, the memory gets cleaned. By combining the previous batch implementation and this system, we can maximize our computability.</p>
+</div>
+</div>
+<div class="section" id="implementing-a-runner-and-a-caller">
+<h2>Implementing a Runner and a Caller<a class="headerlink" href="#implementing-a-runner-and-a-caller" title="Permalink to this headline">¶</a></h2>
+<p>Firstly, we have to create an implementation of the model that takes in previous input as current parameters. Thus, we create a file, which we call “run.py” that takes an argument ie. the current batch number. The implementation for “run.py” is mostly same as the above model but there is a small difference.</p>
+<p>When the batch number is 0, we initialize all variable parameters and save them, but otherwise we use the saved values. The parameters we save include: Acetylcholine Matrix, GABAa Matrix and Final/Initial State Vector. It will also save the files with both batch number and sub-batch number listed.</p>
+<p>The time series will be created and split initially by the caller, which we call “call.py”, and stored in a file. Each execution of the Runner will extract its relevant time series and compute on it.</p>
+<div class="section" id="implementing-the-runner-code">
+<h3>Implementing the Runner code<a class="headerlink" href="#implementing-the-runner-code" title="Permalink to this headline">¶</a></h3>
+<p>“run.py” is essentially identical to the batch-implemented model we developed above with the changes described below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Additional Imports #</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># Duration of Simulation #</span>
+
+<span class="c1"># t = np.arange(0,sim_time,sim_res)      </span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;time.npy&quot;</span><span class="p">,</span><span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="c1"># get first argument to run.py</span>
+
+<span class="c1"># Connectivity Matrix Definitions #</span>
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+    <span class="n">ach_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">))</span> <span class="c1"># Ach Synapse Connectivity Matrix</span>
+    <span class="n">ach_mat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>                <span class="c1"># If connectivity is random, once initialized it will be the same.</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;ach_mat&quot;</span><span class="p">,</span><span class="n">ach_mat</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">ach_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;ach_mat.npy&quot;</span><span class="p">)</span>
+    
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+    <span class="n">gaba_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_n</span><span class="p">,</span><span class="n">n_n</span><span class="p">))</span> <span class="c1"># GABAa Synapse Connectivity Matrix</span>
+    <span class="n">gaba_mat</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>              <span class="c1"># If connectivity is random, once initialized it will be the same.</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;gaba_mat&quot;</span><span class="p">,</span><span class="n">gaba_mat</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">gaba_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gaba_mat.npy&quot;</span><span class="p">)</span>
+
+<span class="c1"># Current Input Definition #</span>
+    
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+    <span class="n">current_input</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_n</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">sim_time</span><span class="o">/</span><span class="n">sim_res</span><span class="p">)))</span>
+    <span class="n">current_input</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="mi">100</span><span class="o">/</span><span class="n">sim_res</span><span class="p">):</span><span class="nb">int</span><span class="p">(</span><span class="mi">200</span><span class="o">/</span><span class="n">sim_res</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">2.5</span>
+    <span class="n">current_input</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="mi">300</span><span class="o">/</span><span class="n">sim_res</span><span class="p">):</span><span class="nb">int</span><span class="p">(</span><span class="mi">400</span><span class="o">/</span><span class="n">sim_res</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">5.0</span>
+    <span class="n">current_input</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="mi">500</span><span class="o">/</span><span class="n">sim_res</span><span class="p">):</span><span class="nb">int</span><span class="p">(</span><span class="mi">600</span><span class="o">/</span><span class="n">sim_res</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">7.5</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;current_input&quot;</span><span class="p">,</span><span class="n">current_input</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">current_input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;current_input.npy&quot;</span><span class="p">)</span>
+    
+<span class="c1"># State Vector Definition #</span>
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+    <span class="n">sstate_vector</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">71</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span><span class="o">+</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span><span class="o">+</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n_ach</span><span class="o">+</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n_gaba</span><span class="o">+</span><span class="p">[</span><span class="o">-</span><span class="mi">9999999</span><span class="p">]</span><span class="o">*</span><span class="n">n_n</span>
+    <span class="n">state_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state_vector</span><span class="p">)</span>
+    <span class="n">state_vector</span> <span class="o">=</span> <span class="n">state_vector</span> <span class="o">+</span> <span class="mf">0.01</span><span class="o">*</span><span class="n">state_vector</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">state_vector</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;state_vector&quot;</span><span class="p">,</span><span class="n">state_vector</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">state_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;state_vector.npy&quot;</span><span class="p">)</span>
+
+<span class="c1"># Saving of Output #</span>
+
+<span class="c1"># np.save(&quot;part_&quot;+str(n+1),state)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;batch&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;_part_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-the-caller-code">
+<h3>Implementing the Caller code<a class="headerlink" href="#implementing-the-caller-code" title="Permalink to this headline">¶</a></h3>
+<p>The caller will create the time series, split it and use python subprocess module to call “run.py” with appropriate arguments. The code for “call.py” is given below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">call</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">total_time</span> <span class="o">=</span> <span class="mi">700</span>
+<span class="n">n_splits</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">total_time</span><span class="p">,</span><span class="mf">0.01</span><span class="p">),</span><span class="n">n_splits</span><span class="p">)</span>
+
+<span class="c1"># Append the last time point to the beginning of the next batch</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">time</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="n">time</span><span class="p">)</span>
+
+<span class="c1"># call successive batches with a new python subprocess and pass the batch number</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_splits</span><span class="p">):</span>
+    <span class="n">call</span><span class="p">([</span><span class="s1">&#39;python&#39;</span><span class="p">,</span><span class="s1">&#39;run.py&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulation Completed.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-call-py">
+<h3>Using call.py<a class="headerlink" href="#using-call-py" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python call.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/numpy/core/_asarray.py:136: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray
+  return array(a, dtype, copy=False, order=order, subok=True)
+WARNING:tensorflow:From run.py:62: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+2021-08-27 12:54:25.566618: E tensorflow/stream_executor/cuda/cuda_driver.cc:271] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2021-08-27 12:54:25.566679: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (e923224ac1ad): /proc/driver/nvidia/version does not exist
+Batch 1 Running...Finished
+Batch 2 Running...Finished
+WARNING:tensorflow:From run.py:62: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+2021-08-27 12:55:00.093380: E tensorflow/stream_executor/cuda/cuda_driver.cc:271] failed call to cuInit: CUDA_ERROR_NO_DEVICE: no CUDA-capable device is detected
+2021-08-27 12:55:00.093443: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (e923224ac1ad): /proc/driver/nvidia/version does not exist
+Batch 1 Running...Finished
+Batch 2 Running...Finished
+Simulation Completed.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="combining-all-data">
+<h3>Combining all Data<a class="headerlink" href="#combining-all-data" title="Permalink to this headline">¶</a></h3>
+<p>Just like we merged all the batches, we merge all the sub-batches and batches.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n_batch</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">overall_state</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iterate over the generated output files</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s2">&quot;batch&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)]):</span>
+    <span class="k">for</span> <span class="n">m</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s2">&quot;_part_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;.npy&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_batch</span><span class="p">)]):</span>
+    
+        <span class="c1"># Since the first element in the series was the last output, we remove them</span>
+        <span class="k">if</span> <span class="n">n</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">m</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">overall_state</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">)[</span><span class="mi">1</span><span class="p">:,:])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">overall_state</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">))</span>
+
+<span class="c1"># Concatenate all the matrix to get a single state matrix</span>
+<span class="n">overall_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">overall_state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">overall_state</span><span class="p">[::</span><span class="mi">100</span><span class="p">,:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">xticklabels</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">yticklabels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (in ms)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Neuron Number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Voltage vs Time Heatmap for Projection Neurons (PNs)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Day 5_22_0.png" src="../../_images/Day 5_22_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Tutorial\Day 5 Optimal Mind Control"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../Day%204%20Neurons%20and%20Networks/Day%204.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Day 4: Neurons and Networks</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../Example%20Implementation%20Locust%20AL/Example.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Example Implementation: Into the Mind of a Locust</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Rishika Mohanta and Collins Assisi<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
