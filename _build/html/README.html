@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PSST … It’s well Documented! &#8212; PSST: Parallelised Scalable Simulations in TensorFlow</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="_static/PSST-favicon-32x32.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Day 0 : Introduction to the Tutorials" href="Tutorial/README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/PSST.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">PSST: Parallelised Scalable Simulations in TensorFlow</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 current">
+  <a class="reference internal" href="#">
+   PSST … It’s well Documented!
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tutorial/README.html">
+   Day 0 : Introduction to the Tutorials
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.html">
+   Day 1: Of Numerical Integration and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tutorial/Day%202%20Let%20the%20Tensors%20Flow/Day%202.html">
+   Day 2: Let the Tensors Flow!
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tutorial/Day%203%20Cells%20in%20Silicon/Day%203.html">
+   Day 3: Cells in Silicon
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tutorial/Day%204%20Neurons%20and%20Networks/Day%204.html">
+   Day 4: Neurons and Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tutorial/Day%205%20Optimal%20Mind%20Control/Day%205.html">
+   Day 5: Optimal Mind Control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tutorial/Example%20Implementation%20Locust%20AL/Example.html">
+   Day 6: (Example Implementation) Into the Mind of a Locust
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tutorial/Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.html">
+   Day 7: (Optional) Distributed Computing with TensorFlow
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/README.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/neurorishika/PSST"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/neurorishika/PSST/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about-psst">
+   About PSST
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tutorial-content">
+   Tutorial Content
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#requirements">
+   Requirements
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="psst-it-s-well-documented">
+<h1>PSST … It’s well Documented!<a class="headerlink" href="#psst-it-s-well-documented" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://arxiv.org/abs/1906.03958"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-1906.03958-b31b1b.svg" /></a>
+<a class="reference external" href="https://www.python.org/"><img alt="made-with-python" src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg" /></a>
+<a class="reference external" href="https://www.tensorflow.org/"><img alt="tensorflow" src="https://raw.githubusercontent.com/aleen42/badges/master/src/tensorflow_flat_square_dfc.svg" /></a>
+<a class="reference external" href="https://mybinder.org/v2/gh/neurorishika/PSST/HEAD"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a>
+<a class="reference external" href="https://github.com/neurorishika/PSST/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/neurorishika/PSST.svg" /></a>
+<a class="reference external" href="https://GitHub.com/neurorishika/PSST/network/"><img alt="GitHub forks" src="https://img.shields.io/github/forks/neurorishika/PSST.svg?style=social&amp;label=Fork&amp;maxAge=2592000" /></a>
+<a class="reference external" href="https://GitHub.com/neurorishika/PSST/stargazers/"><img alt="GitHub stars" src="https://img.shields.io/github/stars/neurorishika/PSST.svg?style=social&amp;label=Star&amp;maxAge=2592000" /></a></p>
+<p>Welcome to <strong>P</strong>arallelised <strong>S</strong>calable <strong>S</strong>imulations in <strong>T</strong>ensorFlow, A  tutorial series about… well… making highly parallelised differential equation based simulations that are scalable across multiple platforms using Python, an easily accessible general purpose programming language, and the power of Google’s open source package TensorFlow.</p>
+<p><img alt="PSST" src="https://raw.githubusercontent.com/technosap/PSST/master/PSST.png" /></p>
+<div class="section" id="about-psst">
+<h2>About PSST<a class="headerlink" href="#about-psst" title="Permalink to this headline">¶</a></h2>
+<p>Neuronal networks are often modeled as systems of coupled, nonlinear, ordinary or partial differential equations. The number of differential equations used to model a network increases with the size of the network and the level of detail used to model individual neurons and synapses. As one scales up the size of the simulation it becomes important to use powerful computing platforms. Many tools exist that solve these equations numerically. However, these tools are often platform-specific. There is a high barrier of entry to developing flexible general purpose code that is platform independent and supports hardware acceleration on modern computing architectures such as GPUs/TPUs and Distributed Platforms. TensorFlow is a Python-based open-source package initially designed for machine learning algorithms, but it presents a scalable environment for a variety of computations including solving differential equations using iterative algorithms such as Euler and Runge-Kutta methods. We have organized as a series of tutorials that demonstrate how to harness the power of TensorFlow’s data-flow programming paradigm to solve differential equations.</p>
+<p>Our tutorial is a simple exposition of numerical methods to solve ordinary differential equations using Python and TensorFlow. It consists of a series of Python notebooks that accompany the proposed manuscript. Over the course of six sessions, we lead novice programmers from integrating simple 1-dimensional differential equations using Python, to solving a large system (1000’s of differential equations) of coupled conductance-based neurons using a highly parallelised and scalable framework that uses Python and TensorFlow.</p>
+</div>
+<div class="section" id="tutorial-content">
+<h2>Tutorial Content<a class="headerlink" href="#tutorial-content" title="Permalink to this headline">¶</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tutorial Day</p></th>
+<th class="head"><p>Run</p></th>
+<th class="head"><p>Run</p></th>
+<th class="head"><p>View</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Day 1: Of Numerical Integration and Python</p></td>
+<td><p><a class="reference external" href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.ipynb"><img alt="Open In kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://nbviewer.jupyter.org/github/neurorishika/PSST/blob/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.ipynb?flush_cache=true"><img alt="View the notebook" src="https://img.shields.io/badge/render-nbviewer-orange.svg" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Day 2: Let the Tensors Flow</p></td>
+<td><p><a class="reference external" href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Day%202%20Let%20the%20Tensors%20Flow/Day%202.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%202%20Let%20the%20Tensors%20Flow/Day%202.ipynb"><img alt="Open In kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://nbviewer.jupyter.org/github/neurorishika/PSST/blob/master/Tutorial/Day%202%20Let%20the%20Tensors%20Flow/Day%202.ipynb?flush_cache=true"><img alt="View the notebook" src="https://img.shields.io/badge/render-nbviewer-orange.svg" /></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Day 3: Cells in Silicon</p></td>
+<td><p><a class="reference external" href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Day%203%20Cells%20in%20Silicon/Day%203.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%203%20Cells%20in%20Silicon/Day%203.ipynb"><img alt="Open In kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://nbviewer.jupyter.org/github/neurorishika/PSST/blob/master/Tutorial/Day%203%20Cells%20in%20Silicon/Day%203.ipynb?flush_cache=true"><img alt="View the notebook" src="https://img.shields.io/badge/render-nbviewer-orange.svg" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Day 4: Neurons and Networks</p></td>
+<td><p><a class="reference external" href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Day%204%20Neurons%20and%20Networks/Day%204.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%204%20Neurons%20and%20Networks/Day%204.ipynb"><img alt="Open In kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://nbviewer.jupyter.org/github/neurorishika/PSST/blob/master/Tutorial/Day%204%20Neurons%20and%20Networks/Day%204.ipynb?flush_cache=true"><img alt="View the notebook" src="https://img.shields.io/badge/render-nbviewer-orange.svg" /></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Day 5: Optimal Mind Control</p></td>
+<td><p><a class="reference external" href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Day%205%20Optimal%20Mind%20Control/Day%205.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%205%20Optimal%20Mind%20Control/Day%205.ipynb"><img alt="Open In kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://nbviewer.jupyter.org/github/neurorishika/PSST/blob/master/Tutorial/Day%205%20Optimal%20Mind%20Control/Day%205.ipynb?flush_cache=true"><img alt="View the notebook" src="https://img.shields.io/badge/render-nbviewer-orange.svg" /></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Day 6: Example Implementation (Locust AL)</p></td>
+<td><p><a class="reference external" href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Example%20Implementation%20Locust%20AL/Example.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Example%20Implementation%20Locust%20AL/Example.ipynb"><img alt="Open In kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://nbviewer.jupyter.org/github/neurorishika/PSST/blob/master/Tutorial/Example%20Implementation%20Locust%20AL/Example.ipynb?flush_cache=true"><img alt="View the notebook" src="https://img.shields.io/badge/render-nbviewer-orange.svg" /></a></p></td>
+</tr>
+<tr class="row-even"><td><p>Day 7: (Optional) Distributed Tensorflow</p></td>
+<td><p><a class="reference external" href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.ipynb"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.ipynb"><img alt="Open In kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p></td>
+<td><p><a class="reference external" href="https://nbviewer.jupyter.org/github/neurorishika/PSST/blob/master/Tutorial/Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.ipynb?flush_cache=true"><img alt="View the notebook" src="https://img.shields.io/badge/render-nbviewer-orange.svg" /></a></p></td>
+</tr>
+</tbody>
+</table>
+<p><em>Pre-rendered HTML files are available in the ‘static’ folder on each day</em></p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Python 3.6 or above</p></li>
+<li><p>Jupyter Notebook</p></li>
+<li><p>Numpy</p></li>
+<li><p>Matplotlib</p></li>
+<li><p>Seaborn (optional)</p></li>
+<li><p>TensorFlow CPU/GPU (1.3 or above)</p></li>
+</ul>
+<p>Happy Coding!</p>
+<p>Cheers,
+Rishika Mohanta and Collins Assisi</p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+     <div id="next">
+        <a class="right-next" href="Tutorial/README.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Day 0 : Introduction to the Tutorials</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Rishika Mohanta and Collins Assisi<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

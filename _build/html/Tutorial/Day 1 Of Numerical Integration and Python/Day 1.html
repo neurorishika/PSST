@@ -1,0 +1,608 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 1: Of Numerical Integration and Python &#8212; PSST: Parallelised Scalable Simulations in TensorFlow</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../../_static/PSST-favicon-32x32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Day 2: Let the Tensors Flow!" href="../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html" />
+    <link rel="prev" title="Day 0 : Introduction to the Tutorials" href="../README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/PSST.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">PSST: Parallelised Scalable Simulations in TensorFlow</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../README.html">
+   PSST … It’s well Documented!
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Day 0 : Introduction to the Tutorials
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Day 1: Of Numerical Integration and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html">
+   Day 2: Let the Tensors Flow!
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%203%20Cells%20in%20Silicon/Day%203.html">
+   Day 3: Cells in Silicon
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%204%20Neurons%20and%20Networks/Day%204.html">
+   Day 4: Neurons and Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Day%205%20Optimal%20Mind%20Control/Day%205.html">
+   Day 5: Optimal Mind Control
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Example%20Implementation%20Locust%20AL/Example.html">
+   Example Implementation: Into the Mind of a Locust
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.html">
+   Distributed Computing with TensorFlow
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Tutorial/Day 1 Of Numerical Integration and Python/Day 1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/neurorishika/PSST"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/neurorishika/PSST/issues/new?title=Issue%20on%20page%20%2FTutorial/Day 1 Of Numerical Integration and Python/Day 1.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-numerical-integration">
+   What is Numerical Integration?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#euler-s-method-for-numerical-integration">
+     Euler’s Method for Numerical Integration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#euler-s-method-in-python">
+     Euler’s Method in Python
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#euler-and-vectors">
+     Euler and Vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-generalized-function-for-euler-integration">
+     A Generalized function for Euler Integration
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#algorithm">
+       Algorithm
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#runge-kutta-methods-for-numerical-integration">
+     Runge-Kutta Methods for Numerical Integration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generalized-rk4-method-in-python">
+     Generalized RK4 Method in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><a href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.ipynb" target="_parent"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>   <a href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.ipynb" target="_parent"><img alt="Open in Kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p>
+<div class="section" id="day-1-of-numerical-integration-and-python">
+<h1>Day 1: Of Numerical Integration and Python<a class="headerlink" href="#day-1-of-numerical-integration-and-python" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to Day 1! Today, we start with our discussion of Numerical Integration.</p>
+<div class="section" id="what-is-numerical-integration">
+<h2>What is Numerical Integration?<a class="headerlink" href="#what-is-numerical-integration" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\frac{dx}{dt} = f(x, t)\]</div>
+<p>where, <span class="math notranslate nohighlight">\(x\)</span> is an <span class="math notranslate nohighlight">\(N-\)</span>dimensional vector and <span class="math notranslate nohighlight">\(t\)</span> typically stands for time. The function <span class="math notranslate nohighlight">\(f(x,t)\)</span> may be a nonlinear function of <span class="math notranslate nohighlight">\(x\)</span> that explicitly depends on <span class="math notranslate nohighlight">\(t\)</span>. In addition to specifying the form of the differential equation, one must also specify the value of <span class="math notranslate nohighlight">\(x\)</span> at a particular time point. Say, <span class="math notranslate nohighlight">\(x=x_{0}\)</span> at <span class="math notranslate nohighlight">\(t = t_0\)</span>. It is often not possible to derive a closed form solution for this equation. Therefore numerical methods to solve these equations are of great importance.</p>
+<div class="section" id="euler-s-method-for-numerical-integration">
+<h3>Euler’s Method for Numerical Integration<a class="headerlink" href="#euler-s-method-for-numerical-integration" title="Permalink to this headline">¶</a></h3>
+<p>We use Euler’s Method to generate a numerical solution to an initial value problem of the form:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dx}{dt} = f(x, t)\]</div>
+<div class="math notranslate nohighlight">
+\[x(t_o) = x_o\]</div>
+<p>Firstly, we decide the interval over which we desire to find the solution, starting at the initial condition. We break this interval into small subdivisions of a fixed length <span class="math notranslate nohighlight">\(\epsilon\)</span>. Then, using the initial condition as our starting point, we generate the rest of the solution by using the iterative formulas:</p>
+<div class="math notranslate nohighlight">
+\[t_{n+1} = t_n + \epsilon\]</div>
+<div class="math notranslate nohighlight">
+\[x_{n+1} = x_n + \epsilon f(x_n, t_n)\]</div>
+<p>to find the coordinates of the points in our numerical solution. We end this process once we have reached the end of the desired interval.</p>
+<p>The best way to understand how it works is from the following diagram:</p>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/euler.svg"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/euler.svg" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/euler.svg" width="600" /></a>
+</div>
+<div class="section" id="euler-s-method-in-python">
+<h3>Euler’s Method in Python<a class="headerlink" href="#euler-s-method-in-python" title="Permalink to this headline">¶</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(\frac{dx}{dt}=f(x,t)\)</span>, we want to find <span class="math notranslate nohighlight">\(x(t)\)</span> over <span class="math notranslate nohighlight">\(t\in[0,2)\)</span>, given that <span class="math notranslate nohighlight">\(x(0)=1\)</span> and <span class="math notranslate nohighlight">\(f(x,t) = 5x\)</span>. The exact solution of this equation would be <span class="math notranslate nohighlight">\(x(t) = e^{5t}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> <span class="c1"># define the function f(x,t)</span>
+    <span class="k">return</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span>
+
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># define timestep</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">epsilon</span><span class="p">)</span> <span class="c1"># define an array for t</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># define an array for x</span>
+
+<span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="mi">1</span> <span class="c1"># set initial condition</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">epsilon</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Euler Integration Step</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">x</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">t</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Exact Solution&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Day 1_3_0.png" src="../../_images/Day 1_3_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="euler-and-vectors">
+<h3>Euler and Vectors<a class="headerlink" href="#euler-and-vectors" title="Permalink to this headline">¶</a></h3>
+<p>Euler’s Method also applies to vectors and can solve simultaneous differential equations.</p>
+<p>The Initial Value problem now becomes:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\vec{X}}{dt} = \vec{f}(\vec{X}, t)\]</div>
+<div class="math notranslate nohighlight">
+\[\vec{X}(t_o) = \vec{X_o}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vec{X}=[X_1,X_2...]\)</span> and <span class="math notranslate nohighlight">\(\vec{f}(\vec{X}, t)=[f_1(\vec{X}, t),f_2(\vec{X}, t)...]\)</span>.</p>
+<p>The Euler’s Method becomes:</p>
+<div class="math notranslate nohighlight">
+\[t_{n+1} = t_n + \epsilon\]</div>
+<div class="math notranslate nohighlight">
+\[\vec{X_{n+1}} = \vec{X_n} + \epsilon \vec{f}(\vec{X_n}, t_n)\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\frac{d\vec{X}}{dt}=f(\vec{X},t)\)</span>, we want to find <span class="math notranslate nohighlight">\(\vec{X}(t)\)</span> over <span class="math notranslate nohighlight">\(t\in[0,2)\)</span>, given that <span class="math notranslate nohighlight">\(\vec{X}(t)=[x,y]\)</span>, <span class="math notranslate nohighlight">\(\vec{X}(0)=[1,0]\)</span> and <span class="math notranslate nohighlight">\(f(\vec{X},t) = [x-y,y-x]\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> <span class="c1"># the function f(X,t) now takes a vector X as input</span>
+    <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">X</span> <span class="c1"># the first and the second elements of X are assigned to x and y</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">])</span>
+
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># define timestep</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">epsilon</span><span class="p">)</span> <span class="c1"># define an array for t</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="c1"># initialize an array for x</span>
+
+<span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># set initial condition</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">X</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">epsilon</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">X</span><span class="p">[:,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Euler Integration Step</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Day 1_5_0.png" src="../../_images/Day 1_5_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="a-generalized-function-for-euler-integration">
+<h3>A Generalized function for Euler Integration<a class="headerlink" href="#a-generalized-function-for-euler-integration" title="Permalink to this headline">¶</a></h3>
+<p>Here we rewrite the code in a modular fashion and cast the integrator as a function that takes in 3 inputs ie. the function <span class="math notranslate nohighlight">\(\vec{f}(\vec{y},t)\)</span> where <span class="math notranslate nohighlight">\(\frac{d\vec{y}}{dt}=f(\vec{y},t)\)</span>, the time array, and initial vector <span class="math notranslate nohighlight">\(\vec{y}_{0}\)</span>. We will find this form to be particularly useful when we use TensorFlow functions to code the integrator. Further, it allows us to write multiple integrating functions (for example Euler or RK4) within the same class and call a specific integrator as needed. In addition we also introduce a function to ensure that the correct inputs are given to the integrator failing which an error message is generated.</p>
+<div class="section" id="algorithm">
+<h4>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Get the required inputs: function <span class="math notranslate nohighlight">\(\vec{f}(\vec{y},t)\)</span>, initial condition vector <span class="math notranslate nohighlight">\(\vec{y}_0\)</span> and time series <span class="math notranslate nohighlight">\(t\)</span>. Entering a time series <span class="math notranslate nohighlight">\(t\)</span> allows for greater control over <span class="math notranslate nohighlight">\(\epsilon\)</span> as it can now vary for each timestep.</p></li>
+<li><p>Check if the input is of the correct datatype ie. floating point decimal.</p></li>
+<li><p>Allocate a matrix to hold the output.</p></li>
+<li><p>At each time step, perform the update <span class="math notranslate nohighlight">\(\vec{y}\)</span> using the Euler method with and store it in the output matrix.</p></li>
+<li><p>Return the output time series [number of equations <span class="math notranslate nohighlight">\(\times\)</span> iterations] matrix.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> <span class="c1"># Ensure Input is Correct</span>
+    <span class="k">return</span> <span class="n">y</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span>
+
+<span class="k">class</span> <span class="nc">_Integrator</span><span class="p">():</span>
+    
+    <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+        <span class="n">time_delta_grid</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">y0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y0</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time_delta_grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="n">time_delta_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">func</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">+</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">odeint_euler</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">check_type</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_Integrator</span><span class="p">()</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error encountered&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="n">odeint_euler</span><span class="p">(</span><span class="n">f</span><span class="p">,[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:2: DeprecationWarning: Converting `np.inexact` or `np.floating` to a dtype is deprecated. The current result is `float64` which is not strictly correct.
+  
+</pre></div>
+</div>
+<img alt="../../_images/Day 1_8_1.png" src="../../_images/Day 1_8_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="runge-kutta-methods-for-numerical-integration">
+<h3>Runge-Kutta Methods for Numerical Integration<a class="headerlink" href="#runge-kutta-methods-for-numerical-integration" title="Permalink to this headline">¶</a></h3>
+<p>Euler’s method <span class="math notranslate nohighlight">\(x_{n+1}=x_n + \epsilon f(x_n,t_n)\)</span> calculates the solution at <span class="math notranslate nohighlight">\(t_{n+1}=t_n+\epsilon\)</span> given the solution at <span class="math notranslate nohighlight">\(t_n\)</span>. In doing so we use the derivative at <span class="math notranslate nohighlight">\(t_{n}\)</span> though its value may change throughout the interval <span class="math notranslate nohighlight">\([t,t+\epsilon]\)</span>.  This results in an error of the order <span class="math notranslate nohighlight">\(\mathcal{O}(\epsilon^2)\)</span>. By calculating the derivatives at intermediate steps, one can reduce the error at each step. Consider the following second order method where the slope is calculated at <span class="math notranslate nohighlight">\(t_{n}\)</span> and <span class="math notranslate nohighlight">\(t_n+\frac{\epsilon}{2}\)</span>.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4f7fccc2-1280-43f1-949e-5628e4aa5e1f">
+<span class="eqno">(1)<a class="headerlink" href="#equation-4f7fccc2-1280-43f1-949e-5628e4aa5e1f" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_1=\epsilon f(x_n,t_n)\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-12fdbd52-64c7-4f55-8110-6f2015c8338c">
+<span class="eqno">(2)<a class="headerlink" href="#equation-12fdbd52-64c7-4f55-8110-6f2015c8338c" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_2=\epsilon f(x_n+\frac{k_1}{2},t_n+\frac{\epsilon}{2})\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-d068bfbb-c845-4b62-92c4-3089503f835d">
+<span class="eqno">(3)<a class="headerlink" href="#equation-d068bfbb-c845-4b62-92c4-3089503f835d" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}x_{n+1}=x_n+k_2+O(\epsilon^3)\end{eqnarray}\]</div>
+<p>This method is called the second order Runge-Kutta method or the midpoint method.</p>
+<a class="reference internal image-reference" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/rk2.svg"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/rk2.svg" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/rk2.svg" width="600" /></a>
+<p>Above is a schematic description of the second order Runge-Kutta method. The blue curve denotes a solution of some differential equation.</p>
+<p>We can reduce errors by calculating additional derivatives. One of the most commonly used integrators is the fourth-order Runge-Kutta Method or RK4 method, that is implemented below:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7788d695-90b1-4d2c-ad47-19334ec28283">
+<span class="eqno">(4)<a class="headerlink" href="#equation-7788d695-90b1-4d2c-ad47-19334ec28283" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_1=f(x_n,t_n)\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-71c377c3-3508-4035-9f1e-c9698fcd3133">
+<span class="eqno">(5)<a class="headerlink" href="#equation-71c377c3-3508-4035-9f1e-c9698fcd3133" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_2=f(x_n+\epsilon\frac{k_1}{2},t_n+\frac{\epsilon}{2})\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-df374ff7-ca0e-4958-b081-693a78b16535">
+<span class="eqno">(6)<a class="headerlink" href="#equation-df374ff7-ca0e-4958-b081-693a78b16535" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_3=f(x_n+\epsilon\frac{k_2}{2},t_n+\frac{\epsilon}{2})\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-cefc0e84-7af5-47cb-ac39-710b523ba135">
+<span class="eqno">(7)<a class="headerlink" href="#equation-cefc0e84-7af5-47cb-ac39-710b523ba135" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_4=f(x_n+\epsilon k_3,t_n+\epsilon)\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-887500dc-4d01-443b-9f5d-d8c5e2ea30f2">
+<span class="eqno">(8)<a class="headerlink" href="#equation-887500dc-4d01-443b-9f5d-d8c5e2ea30f2" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}y_{n+1}=y_n+\frac{\epsilon}{6}(k_1+2 k_2+2 k_3+k_4)+\mathcal{O}(\epsilon^5)\end{eqnarray}\]</div>
+<p>Note that this numerical method is again easily converted to a vector algorithm by simply replacing <span class="math notranslate nohighlight">\(x_i\)</span> by the vector <span class="math notranslate nohighlight">\(\vec{X_i}\)</span>. We will use this method to simulate networks of neurons.</p>
+</div>
+<div class="section" id="generalized-rk4-method-in-python">
+<h3>Generalized RK4 Method in Python<a class="headerlink" href="#generalized-rk4-method-in-python" title="Permalink to this headline">¶</a></h3>
+<p>We can now modify the Euler Integration code implemented earlier with a generalized function for RK4 that takes three inputs - the function <span class="math notranslate nohighlight">\(f(\vec{y},t)\)</span>, where <span class="math notranslate nohighlight">\(\frac{d\vec{y}}{dt}=f(\vec{y},t)\)</span>, the time array, and an initial vector <span class="math notranslate nohighlight">\(\vec{y_0}\)</span>. The code can be updated as follows,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> <span class="c1"># Ensure Input is Correct</span>
+    <span class="k">return</span> <span class="n">y</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span>
+
+<span class="k">class</span> <span class="nc">_Integrator</span><span class="p">():</span>
+    
+    <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+        <span class="n">time_delta_grid</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">y0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y0</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time_delta_grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">k1</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="c1"># RK4 Integration Steps replace Euler&#39;s Updation Steps</span>
+            <span class="n">half_step</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">time_delta_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">k2</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">time_delta_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">k1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">half_step</span><span class="p">)</span>
+            <span class="n">k3</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">time_delta_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">k2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">half_step</span><span class="p">)</span>
+            <span class="n">k4</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">time_delta_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">k3</span><span class="p">,</span> <span class="n">t</span> <span class="o">+</span> <span class="n">time_delta_grid</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="p">(</span><span class="n">k1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">k2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">k3</span> <span class="o">+</span> <span class="n">k4</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">time_delta_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">y</span>
+
+<span class="k">def</span> <span class="nf">odeint_rk4</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">check_type</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_Integrator</span><span class="p">()</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error encountered&quot;</span><span class="p">)</span>
+
+<span class="n">solution</span> <span class="o">=</span> <span class="n">odeint_rk4</span><span class="p">(</span><span class="n">f</span><span class="p">,[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;RK4 Solution for x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;RK4 Solution for y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:2: DeprecationWarning: Converting `np.inexact` or `np.floating` to a dtype is deprecated. The current result is `float64` which is not strictly correct.
+  
+</pre></div>
+</div>
+<img alt="../../_images/Day 1_10_1.png" src="../../_images/Day 1_10_1.png" />
+</div>
+</div>
+<p><strong>Exercise</strong>, Solve the differential equations describing the dynamics of a simple pendulum the using Euler and RK4 methods. The equation of motion of a simple pendulum is given by:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-751a5592-13cd-43c6-88a4-9e091a23e09e">
+<span class="eqno">(9)<a class="headerlink" href="#equation-751a5592-13cd-43c6-88a4-9e091a23e09e" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d^2s}{dt^2}=L\frac{d^2\theta}{dt^2}=-g\sin{\theta}\end{eqnarray}\]</div>
+<p>where <span class="math notranslate nohighlight">\(L\)</span> = Length of String and <span class="math notranslate nohighlight">\(\theta\)</span> = angle made with vertical. This second order differential equation may be written as two first order coupled equations as follows:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-fd2fde13-e464-4829-b540-fbc2ae656158">
+<span class="eqno">(10)<a class="headerlink" href="#equation-fd2fde13-e464-4829-b540-fbc2ae656158" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\theta}{dt}=\omega\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-ae733e34-2909-48e4-970c-e3cfe2a62f25">
+<span class="eqno">(11)<a class="headerlink" href="#equation-ae733e34-2909-48e4-970c-e3cfe2a62f25" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\omega}{dt}=-\frac{g}{L}\sin{\theta}\end{eqnarray}\]</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Tutorial\Day 1 Of Numerical Integration and Python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../README.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Day 0 : Introduction to the Tutorials</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Day 2: Let the Tensors Flow!</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Rishika Mohanta and Collins Assisi<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
