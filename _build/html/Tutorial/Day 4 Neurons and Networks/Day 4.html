@@ -125,12 +125,12 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Example%20Implementation%20Locust%20AL/Example.html">
-   Example Implementation: Into the Mind of a Locust
+   Day 6: (Example Implementation) Into the Mind of a Locust
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Optional%20Material/Distributed%20TensorFlow/Distributed%20TensorFlow.html">
-   Distributed Computing with TensorFlow
+   Day 7: (Optional) Distributed Computing with TensorFlow
   </a>
  </li>
 </ul>
@@ -339,28 +339,28 @@
 <div class="section" id="modelling-synapses">
 <h3>Modelling Synapses<a class="headerlink" href="#modelling-synapses" title="Permalink to this headline">¶</a></h3>
 <p>The synaptic current (<span class="math notranslate nohighlight">\(I_{syn}\)</span>) depends on the difference between the reversal potential (<span class="math notranslate nohighlight">\(E_{syn}\)</span>) and the value of the membrane potential (<span class="math notranslate nohighlight">\(u\)</span>). The synaptic current due to neurotransmitter release into the synaptic cleft following an action potential is given by,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-74631492-30e3-4c78-9189-be98be185108">
-<span class="eqno">(21)<a class="headerlink" href="#equation-74631492-30e3-4c78-9189-be98be185108" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-065d5d25-2ccd-4fd6-9dce-187da9dad7f4">
+<span class="eqno">(21)<a class="headerlink" href="#equation-065d5d25-2ccd-4fd6-9dce-187da9dad7f4" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 I_{syn}(t)=g_{syn}(t)(u(t)−E_{syn})
 \end{equation}\]</div>
 <p>When the transmitter binds to postsynaptic receptors it causes a transient change in the conductance <span class="math notranslate nohighlight">\(g_{syn}\)</span>. To capture the dynamics of <span class="math notranslate nohighlight">\(g_{syn}\)</span>, one models the system using a simple kinetic model where the receptors can be either in an open or a closed state~\cite{Destexhe1994}. The transition between the states is proportional to the concentration of the neurotransmitter <span class="math notranslate nohighlight">\([T]\)</span> in the cleft.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-010a5381-1949-40b3-a10a-0f35af7099b6">
-<span class="eqno">(22)<a class="headerlink" href="#equation-010a5381-1949-40b3-a10a-0f35af7099b6" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d5f35187-aeed-437a-8eac-21cb5150704d">
+<span class="eqno">(22)<a class="headerlink" href="#equation-d5f35187-aeed-437a-8eac-21cb5150704d" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \mathrm{C}\underset{\beta}{\stackrel{\alpha[T]}{\rightleftharpoons}} \mathrm{O}
 \end{equation}\]</div>
 <p>This may be rewritten in the form of a differential equation.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-14becf5d-86e1-4869-9d63-9fca701d328c">
-<span class="eqno">(23)<a class="headerlink" href="#equation-14becf5d-86e1-4869-9d63-9fca701d328c" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d[O]}{dt}=\alpha[T](1−[O])−\beta[O]\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-9f98e003-23a3-4151-8e0b-5bec0ae10a0b">
+<span class="eqno">(23)<a class="headerlink" href="#equation-9f98e003-23a3-4151-8e0b-5bec0ae10a0b" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d[O]}{dt}=\alpha[T](1−[O])−\beta[O]\end{eqnarray}\]</div>
 <p>We can now describe the synaptic conductance <span class="math notranslate nohighlight">\(g_{syn}(t)=g_{max}[O]\)</span>, in terms of the maximal conductance <span class="math notranslate nohighlight">\(g_{max}\)</span> and a gating variable <span class="math notranslate nohighlight">\([O]\)</span>, where <span class="math notranslate nohighlight">\([O](t)\)</span> is the fraction of open synaptic channels. <span class="math notranslate nohighlight">\(\alpha\)</span> is the binding constant, <span class="math notranslate nohighlight">\(\beta\)</span> the unbinding constant and <span class="math notranslate nohighlight">\((1−[O])\)</span> the fraction of closed channels where the neurotransmitter can bind. The functional form of T depends on the nature of the synapse.
 For cholinergic excitatory synapses, <span class="math notranslate nohighlight">\([T]\)</span> is given by,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-66209707-1542-4e0c-9052-5a74fa579919">
-<span class="eqno">(24)<a class="headerlink" href="#equation-66209707-1542-4e0c-9052-5a74fa579919" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-7666b1d6-6201-47b2-ae9a-69045528a2da">
+<span class="eqno">(24)<a class="headerlink" href="#equation-7666b1d6-6201-47b2-ae9a-69045528a2da" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
 [T]_{ach} = A\ \Theta(t_{max}+t_{fire}+t_{delay}-t)\ \Theta(t-t_{fire}-t_{delay})
 \end{eqnarray}\]</div>
 <p>where, <span class="math notranslate nohighlight">\(\Theta (x)\)</span> is the Heaviside step function, <span class="math notranslate nohighlight">\(t_{fire}\)</span> is the time of the last presynaptic spike, <span class="math notranslate nohighlight">\(t_{delay}\)</span> is the time delay from the time of the last spike to its effect on the postsynaptic neuron and <span class="math notranslate nohighlight">\(t_{max}\)</span> is the duration after the spike during which the transmitter remains in the synaptic cleft.
 For Fast GABAergic inhibitory synapses, we used the following equation,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b17cd445-34fe-4072-af4b-be600d3449d3">
-<span class="eqno">(25)<a class="headerlink" href="#equation-b17cd445-34fe-4072-af4b-be600d3449d3" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}[T]_{gaba} = \frac{1}{1+e^{-\frac{V(t-t_{fire}-t_{delay})-V_0}{\sigma}}}\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-26900efa-99ce-4ae2-8a97-4de502456c26">
+<span class="eqno">(25)<a class="headerlink" href="#equation-26900efa-99ce-4ae2-8a97-4de502456c26" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}[T]_{gaba} = \frac{1}{1+e^{-\frac{V(t-t_{fire}-t_{delay})-V_0}{\sigma}}}\end{eqnarray}\]</div>
 <p>Note that in order to solve this equation, we need to determine the time when the presynaptic neuron fired (<span class="math notranslate nohighlight">\(t_{fire}\)</span>). To account for these synaptic interactions between neurons we need to modify the RK4 integrator developed to simulate multiple independent Hodgkin-Huxley neurons.</p>
 </div>
 <div class="section" id="iterating-over-conditionals-in-tensorflow">
@@ -515,15 +515,15 @@ non-resource variables are not supported in the long term
 <div class="section" id="implementing-a-network-of-hodgkin-huxley-neurons">
 <h3>Implementing a network of Hodgkin-Huxley Neurons<a class="headerlink" href="#implementing-a-network-of-hodgkin-huxley-neurons" title="Permalink to this headline">¶</a></h3>
 <p>Recall, each Hodgkin Huxley Neuron in a network with <span class="math notranslate nohighlight">\(n\)</span> neurons has 4 dynamical variables <span class="math notranslate nohighlight">\(V\)</span>, <span class="math notranslate nohighlight">\( m\)</span>, <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(h\)</span>. Each of these variables were represented as <span class="math notranslate nohighlight">\(n\)</span>-dimensional vectors. Now we need to add some more state variables representing each synapse. The neuron receives excitatory and inhibitory inputs that are introduced as additional synaptic currents <span class="math notranslate nohighlight">\(I_{ach}\)</span> and <span class="math notranslate nohighlight">\(I_{GABA}\)</span>. The equation now reads,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-470fb32e-8099-443d-b69b-8ff4211ae13d">
-<span class="eqno">(26)<a class="headerlink" href="#equation-470fb32e-8099-443d-b69b-8ff4211ae13d" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}C_m\frac{dV}{dt} = I_{injected} - I_{Na} - I_K - I_L - I_{ach} - I_{gaba}\end{eqnarray}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-9df6f593-36e3-4db2-988d-c5c335656625">
+<span class="eqno">(26)<a class="headerlink" href="#equation-9df6f593-36e3-4db2-988d-c5c335656625" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}C_m\frac{dV}{dt} = I_{injected} - I_{Na} - I_K - I_L - I_{ach} - I_{gaba}\end{eqnarray}\]</div>
 <p>For each synapse, we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-96be4e41-a397-459a-8fa3-5a19d20666cb">
-<span class="eqno">(27)<a class="headerlink" href="#equation-96be4e41-a397-459a-8fa3-5a19d20666cb" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-15a38888-4bb1-4be9-829a-a4d5ee17621b">
+<span class="eqno">(27)<a class="headerlink" href="#equation-15a38888-4bb1-4be9-829a-a4d5ee17621b" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
 \frac{d[O]_{ach/gaba}}{dt} = \alpha (1-[O]_{ach/gaba})[T]_{ach/gaba}-\beta[O]_{ach/gaba}
 \end{eqnarray}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-273b99a2-ac3f-468c-9434-1d6aa21e83cd">
-<span class="eqno">(28)<a class="headerlink" href="#equation-273b99a2-ac3f-468c-9434-1d6aa21e83cd" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-620a5d89-01c3-4fa1-a537-5f9ae8b5009e">
+<span class="eqno">(28)<a class="headerlink" href="#equation-620a5d89-01c3-4fa1-a537-5f9ae8b5009e" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}
 I_{ach/gaba}(t)=g_{max}[O]_{ach/gaba}(V−E_{ach/gaba})
 \end{eqnarray}\]</div>
 </div>
