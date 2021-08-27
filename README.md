@@ -3,6 +3,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv-1906.03958-b31b1b.svg)](https://arxiv.org/abs/1906.03958)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![tensorflow](https://raw.githubusercontent.com/aleen42/badges/master/src/tensorflow_flat_square_dfc.svg)](https://www.tensorflow.org/)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/neurorishika/PSST/HEAD)
 [![GitHub license](https://img.shields.io/github/license/neurorishika/PSST.svg)](https://github.com/neurorishika/PSST/blob/master/LICENSE)
 [![GitHub forks](https://img.shields.io/github/forks/neurorishika/PSST.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/neurorishika/PSST/network/)
 [![GitHub stars](https://img.shields.io/github/stars/neurorishika/PSST.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/neurorishika/PSST/stargazers/)
