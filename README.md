@@ -17,4 +17,4 @@ Our tutorial is a simple exposition of numerical methods to solve ordinary diffe
 - TensorFlow CPU/GPU (1.3 or above)
 
 Happy Coding!
-Saptarshi Soham Mohanta and Collins Assisi, 2019.
+Rishika Mohanta and Collins Assisi
