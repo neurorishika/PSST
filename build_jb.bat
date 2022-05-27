@@ -1,6 +1,9 @@
 CALL copy Book\_config.yml _config.yml /y
 CALL copy Book\_toc.yml _toc.yml /y
+CALL conda create -n jupyterbook
 CALL conda activate jupyterbook
+CALL pip install jupyter-book
+CALL pip install ghp-import
 CALL cd ..
 CALL jupyter-book build PSST/
 CALL cd PSST
