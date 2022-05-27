@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Day 1: Of Numerical Integration and Python &#8212; PSST: Parallelised Scalable Simulations in TensorFlow</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet" />
-  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -31,33 +31,38 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../../_static/PSST-favicon-32x32.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Day 2: Let the Tensors Flow!" href="../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html" />
     <link rel="prev" title="Day 0 : Introduction to the Tutorials" href="../README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -73,6 +78,10 @@
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
       
       <img src="../../_static/PSST.png" class="logo" alt="logo">
       
@@ -179,7 +188,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -213,7 +222,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -272,7 +281,69 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Day 1: Of Numerical Integration and Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-numerical-integration">
+   What is Numerical Integration?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#euler-s-method-for-numerical-integration">
+     Euler’s Method for Numerical Integration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#euler-s-method-in-python">
+     Euler’s Method in Python
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#euler-and-vectors">
+     Euler and Vectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-generalized-function-for-euler-integration">
+     A Generalized function for Euler Integration
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#algorithm">
+       Algorithm
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#runge-kutta-methods-for-numerical-integration">
+     Runge-Kutta Methods for Numerical Integration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generalized-rk4-method-in-python">
+     Generalized RK4 Method in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <p><a href="https://colab.research.google.com/github/neurorishika/PSST/blob/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.ipynb" target="_parent"><img alt="Open In Colab" src="https://colab.research.google.com/assets/colab-badge.svg" /></a>   <a href="https://kaggle.com/kernels/welcome?src=https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/Day%201.ipynb" target="_parent"><img alt="Open in Kaggle" src="https://kaggle.com/static/images/open-in-kaggle.svg" /></a></p>
@@ -310,6 +381,18 @@
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> <span class="c1"># define the function f(x,t)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function returns the value of the function f(x,t) = 5x. </span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    x: float</span>
+<span class="sd">        The value of variable x.</span>
+<span class="sd">    t: float</span>
+<span class="sd">        The value of time t</span>
+<span class="sd">    </span>
+<span class="sd">    Note: Here the function takes both x and t as input however only x is used in the function. A different time-dependent function can utilize the time variable t.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span>
 
 <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># define timestep</span>
@@ -322,7 +405,8 @@
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
     <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">epsilon</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Euler Integration Step</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">x</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution&quot;</span><span class="p">)</span>
+<span class="c1"># Plot the solution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">x</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&#39;s Solution&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">t</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Exact Solution&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
@@ -354,6 +438,18 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> <span class="c1"># the function f(X,t) now takes a vector X as input</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function returns the value of the function f(X,t) = [X[0]-X[1],X[1]-X[0]].</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    X: numpy array</span>
+<span class="sd">        The value of the vector X.</span>
+<span class="sd">    t: float</span>
+<span class="sd">        The value of time t.</span>
+
+<span class="sd">    Note: Here the function takes both X and t as input however only X is used in the function. A different time-dependent function can utilize the time variable t.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">X</span> <span class="c1"># the first and the second elements of X are assigned to x and y</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">])</span>
 
@@ -366,9 +462,10 @@
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
     <span class="n">X</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">epsilon</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">X</span><span class="p">[:,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Euler Integration Step</span>
-    
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for x&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for y&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot the solution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&#39;s Solution for x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&#39;s Solution for y&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -387,7 +484,7 @@
 <div class="section" id="algorithm">
 <h4>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><p>Get the required inputs: function <span class="math notranslate nohighlight">\(\vec{f}(\vec{y},t)\)</span>, initial condition vector <span class="math notranslate nohighlight">\(\vec{y}_0\)</span> and time series <span class="math notranslate nohighlight">\(t\)</span>. Entering a time series <span class="math notranslate nohighlight">\(t\)</span> allows for greater control over <span class="math notranslate nohighlight">\(\epsilon\)</span> as it can now vary for each timestep.</p></li>
+<li><p>Get the required inputs: function <span class="math notranslate nohighlight">\(\vec{f}(\vec{y},t)\)</span>, initial condition vector <span class="math notranslate nohighlight">\(\vec{y}_0\)</span> and time series <span class="math notranslate nohighlight">\(t\)</span>. Entering a time series <span class="math notranslate nohighlight">\(t\)</span> allows for greater control over <span class="math notranslate nohighlight">\(\epsilon\)</span> as it can now vary for each time-step.</p></li>
 <li><p>Check if the input is of the correct datatype ie. floating point decimal.</p></li>
 <li><p>Allocate a matrix to hold the output.</p></li>
 <li><p>At each time step, perform the update <span class="math notranslate nohighlight">\(\vec{y}\)</span> using the Euler method with and store it in the output matrix.</p></li>
@@ -396,37 +493,68 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> <span class="c1"># Ensure Input is Correct</span>
-    <span class="k">return</span> <span class="n">y</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function checks the type of the input to ensure that it is a floating point number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">_Integrator</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class for integrating a function using the Euler method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
-        <span class="n">time_delta_grid</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function integrates the function func using the Euler method.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters:</span>
+<span class="sd">        -----------</span>
+<span class="sd">        func: function</span>
+<span class="sd">            The function to be integrated.</span>
+<span class="sd">        y0: float</span>
+<span class="sd">            The initial condition.</span>
+<span class="sd">        t: numpy array</span>
+<span class="sd">            The time array.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">time_delta_grid</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># define the time step at each point</span>
         
-        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">y0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-        <span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y0</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">y0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="c1"># initialize the array for y</span>
+        <span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y0</span> <span class="c1"># set the initial condition</span>
         
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time_delta_grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="n">time_delta_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">func</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">+</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time_delta_grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span> <span class="c1"># loop through the time steps</span>
+            <span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="n">time_delta_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">func</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">+</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="c1"># Euler Integration Step</span>
         <span class="k">return</span> <span class="n">y</span>
 
 <span class="k">def</span> <span class="nf">odeint_euler</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
-    <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">check_type</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">_Integrator</span><span class="p">()</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function integrates the function func using the Euler method implemented in the _Integrator class.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    func: function</span>
+<span class="sd">        The function to be integrated.</span>
+<span class="sd">    y0: float</span>
+<span class="sd">        The initial condition.</span>
+<span class="sd">    t: numpy array</span>
+<span class="sd">        The time array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span> <span class="c1"># ensure y0 is a numpy array</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="c1"># ensure t is a numpy array</span>
+    <span class="k">if</span> <span class="n">check_type</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="n">_Integrator</span><span class="p">()</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="c1"># return the integrated function</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error encountered&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Inputs must be floating point numbers.&quot;</span><span class="p">)</span> <span class="c1"># print error message</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="n">odeint_euler</span><span class="p">(</span><span class="n">f</span><span class="p">,[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="n">t</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="n">odeint_euler</span><span class="p">(</span><span class="n">f</span><span class="p">,[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="n">t</span><span class="p">)</span> <span class="c1"># integrate the function given the initial condition</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for x&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for y&quot;</span><span class="p">)</span>
+<span class="c1"># Plot the solution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&#39;s Solution for x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&#39;s Solution for y&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -435,11 +563,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:2: DeprecationWarning: Converting `np.inexact` or `np.floating` to a dtype is deprecated. The current result is `float64` which is not strictly correct.
-  
-</pre></div>
-</div>
-<img alt="../../_images/Day 1_8_1.png" src="../../_images/Day 1_8_1.png" />
+<img alt="../../_images/Day 1_8_0.png" src="../../_images/Day 1_8_0.png" />
 </div>
 </div>
 </div>
@@ -447,26 +571,26 @@
 <div class="section" id="runge-kutta-methods-for-numerical-integration">
 <h3>Runge-Kutta Methods for Numerical Integration<a class="headerlink" href="#runge-kutta-methods-for-numerical-integration" title="Permalink to this headline">¶</a></h3>
 <p>Euler’s method <span class="math notranslate nohighlight">\(x_{n+1}=x_n + \epsilon f(x_n,t_n)\)</span> calculates the solution at <span class="math notranslate nohighlight">\(t_{n+1}=t_n+\epsilon\)</span> given the solution at <span class="math notranslate nohighlight">\(t_n\)</span>. In doing so we use the derivative at <span class="math notranslate nohighlight">\(t_{n}\)</span> though its value may change throughout the interval <span class="math notranslate nohighlight">\([t,t+\epsilon]\)</span>.  This results in an error of the order <span class="math notranslate nohighlight">\(\mathcal{O}(\epsilon^2)\)</span>. By calculating the derivatives at intermediate steps, one can reduce the error at each step. Consider the following second order method where the slope is calculated at <span class="math notranslate nohighlight">\(t_{n}\)</span> and <span class="math notranslate nohighlight">\(t_n+\frac{\epsilon}{2}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-027007d8-2023-4f87-8b7d-fca741480fc8">
-<span class="eqno">(1)<a class="headerlink" href="#equation-027007d8-2023-4f87-8b7d-fca741480fc8" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_1=\epsilon f(x_n,t_n)\end{eqnarray}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-5f507653-d9b0-4c27-9807-2313b0693151">
-<span class="eqno">(2)<a class="headerlink" href="#equation-5f507653-d9b0-4c27-9807-2313b0693151" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_2=\epsilon f(x_n+\frac{k_1}{2},t_n+\frac{\epsilon}{2})\end{eqnarray}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-ebde9b1a-8576-4ed7-9237-768d1b7c43a6">
-<span class="eqno">(3)<a class="headerlink" href="#equation-ebde9b1a-8576-4ed7-9237-768d1b7c43a6" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}x_{n+1}=x_n+k_2+O(\epsilon^3)\end{eqnarray}\]</div>
+<div class="math notranslate nohighlight">
+\[k_1=\epsilon f(x_n,t_n)\]</div>
+<div class="math notranslate nohighlight">
+\[k_2=\epsilon f(x_n+\frac{k_1}{2},t_n+\frac{\epsilon}{2})\]</div>
+<div class="math notranslate nohighlight">
+\[x_{n+1}=x_n+k_2+O(\epsilon^3)\]</div>
 <p>This method is called the second order Runge-Kutta method or the midpoint method.</p>
 <a class="reference internal image-reference" href="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/rk2.svg"><img alt="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/rk2.svg" src="https://raw.githubusercontent.com/neurorishika/PSST/master/Tutorial/Day%201%20Of%20Numerical%20Integration%20and%20Python/rk2.svg" width="600" /></a>
 <p>Above is a schematic description of the second order Runge-Kutta method. The blue curve denotes a solution of some differential equation.</p>
 <p>We can reduce errors by calculating additional derivatives. One of the most commonly used integrators is the fourth-order Runge-Kutta Method or RK4 method, that is implemented below:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6149c7b2-8d0f-4119-97b1-80a185c8706f">
-<span class="eqno">(4)<a class="headerlink" href="#equation-6149c7b2-8d0f-4119-97b1-80a185c8706f" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_1=f(x_n,t_n)\end{eqnarray}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-07da2c83-8c26-47d3-b1b5-3b30b581fc25">
-<span class="eqno">(5)<a class="headerlink" href="#equation-07da2c83-8c26-47d3-b1b5-3b30b581fc25" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_2=f(x_n+\epsilon\frac{k_1}{2},t_n+\frac{\epsilon}{2})\end{eqnarray}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-fec31f0e-40f6-4336-83da-0999a579ec53">
-<span class="eqno">(6)<a class="headerlink" href="#equation-fec31f0e-40f6-4336-83da-0999a579ec53" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_3=f(x_n+\epsilon\frac{k_2}{2},t_n+\frac{\epsilon}{2})\end{eqnarray}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-488cb3e9-9f1a-475d-8409-da17bb967b80">
-<span class="eqno">(7)<a class="headerlink" href="#equation-488cb3e9-9f1a-475d-8409-da17bb967b80" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}k_4=f(x_n+\epsilon k_3,t_n+\epsilon)\end{eqnarray}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-f983a9d9-fdf5-49fc-9f7d-abdaca7aa4a7">
-<span class="eqno">(8)<a class="headerlink" href="#equation-f983a9d9-fdf5-49fc-9f7d-abdaca7aa4a7" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}y_{n+1}=y_n+\frac{\epsilon}{6}(k_1+2 k_2+2 k_3+k_4)+\mathcal{O}(\epsilon^5)\end{eqnarray}\]</div>
+<div class="math notranslate nohighlight">
+\[k_1=f(x_n,t_n)\]</div>
+<div class="math notranslate nohighlight">
+\[k_2=f(x_n+\epsilon\frac{k_1}{2},t_n+\frac{\epsilon}{2})\]</div>
+<div class="math notranslate nohighlight">
+\[k_3=f(x_n+\epsilon\frac{k_2}{2},t_n+\frac{\epsilon}{2})\]</div>
+<div class="math notranslate nohighlight">
+\[k_4=f(x_n+\epsilon k_3,t_n+\epsilon)\]</div>
+<div class="math notranslate nohighlight">
+\[y_{n+1}=y_n+\frac{\epsilon}{6}(k_1+2 k_2+2 k_3+k_4)+\mathcal{O}(\epsilon^5)\]</div>
 <p>Note that this numerical method is again easily converted to a vector algorithm by simply replacing <span class="math notranslate nohighlight">\(x_i\)</span> by the vector <span class="math notranslate nohighlight">\(\vec{X_i}\)</span>. We will use this method to simulate networks of neurons.</p>
 </div>
 <div class="section" id="generalized-rk4-method-in-python">
@@ -475,17 +599,34 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> <span class="c1"># Ensure Input is Correct</span>
-    <span class="k">return</span> <span class="n">y</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function checks the type of the input to ensure that it is a floating point number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">_Integrator</span><span class="p">():</span>
-    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class for integrating a function using the Runge-Kutta of order 4 method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
-        <span class="n">time_delta_grid</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        
-        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">y0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-        <span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y0</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function integrates the function func using the Runge-Kutta of order 4 method.</span>
 
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time_delta_grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+<span class="sd">        Parameters:</span>
+<span class="sd">        -----------</span>
+<span class="sd">        func: function</span>
+<span class="sd">            The function to be integrated.</span>
+<span class="sd">        y0: float</span>
+<span class="sd">            The initial condition.</span>
+<span class="sd">        t: numpy array</span>
+<span class="sd">            The time array.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">time_delta_grid</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># define the time step at each point</span>
+        
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">y0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="c1"># initialize the array for y</span>
+        <span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y0</span> <span class="c1"># set the initial condition</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time_delta_grid</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span> <span class="c1"># loop through the time steps</span>
             <span class="n">k1</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="c1"># RK4 Integration Steps replace Euler&#39;s Updation Steps</span>
             <span class="n">half_step</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">time_delta_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
             <span class="n">k2</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">y</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">time_delta_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">k1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">half_step</span><span class="p">)</span>
@@ -495,15 +636,33 @@
         <span class="k">return</span> <span class="n">y</span>
 
 <span class="k">def</span> <span class="nf">odeint_rk4</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
-    <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">check_type</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">_Integrator</span><span class="p">()</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function integrates the function func using the Runge-Kutta of order 4 method implemented in the _Integrator class.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    func: function</span>
+<span class="sd">        The function to be integrated.</span>
+<span class="sd">    y0: float</span>
+<span class="sd">        The initial condition.</span>
+<span class="sd">    t: numpy array</span>
+<span class="sd">        The time array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y0</span><span class="p">)</span> <span class="c1"># ensure y0 is a numpy array</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="c1"># ensure t is a numpy array</span>
+    <span class="k">if</span> <span class="n">check_type</span><span class="p">(</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="n">_Integrator</span><span class="p">()</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">t</span><span class="p">)</span> <span class="c1"># return the integrated function</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error encountered&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Inputs must be floating point numbers.&quot;</span><span class="p">)</span> <span class="c1"># print error message</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="n">odeint_rk4</span><span class="p">(</span><span class="n">f</span><span class="p">,[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="n">t</span><span class="p">)</span> <span class="c1"># integrate the function given the initial condition</span>
 
-<span class="n">solution</span> <span class="o">=</span> <span class="n">odeint_rk4</span><span class="p">(</span><span class="n">f</span><span class="p">,[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="n">t</span><span class="p">)</span>
-
+<span class="c1"># Plot the solution</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;RK4 Solution for x&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;RK4 Solution for y&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
@@ -514,21 +673,60 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:2: DeprecationWarning: Converting `np.inexact` or `np.floating` to a dtype is deprecated. The current result is `float64` which is not strictly correct.
-  
+<img alt="../../_images/Day 1_11_0.png" src="../../_images/Day 1_11_0.png" />
+</div>
+</div>
+<p><strong>Exercise</strong>, Solve the differential equations describing the dynamics of a simple pendulum the using Euler and RK4 methods. The equation of motion of a simple pendulum is given by:
+$<span class="math notranslate nohighlight">\(\frac{d^2s}{dt^2}=L\frac{d^2\theta}{dt^2}=-g\sin{\theta}\)</span><span class="math notranslate nohighlight">\(
+where \)</span>L<span class="math notranslate nohighlight">\( = Length of String and \)</span>\theta<span class="math notranslate nohighlight">\( = angle made with vertical. This second order differential equation may be written as two first order coupled equations as follows:
+\)</span><span class="math notranslate nohighlight">\(\frac{d\theta}{dt}=\omega\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\frac{d\omega}{dt}=-\frac{g}{L}\sin{\theta}\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#####################################</span>
+<span class="c1"># Problem Hint for the Euler Method #</span>
+<span class="c1">#####################################</span>
+
+<span class="c1"># # Note: Uncomment and complete the code below to practice the Euler method.</span>
+
+<span class="c1"># epsilon  = ... # define the resolution of the simulation</span>
+<span class="c1"># t = ... # define the time array</span>
+
+<span class="c1"># g = ... # define the value of the acceleration due to gravity</span>
+<span class="c1"># L = ... # define the value of the length of the pendulum</span>
+
+<span class="c1"># def f(X,t): # Create a new function F(X,t) where X is a vector of the form [theta,omega] and t is the time. </span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     This function defines the differential equation for the pendulum.</span>
+
+<span class="c1">#     Parameters:</span>
+<span class="c1">#     -----------</span>
+<span class="c1">#     X: numpy array</span>
+<span class="c1">#         The state vector of the pendulum given by [theta,omega].</span>
+<span class="c1">#     t: float</span>
+<span class="c1">#         The time.</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     theta = ... # extract theta from X</span>
+<span class="c1">#     omega = ... # extract omega from X</span>
+<span class="c1">#     dtheta = ... # define the derivative of theta</span>
+<span class="c1">#     domega = ... # define the derivative of omega</span>
+<span class="c1">#     return np.array([dtheta, domega]) # return the derivative of state vector X</span>
+
+<span class="c1"># solution = odeint_euler(...) # Use the Euler method to solve the pendulum problem</span>
+
+<span class="c1"># # Plot the solution</span>
+<span class="c1"># plt.plot(...,&quot;.&quot;,label=&quot;Euler&#39;s Solution for theta&quot;)</span>
+<span class="c1"># plt.plot(...,&quot;.&quot;,label=&quot;Euler&#39;s Solution for omega&quot;)</span>
+<span class="c1"># plt.xlabel(&quot;t&quot;)</span>
+<span class="c1"># plt.ylabel(&quot;theta/omega&quot;)</span>
+<span class="c1"># plt.legend()</span>
+<span class="c1"># plt.show()</span>
+
+<span class="c1"># # Now try to implement the Runge-Kutta of order 4 method to solve the pendulum problem by yourself.</span>
 </pre></div>
 </div>
-<img alt="../../_images/Day 1_10_1.png" src="../../_images/Day 1_10_1.png" />
 </div>
 </div>
-<p><strong>Exercise</strong>, Solve the differential equations describing the dynamics of a simple pendulum the using Euler and RK4 methods. The equation of motion of a simple pendulum is given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-247a558b-8332-4352-9988-ea45a80ff079">
-<span class="eqno">(9)<a class="headerlink" href="#equation-247a558b-8332-4352-9988-ea45a80ff079" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d^2s}{dt^2}=L\frac{d^2\theta}{dt^2}=-g\sin{\theta}\end{eqnarray}\]</div>
-<p>where <span class="math notranslate nohighlight">\(L\)</span> = Length of String and <span class="math notranslate nohighlight">\(\theta\)</span> = angle made with vertical. This second order differential equation may be written as two first order coupled equations as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-578c9af0-49f3-4fb7-a808-489b9b266f7f">
-<span class="eqno">(10)<a class="headerlink" href="#equation-578c9af0-49f3-4fb7-a808-489b9b266f7f" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\theta}{dt}=\omega\end{eqnarray}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-662ca8bc-eca9-48f6-9ed7-3a2163a98c31">
-<span class="eqno">(11)<a class="headerlink" href="#equation-662ca8bc-eca9-48f6-9ed7-3a2163a98c31" title="Permalink to this equation">¶</a></span>\[\begin{eqnarray}\frac{d\omega}{dt}=-\frac{g}{L}\sin{\theta}\end{eqnarray}\]</div>
 </div>
 </div>
 </div>
@@ -555,54 +753,42 @@
 
               </div>
               
-        
             
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="../README.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Day 0 : Introduction to the Tutorials</p>
-            </div>
-        </a>
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../README.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Day 0 : Introduction to the Tutorials</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Day 2: Let the Tensors Flow!</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="../Day%202%20Let%20the%20Tensors%20Flow/Day%202.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Day 2: Let the Tensors Flow!</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Rishika Mohanta and Collins Assisi<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+    <footer class="footer">
+  <p>
+    
+      By Rishika Mohanta and Collins Assisi<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>
