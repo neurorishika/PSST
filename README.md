@@ -31,13 +31,15 @@ Our tutorial is a simple exposition of numerical methods to solve ordinary diffe
 
 *Pre-rendered HTML files are available in the 'static' folder on each day*
 
+**WARNING: If you are running PSST using Kaggle, make sure you have logged in to your verified Kaggle account and enabled Internet Access for the kernel. If you do not do so, the code will give errors from Day 5 onwards. For instructions on enabling Internet on Kaggle Kernels, visit: https://www.kaggle.com/product-feedback/63544**
+
 ### Requirements
-- Python 3.6 or above
+- Python 3.9 or above
 - Jupyter Notebook
-- Numpy
-- Matplotlib
-- Seaborn (optional)
-- TensorFlow CPU/GPU (1.3 or above)
+- NumPy 1.20 or above
+- MatPlotLib 3.4.3 or above
+- Seaborn 0.11.2 or above
+- TensorFlow CPU/GPU (2.8 or above)
 
 Happy Coding!
 
