@@ -676,11 +676,14 @@ const thebe_selector_output = ".output, .cell_output"
 <img alt="../../_images/Day 1_11_0.png" src="../../_images/Day 1_11_0.png" />
 </div>
 </div>
-<p><strong>Exercise</strong>, Solve the differential equations describing the dynamics of a simple pendulum the using Euler and RK4 methods. The equation of motion of a simple pendulum is given by:
-$<span class="math notranslate nohighlight">\(\frac{d^2s}{dt^2}=L\frac{d^2\theta}{dt^2}=-g\sin{\theta}\)</span><span class="math notranslate nohighlight">\(
-where \)</span>L<span class="math notranslate nohighlight">\( = Length of String and \)</span>\theta<span class="math notranslate nohighlight">\( = angle made with vertical. This second order differential equation may be written as two first order coupled equations as follows:
-\)</span><span class="math notranslate nohighlight">\(\frac{d\theta}{dt}=\omega\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(\frac{d\omega}{dt}=-\frac{g}{L}\sin{\theta}\)</span>$</p>
+<p><strong>Exercise</strong>, Solve the differential equations describing the dynamics of a simple pendulum the using Euler and RK4 methods. The equation of motion of a simple pendulum is given by:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d^2s}{dt^2}=L\frac{d^2\theta}{dt^2}=-g\sin{\theta}\]</div>
+<p>where <span class="math notranslate nohighlight">\(L\)</span> = Length of String and <span class="math notranslate nohighlight">\(\theta\)</span> = angle made with vertical. This second order differential equation may be written as two first order coupled equations as follows:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\theta}{dt}=\omega\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{d\omega}{dt}=-\frac{g}{L}\sin{\theta}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#####################################</span>
