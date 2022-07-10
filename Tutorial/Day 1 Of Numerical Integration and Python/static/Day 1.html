@@ -13995,7 +13995,7 @@ $$t_{n+1} = t_n + \epsilon$$$$x_{n+1} = x_n + \epsilon f(x_n, t_n)$$<p>to find t
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -14028,7 +14028,7 @@ $$t_{n+1} = t_n + \epsilon$$$$x_{n+1} = x_n + \epsilon f(x_n, t_n)$$<p>to find t
     <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">epsilon</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Euler Integration Step</span>
 
 <span class="c1"># Plot the solution</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">x</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">x</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&#39;s Solution&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">t</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Exact Solution&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
@@ -14078,7 +14078,7 @@ $$t_{n+1} = t_n + \epsilon$$$$\vec{X_{n+1}} = \vec{X_n} + \epsilon \vec{f}(\vec{
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> <span class="c1"># the function f(X,t) now takes a vector X as input</span>
@@ -14108,8 +14108,8 @@ $$t_{n+1} = t_n + \epsilon$$$$\vec{X_{n+1}} = \vec{X_n} + \epsilon \vec{f}(\vec{
     <span class="n">X</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">epsilon</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">X</span><span class="p">[:,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Euler Integration Step</span>
 
 <span class="c1"># Plot the solution</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for x&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&#39;s Solution for x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&#39;s Solution for y&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -14150,7 +14150,7 @@ $$t_{n+1} = t_n + \epsilon$$$$\vec{X_{n+1}} = \vec{X_n} + \epsilon \vec{f}(\vec{
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="A-Generalized-function-for-Euler-Integration">A Generalized function for Euler Integration<a class="anchor-link" href="#A-Generalized-function-for-Euler-Integration">&#182;</a></h4><p>Here we rewrite the code in a modular fashion and cast the integrator as a function that takes in 3 inputs ie. the function $\vec{f}(\vec{y},t)$ where $\frac{d\vec{y}}{dt}=f(\vec{y},t)$, the time array, and initial vector $\vec{y}_{0}$. We will find this form to be particularly useful when we use TensorFlow functions to code the integrator. Further, it allows us to write multiple integrating functions (for example Euler or RK4) within the same class and call a specific integrator as needed. In addition we also introduce a function to ensure that the correct inputs are given to the integrator failing which an error message is generated.</p>
 <h5 id="Algorithm">Algorithm<a class="anchor-link" href="#Algorithm">&#182;</a></h5><ul>
-<li>Get the required inputs: function $\vec{f}(\vec{y},t)$, initial condition vector $\vec{y}_0$ and time series $t$. Entering a time series $t$ allows for greater control over $\epsilon$ as it can now vary for each timestep. </li>
+<li>Get the required inputs: function $\vec{f}(\vec{y},t)$, initial condition vector $\vec{y}_0$ and time series $t$. Entering a time series $t$ allows for greater control over $\epsilon$ as it can now vary for each time-step. </li>
 <li>Check if the input is of the correct datatype ie. floating point decimal.</li>
 <li>Allocate a matrix to hold the output.</li>
 <li>At each time step, perform the update $\vec{y}$ using the Euler method with and store it in the output matrix.</li>
@@ -14161,7 +14161,7 @@ $$t_{n+1} = t_n + \epsilon$$$$\vec{X_{n+1}} = \vec{X_n} + \epsilon \vec{f}(\vec{
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> <span class="c1"># Ensure Input is Correct</span>
@@ -14226,14 +14226,14 @@ $$t_{n+1} = t_n + \epsilon$$$$\vec{X_{n+1}} = \vec{X_n} + \epsilon \vec{f}(\vec{
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="n">odeint_euler</span><span class="p">(</span><span class="n">f</span><span class="p">,[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="n">t</span><span class="p">)</span> <span class="c1"># integrate the function given the initial condition</span>
 
 <span class="c1"># Plot the solution</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for x&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Eulers Solution for y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&#39;s Solution for x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[::</span><span class="mi">5</span><span class="p">],</span><span class="n">solution</span><span class="p">[</span><span class="mi">1</span><span class="p">,::</span><span class="mi">5</span><span class="p">],</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler&#39;s Solution for y&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -14284,7 +14284,7 @@ $$k_1=f(x_n,t_n)$$$$k_2=f(x_n+\epsilon\frac{k_1}{2},t_n+\frac{\epsilon}{2})$$$$k
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">t</span><span class="p">):</span> <span class="c1"># Ensure Input is Correct</span>
@@ -14353,7 +14353,7 @@ $$k_1=f(x_n,t_n)$$$$k_2=f(x_n+\epsilon\frac{k_1}{2},t_n+\frac{\epsilon}{2})$$$$k
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">solution</span> <span class="o">=</span> <span class="n">odeint_rk4</span><span class="p">(</span><span class="n">f</span><span class="p">,[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],</span><span class="n">t</span><span class="p">)</span> <span class="c1"># integrate the function given the initial condition</span>
@@ -14399,24 +14399,21 @@ $$k_1=f(x_n,t_n)$$$$k_2=f(x_n+\epsilon\frac{k_1}{2},t_n+\frac{\epsilon}{2})$$$$k
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Exercise</strong>, Solve the differential equations describing the dynamics of a simple pendulum the using Euler and RK4 methods. The equation of motion of a simple pendulum is given by: 
-$$\frac{d^2s}{dt^2}=L\frac{d^2\theta}{dt^2}=-g\sin{\theta}$$
-where $L$ = Length of String and $\theta$ = angle made with vertical. This second order differential equation may be written as two first order coupled equations as follows:
-$$\frac{d\theta}{dt}=\omega$$
-$$\frac{d\omega}{dt}=-\frac{g}{L}\sin{\theta}$$</p>
-
+<p><strong>Exercise</strong>, Solve the differential equations describing the dynamics of a simple pendulum the using Euler and RK4 methods. The equation of motion of a simple pendulum is given by:</p>
+$$\frac{d^2s}{dt^2}=L\frac{d^2\theta}{dt^2}=-g\sin{\theta}$$<p>where $L$ = Length of String and $\theta$ = angle made with vertical. This second order differential equation may be written as two first order coupled equations as follows:</p>
+$$\frac{d\theta}{dt}=\omega$$$$\frac{d\omega}{dt}=-\frac{g}{L}\sin{\theta}$$
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#####################################</span>
 <span class="c1"># Problem Hint for the Euler Method #</span>
 <span class="c1">#####################################</span>
 
-<span class="c1"># # Note: Uncommment and complete the code below to practice the Euler method.</span>
+<span class="c1"># # Note: Uncomment and complete the code below to practice the Euler method.</span>
 
 <span class="c1"># epsilon  = ... # define the resolution of the simulation</span>
 <span class="c1"># t = ... # define the time array</span>
@@ -14444,8 +14441,8 @@ $$\frac{d\omega}{dt}=-\frac{g}{L}\sin{\theta}$$</p>
 <span class="c1"># solution = odeint_euler(...) # Use the Euler method to solve the pendulum problem</span>
 
 <span class="c1"># # Plot the solution</span>
-<span class="c1"># plt.plot(...,&quot;.&quot;,label=&quot;Eulers Solution for theta&quot;)</span>
-<span class="c1"># plt.plot(...,&quot;.&quot;,label=&quot;Eulers Solution for omega&quot;)</span>
+<span class="c1"># plt.plot(...,&quot;.&quot;,label=&quot;Euler&#39;s Solution for theta&quot;)</span>
+<span class="c1"># plt.plot(...,&quot;.&quot;,label=&quot;Euler&#39;s Solution for omega&quot;)</span>
 <span class="c1"># plt.xlabel(&quot;t&quot;)</span>
 <span class="c1"># plt.ylabel(&quot;theta/omega&quot;)</span>
 <span class="c1"># plt.legend()</span>
