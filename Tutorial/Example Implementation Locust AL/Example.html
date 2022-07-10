@@ -1071,6 +1071,7 @@ operable program or batch file.
 </div>
 <div class="section" id="running-the-simulation-and-interpreting-the-output">
 <h3>Running the simulation and Interpreting the Output<a class="headerlink" href="#running-the-simulation-and-interpreting-the-output" title="Permalink to this headline">¶</a></h3>
+<p><em>Note: The following cell can take a few minutes to run the simulation depending on your device.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">tf_int</span><span class="o">.</span><span class="n">odeint</span><span class="p">(</span><span class="n">dXdt</span><span class="p">,</span> <span class="n">init_state</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">n_n</span><span class="p">,</span> <span class="n">F_b</span><span class="p">)</span> <span class="c1"># Solve the differential equation</span>
@@ -1097,7 +1098,7 @@ operable program or batch file.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Example_24_0.png" src="../../_images/Example_24_0.png" />
+<img alt="../../_images/Example_25_0.png" src="../../_images/Example_25_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1114,7 +1115,7 @@ operable program or batch file.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Example_25_0.png" src="../../_images/Example_25_0.png" />
+<img alt="../../_images/Example_26_0.png" src="../../_images/Example_26_0.png" />
 </div>
 </div>
 <p>Thus, We are capable of making models of complex realistic networks of neurons in the brains of living organisms. As an <strong>Exercise</strong> implement the batch and caller-runner system for this example as taught in day 5. Use this to implement a simulation of successive box input to 1/3rd of the neurons for a period of 2 seconds. Also try introducing variability to the parameters of the neurons.</p>

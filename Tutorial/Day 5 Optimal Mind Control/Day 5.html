@@ -752,6 +752,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="step-3-splitting-time-series-into-independent-batches-and-run-each-batch-sequentially">
 <h3>Step 3: Splitting Time Series into independent batches and Run Each Batch Sequentially<a class="headerlink" href="#step-3-splitting-time-series-into-independent-batches-and-run-each-batch-sequentially" title="Permalink to this headline">¶</a></h3>
 <p>Since we will be dividing the computation into batches, we have to split the time array such that for each new call, the final state vector of the last batch will be the initial condition for the current batch. The function <span class="math notranslate nohighlight">\(np.array\_split()\)</span> splits the array into non-overlapping vectors. Therefore, we append the last time of the previous batch to the beginning of the current time array batch.</p>
+<p><em>Note: The following cell can take a few minutes to run the simulation depending on your device.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the Number of Batches</span>
@@ -846,7 +847,7 @@ Batch 2 Running...Finished
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Day 5_15_0.png" src="../../_images/Day 5_15_0.png" />
+<img alt="../../_images/Day 5_16_0.png" src="../../_images/Day 5_16_0.png" />
 </div>
 </div>
 <p>By this method, we have maximized the usage of our available memory but we can go further and develop a method to allow indefinitely long simulation. The issue behind this entire algorithm is that the memory is not cleared until the python kernel finishes. One way to overcome this is to save the parameters of the model (such as connectivity matrix) and the state vector in a file, and start a new python kernel from a python script to compute successive batches. This way after each large batch, the memory gets cleaned. By combining the previous batch implementation and this system, we can maximize our computability.</p>
@@ -940,6 +941,7 @@ Batch 2 Running...Finished
 </div>
 <div class="section" id="using-call-py">
 <h3>Using call.py<a class="headerlink" href="#using-call-py" title="Permalink to this headline">¶</a></h3>
+<p><em>Note: The following cell can take a few minutes to run the simulation depending on your device.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python call.py
@@ -1019,7 +1021,7 @@ Simulation Completed.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Day 5_23_0.png" src="../../_images/Day 5_23_0.png" />
+<img alt="../../_images/Day 5_25_0.png" src="../../_images/Day 5_25_0.png" />
 </div>
 </div>
 </div>
